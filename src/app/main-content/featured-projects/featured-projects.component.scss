@@ -1,0 +1,12 @@
+@import "../../../styles.scss";
+
+$color-green: #3DCFB6;
+
+.featured-projects-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1920px;
+    gap: 96px;
+    width: auto;
+    padding: 96px;
+}

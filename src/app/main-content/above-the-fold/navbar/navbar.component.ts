@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  currentLang: 'en' | 'de' = 'de'; // Default Deutsch
 
+  toggleLanguage() {
+    this.currentLang = this.currentLang === 'en' ? 'de' : 'en';
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

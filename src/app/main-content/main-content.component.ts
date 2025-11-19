@@ -5,7 +5,7 @@ import { AboutMeComponent } from './about-me/about-me.component';
 import { SkillsetComponent } from './skillset/skillset.component';
 import { FeaturedProjectsComponent } from './featured-projects/featured-projects.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
-import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import { ContactformComponent } from './contactform/contactform.component';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { ContactFormComponent } from './contact/contact-form/contact-form.compon
     SkillsetComponent,
     FeaturedProjectsComponent,
     TestimonialsComponent,
-    ContactFormComponent
+    ContactformComponent
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss'
@@ -26,3 +26,4 @@ import { ContactFormComponent } from './contact/contact-form/contact-form.compon
 export class MainContentComponent {
 
 }
+

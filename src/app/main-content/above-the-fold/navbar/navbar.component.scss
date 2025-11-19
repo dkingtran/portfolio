@@ -1,0 +1,93 @@
+@import '../../../../styles.scss';
+
+
+$color-green: #3DCFB6;
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 96px;
+    position: absolute;
+    width: 100%;
+    max-width: 1920px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 13.56%, rgba(0, 0, 0, 0.6) 84.01%);
+}
+
+.navbar {
+    display: flex;
+    gap: 24px;
+    height: 98px;
+    @include display-flex-center;
+
+    a {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+    }
+}
+
+.language-toggle {
+    width: 84px;
+    height: 28px;
+    font-family: 'FiraCode';
+    border-radius: 100px;
+    border: solid 1px $color-green;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    @include display-flex-center;
+    padding-left: 12px;
+    padding-right: 12px;
+    cursor: pointer;
+    transition: all 300ms ease-out;
+
+    .en,
+    .de {
+        opacity: 0.5;
+        padding: 0px 12px;
+        height: 28px;
+        @include display-flex-center;
+        border-radius: 100px;
+        color: white !important;
+    }
+
+    &.active-en .en {
+        background-color: $color-green;
+        opacity: 1;
+        font-weight: 700;
+        transition: color 300ms ease-out;
+    }
+
+    &.active-de .de {
+        background-color: $color-green;
+        opacity: 1;
+        font-weight: 700;
+        transition: color 300ms ease-out;
+    }
+
+    &.active-de:hover .de {
+        color: white !important;
+        transition: color 300ms ease-out;
+    }
+
+    &.active-en:hover .en {
+        color: white !important;
+        transition: color 300ms ease-out;
+    }
+
+    &:hover {
+        border-color: white;
+    }
+
+    &:hover .en,
+    &:hover .de {
+        opacity: 1;
+        color: $color-green !important;
+    }
+}
+
+.logo {
+    @include logo;
+}

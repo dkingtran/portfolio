@@ -1,1 +1,22 @@
-<p>navbar works!</p>
+<div class="layout">
+    <nav>
+        <div class="navbar">
+            <!-- Slide/Switch von 'EN' zu 'DE' -->
+            <button class="language-toggle" [class.active-en]="currentLang === 'en'" [class.active-de]="currentLang === 'de'" (click)="toggleLanguage()">
+                <span class="en">EN</span><span class="de">DE</span>
+            </button>
+            <a href="#about-me">About me</a>
+            <a href="#skillset">Skills</a>
+            <a href="#featured-projects">Projects</a>
+        </div>
+        <div>
+            <!-- Monoline - logo + name (Dennis Tran) -->
+        <svg class="logo logo-name" (click)="scrollToTop()" width="178" height="46" aria-label="DT Dennis Logo">
+          <title>DT Name Logo</title>
+          <text x="-0.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="60" fill="#E8B91B">DT</text>
+          <text x="46%" y="47%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Dennis</text>
+          <text x="46.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Tran</text>
+        </svg>
+        </div>
+    </nav>
+</div>

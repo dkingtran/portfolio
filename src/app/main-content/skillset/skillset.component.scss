@@ -1,0 +1,130 @@
+@import "../../../styles.scss";
+
+$color-green: #3DCFB6;
+
+.layout {
+    background: radial-gradient(22.43% 43.85% at 1.22% 52.45%, rgba(8, 70, 59, 0.3) 0%, #1C1C1C 100%);
+    width: 100%;
+}
+
+.skillset-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1920px;
+    gap: 96px;
+    width: auto;
+    padding: 96px;
+}
+
+h3 {
+    font-family: 'Karla';
+    font-weight: 500;
+    font-size: 24px;
+    color: $color-green;
+}
+
+h2 {
+    font-family: 'FiraCode';
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-family: 'FiraCode';
+    font-weight: 700;
+    font-size: 64px;
+    color: $color-green;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.colored-h2 {
+    color: $color-green;
+}
+
+.text-container {
+    @include text-container;
+    flex: 0 0 50%;
+}
+
+.text-content {
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.info-boxes {
+
+    button {
+        border: 1px solid #FFFFFF;
+        border-radius: 100px;
+        background-color: transparent;
+        cursor: pointer;
+        font-family: 'Karla';
+        height: 48px;
+        color: white;
+        padding: 0px 24px;
+        margin-top: 24px;
+        font-size: 18px;
+    }
+}
+
+.icons-container {
+    display: flex;
+    gap: 68px;
+    margin-top: 80px;
+    flex: 0 0 50%;
+    flex-wrap: wrap;
+    justify-content: start;
+
+    .icon-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 100px;
+        position: relative;
+
+        img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            transition: all 125ms ease-out;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        span {
+            color: white;
+            font-family: 'Karla';
+            font-size: 16px;
+            text-align: center;
+            transition: color 125ms ease-out;
+        }
+
+        &:last-child:hover span {
+            color: $color-green;
+        }
+
+        .interest-image {
+            position: absolute;
+            width: 188px;
+            height: 129px;
+            opacity: 0;
+            transition: opacity 125ms ease-out;
+            top: -109px;
+            left: 90px;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        &:last-child:hover .interest-image {
+            opacity: 1;
+        }
+    }
+}
