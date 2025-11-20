@@ -10,12 +10,24 @@ $color-green: #3DCFB6;
     width: auto;
     padding: 96px;
     position: relative;
+
+    @media (max-width: 1300px) {
+        padding: 48px;
+    }
 }
 
 .text-content {
     display: flex;
     flex-direction: column;
     flex: 0 0 65%;
+
+    @media (max-width: 1300px) {
+        flex: 0 0 55%;
+    }
+
+    @media (max-width: 1200px) {
+        flex: 0 0 100%;
+    }
 
     div {
 
@@ -114,6 +126,13 @@ $color-green: #3DCFB6;
             line-height: inherit;
             vertical-align: middle;
         }
+
+        @media (max-width: 800px) {
+            flex-direction: column;
+            align-items: center;
+            padding: 32px;
+            gap: 16px;
+        }
     }
 }
 
@@ -124,6 +143,15 @@ $color-green: #3DCFB6;
     padding: 80px;
     pointer-events: none;
     @include display-flex-center;
+
+    @media (max-width: 1300px) {
+        flex: 0 0 45%;
+    }
+
+    @media (max-width: 1200px) {
+        display: none;
+        flex: 0 0 0%;
+    }
 
     // background 'capa' image placed behind the main preview and offset
     .interactive-bg {

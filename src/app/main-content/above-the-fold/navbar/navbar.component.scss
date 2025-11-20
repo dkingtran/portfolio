@@ -28,18 +28,29 @@ nav {
     }
 }
 
-.navbar ::after {
+.navbar a {
+    position: relative;
+}
+
+/* small green dot under section links (About me / Skills / Projects) */
+.navbar a[href^="#"]::after {
     content: "";
     position: absolute;
-    bottom: -4px;
     left: 50%;
-    transform: translate(-50%);
-    width: 6px;
-    height: 6px;
+    bottom: -12px;
+    transform: translateX(-50%) scale(0.9);
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background-color: var(--color-main-green);
+    background-color: $color-green;
     opacity: 0;
-    transition: opacity .3s ease, transform .3s ease;
+    transition: opacity 140ms ease, transform 140ms cubic-bezier(.2, .9, .2, 1);
+}
+
+.navbar a[href^="#"]:hover::after,
+.navbar a[href^="#"]:focus::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
 }
 
 .language-toggle {

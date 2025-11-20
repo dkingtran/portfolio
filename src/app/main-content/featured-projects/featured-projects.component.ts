@@ -28,7 +28,7 @@ export class FeaturedProjectsComponent {
       tech: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
       image: '/assets/img/icons/featured-projects/project-images/01_join.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
-      description: 'Join is a small collaborative app demonstrating real-time updates and Firebase integration.',
+      description: 'Task manager inspired by the Kanban System. Create and organize tasks using drag and drop functions, assign users and categories.',
       github: 'https://github.com/yourname/join',
       live: 'https://yourdomain.com/join',
       techIcons: [
@@ -44,7 +44,7 @@ export class FeaturedProjectsComponent {
       tech: ['HTML', 'CSS', 'JavaScript'],
       image: '/assets/img/icons/featured-projects/project-images/02_el_pollo_loco.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
-      description: 'El Pollo Loco is a restaurant landing project focusing on responsive design and animations.',
+      description: 'Jump, run and throw game based on object-oriented approach. Help Pepe to find coins and tabasco salsa to fight against the crazy hen.',
       github: 'https://github.com/yourname/el-pollo-loco',
       live: 'https://yourdomain.com/el-pollo-loco',
       techIcons: [
@@ -59,14 +59,14 @@ export class FeaturedProjectsComponent {
       tech: ['HTML', 'CSS', 'JavaScript', 'REST-API'],
       image: '/assets/img/icons/featured-projects/project-images/03_pokedex.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
-      description: 'Pokédex demonstrates REST API consumption and dynamic UI rendering with animations.',
+      description: 'This interactive Pokédex, built with HTML, CSS, and JavaScript, pulls data from an API to display each Pokémon’s name, image, and type.',
       github: 'https://github.com/yourname/pokedex',
       live: 'https://yourdomain.com/pokedex',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
         { src: '/assets/img/icons/featured-projects/modal/css.png', label: 'CSS' },
         { src: '/assets/img/icons/featured-projects/modal/javascript.png', label: 'JavaScript' },
-        { src: '/assets/img/icons/featured-projects/modal/api.png', label: 'REST-API' }
+        { src: '/assets/img/icons/featured-projects/modal/rest-api.png', label: 'REST-API' }
       ]
     }
   ];

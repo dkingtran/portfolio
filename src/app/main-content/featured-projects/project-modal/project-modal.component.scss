@@ -20,9 +20,9 @@ $color-green: #3DCFB6;
 .modal-wrapper {
     width: 80vw;
     max-width: 1200px;
-    max-height: 800px;
-    height: 800px;
-    border-radius: 12px;
+    max-height: 1000px;
+    height: 860px;
+    border-radius: 30px;
     background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
     position: relative;
     overflow: hidden;
@@ -138,6 +138,12 @@ $color-green: #3DCFB6;
         font-weight: 700;
         color: $color-green;
     }
+
+    @media (max-width: 1300px) {
+        display: flex;
+        justify-content: center;
+        padding: 36px;
+    }
 }
 
 .modal-right {
@@ -149,6 +155,12 @@ $color-green: #3DCFB6;
     background: transparent;
     min-width: 0;
     overflow: hidden;
+
+    @media (max-width: 1300px) {
+        display: flex;
+        justify-content: center;
+        padding: 36px;
+    }
 }
 
 .modal-image {
@@ -179,13 +191,11 @@ $color-green: #3DCFB6;
 
 .modal-project-description {
     margin-bottom: 24px;
+    font-size: 18px;
+    font-family: 'Karla';
+    font-weight: 400;
+    line-height: 1.2;
 
-    p {
-        font-size: 18px;
-        font-family: 'Karla';
-        font-weight: 400;
-        line-height: 1.2;
-    }
 }
 
 .modal-tech-stack {
