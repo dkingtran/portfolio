@@ -6,7 +6,169 @@ $color-green: #3DCFB6;
     display: flex;
     justify-content: space-between;
     max-width: 1920px;
-    gap: 96px;
+    gap: 36px;
     width: auto;
     padding: 96px;
+    position: relative;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 65%;
+
+    div {
+
+        h3 {
+            font-family: 'Karla';
+            font-weight: 500;
+            font-size: 24px;
+            color: $color-green;
+            margin-bottom: 0;
+        }
+
+        h1 {
+            font-family: 'FiraCode';
+            font-weight: 700;
+            font-size: 64px;
+            color: $color-green;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+
+        p {
+            font-family: 'Karla';
+            font-weight: 400;
+            font-size: 18px;
+            color: white;
+            margin-top: 0;
+        }
+    }
+}
+
+.projects-container {
+
+    .project-description {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 40px 32px;
+        border-width: 1px 0px 1px 0px;
+        border-style: solid;
+        border-color: #3DCFB6;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba($color-green, 0.2);
+        }
+
+        span {
+            font-family: 'FiraCode';
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 1.2;
+
+            // the <img> inside the span; always in the flow but hidden visually
+            >.hover-icon {
+                display: inline-block;
+                width: 13px;
+                height: 13px;
+                margin-left: 8px;
+                vertical-align: middle;
+                object-fit: contain;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 125ms ease;
+            }
+        }
+
+        // show the image with a smooth fade when hovering the entire project item
+        &:hover span>.hover-icon {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        // show the image when hovering the entire project item
+        &:hover span>.hover-icon {
+            display: inline-block;
+        }
+
+        p {
+            font-family: 'Karla';
+            font-weight: 400;
+            font-size: 18px;
+            color: white;
+            margin: 0;
+            gap: 8px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+        }
+
+        .pipe {
+            color: $color-green;
+            display: inline;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            vertical-align: middle;
+        }
+    }
+}
+
+// interactive preview container (absolute to the right)
+.interactive-container {
+    position: relative;
+    flex: 0 0 35%;
+    padding: 80px;
+    pointer-events: none;
+    @include display-flex-center;
+
+    // background 'capa' image placed behind the main preview and offset
+    .interactive-bg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translate(30px, 30px);
+        width: 100%;
+        height: 100%;
+        max-height: 233px;
+        max-width: 348px;
+        object-fit: cover;
+        border-radius: 16px;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 125ms ease;
+        pointer-events: none;
+    }
+
+    .interactive-bg.visible {
+        opacity: 1;
+    }
+
+    .interactive-img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        max-height: 233px;
+        max-width: 348px;
+        object-fit: cover;
+        border-radius: 16px;
+        opacity: 0;
+        transition: opacity 125ms ease;
+        pointer-events: none;
+    }
+
+    .interactive-img.visible {
+        opacity: 1;
+    }
+}
+
+.button {
+    @include button;
 }

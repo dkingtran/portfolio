@@ -5,27 +5,49 @@
         <div>
             <h3>Portfolio</h3>
             <h1>Featured Projects</h1>
-            <p>Explore a selection of my work here - Interact with projects to see my skills in action.</p>
+            <p>Explore a selection of my work here - Interact with <br>
+                 projects to see my skills in action.</p>
         </div>
+
         <div class="projects-container">
-            <div class="project-description">
-                <p>Join</p>
-                <p>HTML | CSS | JavaScript</p>
+            <div class="project-description"
+                 *ngFor="let project of projects; let i = index"
+                 [id]="project.id"
+                 (mouseenter)="showPreview(project.image, project.background, i)"
+                 (mouseleave)="clearPreview()"
+                 (click)="openModal(i)">
+                <span>{{ project.title }}<img class="hover-icon" src="/assets/img/icons/featured-projects/base/arrow_outward.png" alt="arrow"></span>
+                <p>
+                    <ng-container *ngFor="let t of project.tech; let i = index">
+                        {{ t }}<span *ngIf="i < project.tech.length - 1" class="pipe">|</span>
+                    </ng-container>
+                </p>
             </div>
-            <div class="project-description">
-                <p>El Pollo Loco</p>
-                <p>HTML | CSS | JavaScript</p>
-            </div>
-            <div class="project-description">
-                <p>Pokédex</p>
-                <p>HTML | CSS | JavaScript</p>
-            </div>
-        </div>
-        <div class="interactive-container">
-            <!-- Container where project images or interactive elements will be placed -->
-        </div>
-        <div class="modal-wrapper">
-            <!-- Show Modal with Overlay for a bigger sized preview -->
         </div>
     </div>
+
+    <div class="interactive-container">
+        <!-- background 'capa' image, placed slightly offset behind the main preview -->
+        <img class="interactive-bg"
+             [src]="displayedBackground"
+             [class.visible]="hoveredBackground"
+             [style.transform]="'translate(-50%,-50%) translate(30px, 30px) translateY(' + (displayedOffset || 0) + 'px)'"
+             alt="background">
+
+        <!-- primary preview image (appears on hover) -->
+        <img class="interactive-img"
+             [src]="displayedImage"
+             [class.visible]="hoveredImage"
+             [style.transform]="'translate(-50%,-50%) translateY(' + (displayedOffset || 0) + 'px)'"
+             alt="preview">
+    </div>
 </div>
+
+<!-- project modal placed outside the featured-projects container to avoid layout/overflow issues -->
+<app-project-modal
+  [project]="projects[modalIndex]"
+  [index]="modalIndex"
+  [isOpen]="isModalOpen"
+  (close)="closeModal()"
+  (next)="nextModal()">
+</app-project-modal>

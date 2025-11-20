@@ -54,6 +54,27 @@ body {
     transition: transform 300ms ease-out;
 }
 
+@mixin button {
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: 'Karla';
+    height: 48px;
+    color: white;
+    padding: 0px 24px;
+    font-size: 18px;
+    @include display-flex-center;
+    transition: color 300ms ease;
+
+    &:hover {
+        border-color: $color-green;
+        color: $color-green;
+    }
+}
+
+@mixin btn-text-animation {}
+
 .logo-small text {
     fill: #3DCFB6;
 }

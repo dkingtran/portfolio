@@ -28,15 +28,8 @@ $color-green: #3DCFB6;
     gap: 48px;
 
     button {
-        border: 1px solid #FFFFFF;
-        border-radius: 100px;
-        background-color: transparent;
-        cursor: pointer;
-        font-family: 'Karla';
-        height: 48px;
-        color: white;
-        padding: 0px 24px;
-        font-size: 18px;
+        @include button;
+
     }
 }
 

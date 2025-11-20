@@ -11,6 +11,7 @@ nav {
     position: absolute;
     width: 100%;
     max-width: 1920px;
+    z-index: 2;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0) 13.56%, rgba(0, 0, 0, 0.6) 84.01%);
 }
 
@@ -25,6 +26,20 @@ nav {
         text-decoration: none;
         font-size: 20px;
     }
+}
+
+.navbar ::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-main-green);
+    opacity: 0;
+    transition: opacity .3s ease, transform .3s ease;
 }
 
 .language-toggle {
