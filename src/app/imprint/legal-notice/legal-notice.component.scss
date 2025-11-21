@@ -1,0 +1,73 @@
+@import '../../../styles.scss';
+
+$color-green: #3DCFB6;
+
+
+
+.legal-content {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 96px;
+    font-family: 'Karla';
+    color: white;
+}
+
+h1 {
+    font-family: 'FiraCode';
+    font-weight: 700;
+    font-size: 64px;
+    color: $color-green;
+    @include display-flex-center;
+    margin-top: 0;
+    margin-bottom: 64px;
+}
+
+.text-content {
+    line-height: 1.2;
+
+    button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+        left: 0;
+        transition: transform 125ms ease-out, color 125ms ease-out;
+
+        &:hover {
+            transform: scale(1.1);
+            filter: invert(61%) sepia(100%) saturate(1200%) hue-rotate(134deg) brightness(120%) contrast(100%);
+        }
+    }
+
+    h3 {
+        margin-bottom: 16px;
+    }
+
+    h2 {
+        color: white;
+        font-size: 19px;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        color: $color-green;
+        margin: 0;
+
+        span {
+            padding: 0 8px;
+        }
+    }
+}
+
+.legal-notice-text {
+
+    span {
+        color: white;
+        padding: 0 !important;
+    }
+}

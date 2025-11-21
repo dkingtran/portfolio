@@ -71,10 +71,37 @@ $color-green: #3DCFB6;
     border-bottom: 0;
     font-family: 'Karla';
     font-weight: 400;
+    transition: color 140ms ease;
 }
 
 .footer-link:hover {
     color: $color-green;
+}
+
+/* left green dot on hover (8px) similar to navbar/AOT dots but positioned to the left */
+.footer-link {
+    position: relative;
+}
+
+.footer-link::before {
+    content: "";
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.9);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: $color-green;
+    opacity: 0;
+    transition: opacity 140ms ease, transform 140ms cubic-bezier(.2, .9, .2, 1);
+    pointer-events: none;
+}
+
+.footer-link:hover::before,
+.footer-link:focus::before {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
 }
 
 @media (max-width: 1000px) {

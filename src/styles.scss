@@ -12,6 +12,13 @@ body {
     max-width: 1920px;
 }
 
+/* full-page legal notice background class applied to body so background runs under footer */
+.imprint-bg-full {
+    background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
 @font-face {
     font-family: 'FiraCode';
     src: url('/assets/fonts/FiraCode-VariableFont_wght.ttf');
