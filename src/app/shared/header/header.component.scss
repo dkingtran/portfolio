@@ -25,9 +25,8 @@ nav:not(.overlay) {
 /* When overlaying the AOT, let the header sit absolutely on top and be transparent */
 nav.overlay {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
+    max-width: 1920px;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0) 13.56%, rgba(0, 0, 0, 0.6) 84.01%);
 
     @media (max-width: 1000px) {

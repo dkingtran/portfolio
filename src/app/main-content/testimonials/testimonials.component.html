@@ -1,3 +1,35 @@
 <section id="testimonials"></section>
 
-<p>testimonials works!</p>
+<div class="testimonials-container">
+    <div>
+        <h1>What my colleagues say about me</h1>
+    </div>
+
+    <div class="text-content">
+        
+
+        <div #viewport class="viewport">
+            <div #track class="track">
+                <div class="testimonial-card" *ngFor="let testimonial of carouselItems; let i = index" [class.active]="i === trackIndex">
+                    <p class="testimonial-message">"{{ testimonial.message }}"</p>
+                    <div class="testimonial-client-info">
+                        <div class="client-details">
+                            <div class="pipe"></div>
+                            <p class="client-name">{{ testimonial.name }} <span>-</span></p>
+                            <p class="client-position">{{ testimonial.position }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <button type="button" class="arrow left" (click)="prev()" aria-label="Previous">‹</button>
+
+            <div class="dots" aria-hidden="true" role="presentation">
+                <span *ngFor="let t of testimonials; let i = index" class="dot" [class.active]="((trackIndex - 1 + testimonials.length) % testimonials.length) === i" tabindex="-1" aria-hidden="true" role="presentation"></span>
+            </div>
+
+            <button type="button" class="arrow right" (click)="next()" aria-label="Next">›</button>
+        </div>
+    </div>
+</div>

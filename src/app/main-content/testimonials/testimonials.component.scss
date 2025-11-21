@@ -1,0 +1,161 @@
+@import "../../../styles.scss";
+
+$color-green: #3DCFB6;
+
+.testimonials-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1920px;
+    width: auto;
+    padding: 96px 48px;
+
+    @media (max-width: 1300px) {
+        padding: 48px 24px;
+    }
+
+    h1 {
+        font-family: 'FiraCode';
+        font-weight: 700;
+        font-size: 32px;
+        color: $color-green;
+        margin-top: 0;
+        margin-bottom: 40px;
+    }
+
+    .text-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .arrow {
+                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                color: white;
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                cursor: pointer;
+            }
+
+            .dots {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                user-select: none;
+
+                .dot {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: #FFFFFF;
+                    opacity: 0.9;
+                    cursor: default;
+                    pointer-events: none;
+                    transition: background 160ms ease, transform 160ms cubic-bezier(.2, .9, .2, 1);
+                }
+
+                .dot.active {
+                    background: $color-green;
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        .viewport {
+            /* show exactly 3 cards (3*cardWidth + 2*gap) and center */
+            width: 1122px;
+            /* 358*3 + 24*2 = 1122 */
+            margin: 0 auto;
+            overflow: hidden;
+            /* fixed viewport height to avoid layout jumps */
+            height: 360px;
+        }
+
+        .track {
+            display: flex;
+            gap: 24px;
+            transition: transform 420ms cubic-bezier(.22, .9, .36, 1);
+            align-items: center;
+            will-change: transform;
+        }
+
+        .testimonial-card {
+            width: 358px;
+            height: 360px;
+            /* fixed outer height to avoid layout reflow */
+            box-sizing: border-box;
+            border-radius: 32px;
+            padding: 40px;
+            flex: 0 0 auto;
+            background: rgba(61, 207, 182, 0.1);
+            border: 1px solid $color-green;
+            transition: transform 420ms cubic-bezier(.22, .9, .36, 1), background 300ms ease, opacity 300ms ease;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transform-origin: center top;
+        }
+
+        /* active card visually larger via transform (no height change) */
+        .testimonial-card.active {
+            transform: translateY(0) scale(1);
+            background: rgba(61, 207, 182, 0.30);
+            opacity: 1;
+        }
+
+        /* inactive cards appear smaller and slightly lower using transform (no layout change) */
+        .testimonial-card:not(.active) {
+            transform: translateY(28px) scale(0.86);
+            background: rgba(61, 207, 182, 0.10);
+            opacity: 0.95;
+        }
+
+        .testimonial-message {
+            font-family: 'Karla';
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+            white-space: normal;
+        }
+
+        .client-name {
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .client-position {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .testimonials-container .text-content .viewport {
+        width: 100%;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 600px) {
+    .testimonials-container .text-content .viewport {
+        height: 300px;
+    }
+}

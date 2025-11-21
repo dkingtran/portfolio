@@ -105,6 +105,11 @@ $color-green: #3DCFB6;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+
+    @media (max-width: 1200px) {
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 
 .modal-left {
@@ -123,6 +128,11 @@ $color-green: #3DCFB6;
         font-size: 128px;
         font-family: 'Karla';
         font-weight: 700;
+
+        @media (max-width: 1200px) {
+            font-size: 72px;
+            margin: 0;
+        }
     }
 
     h2 {
@@ -144,6 +154,12 @@ $color-green: #3DCFB6;
         justify-content: center;
         padding: 36px;
     }
+
+    @media (max-width: 1200px) {
+        padding-top: 0 !important;
+        padding: 36px;
+        flex: 0 0 60%;
+    }
 }
 
 .modal-right {
@@ -161,6 +177,11 @@ $color-green: #3DCFB6;
         justify-content: center;
         padding: 36px;
     }
+
+    @media (max-width: 1200px) {
+
+        flex: 0 0 40%;
+    }
 }
 
 .modal-image {
@@ -174,6 +195,8 @@ $color-green: #3DCFB6;
 
     @media (max-width: 1200px) {
         width: 90%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
     }
 }
 
@@ -207,6 +230,10 @@ $color-green: #3DCFB6;
 
     p {
         font-size: 16px;
+    }
+
+    @media (max-width: 1200px) {
+        margin: 0;
     }
 }
 
