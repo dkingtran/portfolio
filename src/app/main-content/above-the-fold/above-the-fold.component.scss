@@ -96,6 +96,19 @@ $color-green: #3DCFB6;
     }
 }
 
+.bottom-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+
+    @media (max-width: 1300px) {
+        padding: 0 48px;
+    }
+}
+
 .left-btm-container {
     position: absolute;
     bottom: 0px;
@@ -104,6 +117,10 @@ $color-green: #3DCFB6;
     @include flex-column-center;
     align-items: center;
     z-index: 1;
+
+    @media (max-width: 1000px) {
+        left: 48px;
+    }
 
     .arrow {
         width: 30px;
@@ -152,11 +169,26 @@ $color-green: #3DCFB6;
     align-items: center;
     @include flex-column-center;
 
+    @media (max-width: 1000px) {
+        right: 48px;
+    }
+
     .icons {
         @include flex-column-center;
         gap: 12px;
         width: auto;
         height: auto;
+
+        .icon.mail {
+            display: none;
+        }
+
+        @media (max-width: 1000px) {
+
+            .icon.mail {
+                display: inline-flex;
+            }
+        }
     }
 
     .icons .icon {
@@ -173,8 +205,8 @@ $color-green: #3DCFB6;
         filter: none;
         transition: filter 180ms ease, transform 180ms ease;
         display: block;
-        width: 32px;
-        height: 32px;
+        width: 26px;
+        height: 26px;
         object-fit: contain;
     }
 
@@ -214,6 +246,10 @@ $color-green: #3DCFB6;
         transform: rotate(180deg);
         text-orientation: mixed;
         margin: 0;
+
+        @media (max-width: 1000px) {
+            display: none;
+        }
     }
 
     .line-break-right {

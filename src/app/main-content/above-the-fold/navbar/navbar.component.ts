@@ -9,9 +9,14 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   currentLang: 'en' | 'de' = 'de'; // Default Deutsch
+  isMenuOpen = false;
 
   toggleLanguage() {
     this.currentLang = this.currentLang === 'en' ? 'de' : 'en';
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   scrollToTop() {

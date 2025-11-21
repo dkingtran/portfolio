@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-above-the-fold',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './above-the-fold.component.html',
   styleUrl: './above-the-fold.component.scss'
 })

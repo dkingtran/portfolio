@@ -1,5 +1,120 @@
 @import '../../../styles.scss';
 
+$color-green: #3DCFB6;
+
 .logo {
     @include logo;
+    margin-bottom: 24px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 48px 96px;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-left {
+    flex: 1 1 30%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-center {
+    flex: 0 0 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        color: $color-green;
+    }
+}
+
+.footer-right {
+    flex: 1 1 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: left;
+    gap: 8px;
+}
+
+/* keep the link block right-aligned while text inside is left-aligned */
+.footer-right .footer-link {
+    display: block;
+    width: 92px;
+    text-align: left;
+}
+
+.muted {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Karla';
+    font-weight: 400;
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    border-bottom: 0;
+    font-family: 'Karla';
+    font-weight: 400;
+}
+
+.footer-link:hover {
+    color: $color-green;
+}
+
+@media (max-width: 1000px) {
+
+    /* top row: left (col1) and right (col2) side-by-side; center spans below */
+    .footer-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "left right"
+            "center center";
+        gap: 16px;
+        padding: 32px 48px;
+        align-items: start;
+        text-align: left;
+    }
+
+    .footer-left {
+        grid-area: left;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .footer-right {
+        grid-area: right;
+        align-items: flex-end;
+        text-align: left;
+    }
+
+    .footer-center {
+        grid-area: center;
+        justify-self: center;
+        align-self: start;
+        text-align: center;
+    }
+
+    /* ensure link blocks remain left-aligned within the right column */
+    .footer-right .footer-link {
+        width: 92px;
+        text-align: left;
+    }
 }

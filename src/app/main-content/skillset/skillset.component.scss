@@ -50,6 +50,9 @@ h1 {
     color: $color-green;
     margin-top: 0;
     margin-bottom: 40px;
+    letter-spacing: -4%;
+    white-space: nowrap;
+
 }
 
 .colored-h2 {
@@ -59,6 +62,11 @@ h1 {
 .text-container {
     @include text-container;
     flex: 0 0 50%;
+
+    h1 {
+        margin-bottom: 0;
+        white-space: inherit;
+    }
 }
 
 .text-content {
@@ -81,6 +89,12 @@ h1 {
     flex: 0 0 50%;
     flex-wrap: wrap;
     justify-content: start;
+
+    @media (max-width: 883px) {
+        margin-top: 40px;
+        gap: 40px;
+        justify-content: center;
+    }
 
     .icon-item {
         display: flex;
