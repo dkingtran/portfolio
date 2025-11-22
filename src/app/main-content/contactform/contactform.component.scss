@@ -1,0 +1,176 @@
+@import '../../../styles.scss';
+
+$color-green: #3DCFB6;
+
+
+.contactform-container-all {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1920px;
+    gap: 96px;
+    width: auto;
+    padding: 96px;
+
+    @media (max-width: 1300px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 48px;
+    }
+}
+
+.contact-form-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Form-specific styles */
+.contact-form {
+    max-width: 960px;
+}
+
+.contact-form-container {
+    display: flex;
+    padding: 40px 32px;
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color: $color-green;
+    align-items: center;
+    gap: 16px;
+}
+
+.contact-form-container .question-span {
+    font-weight: 700;
+    margin-right: 12px;
+}
+
+.contact-form-container input[type="text"],
+.contact-form-container input[type="email"] {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    min-width: 280px;
+}
+
+.input-validation-message {
+    display: block;
+    color: #ffb3b3;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.privacy-policy-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 0;
+}
+
+.privacy-policy-checkbox-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'karla';
+    font-size: 15px;
+    font-weight: 400;
+
+
+    span {
+        line-height: 140%;
+    }
+}
+
+
+.custom-checkbox {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    /* larger clickable area */
+    min-height: 24px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    transition: background 180ms ease, transform 120ms ease;
+    cursor: pointer;
+    line-height: 0;
+
+    &:hover {
+        background: rgba($color-green, 0.2);
+    }
+}
+
+/* make the native checkbox fill the visible area so it stays keyboard-accessible */
+.custom-checkbox input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.custom-checkbox img {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+
+/* when checked, keep a slight scale for feedback */
+.custom-checkbox input:checked+img {
+    transform: scale(1);
+}
+
+/* privacy link styling: base color and positioned pseudo-underline (hidden by default) */
+.privacy-policy-container a {
+    position: relative;
+    color: #3DCFB6;
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+
+.privacy-policy-container a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #3DCFB6;
+    bottom: -4px;
+    /* lower the underline by a few pixels */
+    opacity: 0;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 180ms ease, opacity 180ms ease;
+    pointer-events: none;
+}
+
+.privacy-policy-container a:hover::after,
+.privacy-policy-container a:focus::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.privacy-policy-container a:hover,
+.privacy-policy-container a:focus {
+    color: #ffffff;
+}
+
+.send-btn-container button {
+    background: #3DCFB6;
+    color: #0b0b0b;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.send-btn-container button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

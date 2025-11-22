@@ -59,6 +59,8 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('track', { static: false }) trackEl!: ElementRef<HTMLDivElement>;
 
+  private resizeObserver?: ResizeObserver;
+
   private onTransitionEndBound = this.onTransitionEnd.bind(this);
 
   constructor(private renderer: Renderer2) { }
@@ -129,6 +131,13 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.viewportEl.nativeElement.addEventListener('pointerdown', this.pointerDownBound);
       // ensure touch-action none for panning
       this.viewportEl.nativeElement.style.touchAction = 'pan-y';
+      // observe size changes to keep active card centered when the viewport is resized
+      if (typeof ResizeObserver !== 'undefined') {
+        this.resizeObserver = new ResizeObserver(() => {
+          this.updateViewportWidth();
+        });
+        this.resizeObserver.observe(this.viewportEl.nativeElement);
+      }
     }
   }
 
@@ -144,6 +153,8 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.viewportWidth = window.innerWidth;
     }
+    // re-apply transform when viewport changes so the active card stays centered
+    this.applyTransform();
   }
 
   ngOnDestroy(): void {
@@ -152,6 +163,10 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.viewportEl && this.viewportEl.nativeElement) {
       this.viewportEl.nativeElement.removeEventListener('pointerdown', this.pointerDownBound);
+    }
+    if (this.resizeObserver && this.viewportEl && this.viewportEl.nativeElement) {
+      this.resizeObserver.unobserve(this.viewportEl.nativeElement);
+      this.resizeObserver.disconnect();
     }
   }
 
@@ -196,10 +211,22 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     window.removeEventListener('pointermove', this.pointerMoveBound);
     window.removeEventListener('pointerup', this.pointerUpBound);
     const delta = ev.clientX - this.startX;
-    const step = this.cardWidth + this.gap;
-    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-    const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
-    this.trackEl.nativeElement.style.transform = `translate3d(${x}px, 0, 0)`;
+    // center the currently focused card using its real DOM position
+    const track = this.trackEl.nativeElement as HTMLElement;
+    const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
+    const child = track.children[this.trackIndex] as HTMLElement | undefined;
+    if (child && viewport) {
+      const cardCenter = child.offsetLeft + child.offsetWidth / 2;
+      const viewportCenter = viewport.clientWidth / 2;
+      const translate = viewportCenter - cardCenter + this.dragOffset;
+      track.style.transform = `translate3d(${translate}px, 0, 0)`;
+    } else {
+      // fallback to previous calculation
+      const step = this.cardWidth + this.gap;
+      const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
+      const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
+      this.trackEl.nativeElement.style.transform = `translate3d(${x}px, 0, 0)`;
+    }
     if (Math.abs(delta) > this.swipeThreshold) {
       this.dragOffset = 0;
       // perform navigation
@@ -251,11 +278,23 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     // remove transition
     this.renderer.setStyle(el, 'transition', 'none');
     this.dragOffset = 0;
-    // set transform directly to the target position
-    const step = this.cardWidth + this.gap;
-    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-    const x = -(targetIndex * step) + centerOffset;
-    el.style.transform = `translate3d(${x}px, 0, 0)`;
+    // set transform directly to the target card using DOM measurements (more robust)
+    const track = el as HTMLElement;
+    const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
+    const child = track.children[targetIndex] as HTMLElement | undefined;
+    if (child && viewport) {
+      const cardCenter = child.offsetLeft + child.offsetWidth / 2;
+      const viewportCenter = viewport.clientWidth / 2;
+      const translate = viewportCenter - cardCenter;
+      track.style.transform = `translate3d(${translate}px, 0, 0)`;
+    } else {
+      // fallback: algebraic calculation
+      const step = this.cardWidth + this.gap;
+      const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
+      const x = -(targetIndex * step) + centerOffset;
+      el.style.transform = `translate3d(${x}px, 0, 0)`;
+    }
+
     // update index in next macrotask to avoid ExpressionChangedAfterItHasBeenChecked
     setTimeout(() => {
       this.trackIndex = targetIndex;
@@ -266,11 +305,22 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // apply computed transform using current trackIndex and dragOffset
   private applyTransform() {
-    const el = this.trackEl?.nativeElement;
-    if (!el) return;
+    const track = this.trackEl?.nativeElement as HTMLElement | undefined;
+    const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
+    if (!track || !viewport) return;
+    // prefer DOM measurements for accurate centering (handles padding, responsive sizes)
+    const child = track.children[this.trackIndex] as HTMLElement | undefined;
+    if (child) {
+      const cardCenter = child.offsetLeft + child.offsetWidth / 2;
+      const viewportCenter = viewport.clientWidth / 2;
+      const translate = viewportCenter - cardCenter + this.dragOffset;
+      track.style.transform = `translate3d(${translate}px, 0, 0)`;
+      return;
+    }
+    // fallback to arithmetic calculation
     const step = this.cardWidth + this.gap;
     const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
     const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
-    el.style.transform = `translate3d(${x}px, 0, 0)`;
+    track.style.transform = `translate3d(${x}px, 0, 0)`;
   }
 }

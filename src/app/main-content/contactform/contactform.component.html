@@ -1,3 +1,67 @@
 <section id="contactform"></section>
 
-<p>contactform works!</p>
+<div class="contactform-container-all">
+    <div class="contact-form-content">
+        <div class="text-content">
+            <h3>Contact me</h3>
+            <h1>Let's work together</h1>
+            <h2>Got a problem to solve?</h2>
+            <p>Encourage people to contact you and describe what role 
+                you are interested in. Show that you will add value to 
+                their projects through your work.</p>
+            <p>Need a Frontend developer? Let’s talk!</p>
+        </div>
+        <div>
+            <form (ngSubmit)="onSubmit()" #f="ngForm" novalidate class="contact-form" autocomplete="off">
+                <div class="contact-form-container">
+                    <div class="name-form" [class.error]="submitted && !name">
+                        <span class="question-span">What´s your name?</span>
+                        <div>
+                            <input name="name" [(ngModel)]="name" #nameCtrl="ngModel" type="text" autocomplete="off" placeholder="Your name goes here?" required />
+                            <span class="input-validation-message" *ngIf="submitted && !name">Oops! It seems your name is missing.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <div class="email-form" [class.error]="submitted && !email">
+                        <span class="question-span">What´s your email?</span>
+                        <div>
+                            <input name="email" [(ngModel)]="email" #emailCtrl="ngModel" type="email" autocomplete="off" placeholder="youremail@email.com" required />
+                            <span class="input-validation-message" *ngIf="submitted && !email">Hoopla! Your email is required.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <div class="message-form" [class.error]="submitted && message && message.length < 10">
+                        <span class="question-span">How can I help you?</span>
+                        <div>
+                            <input name="message" [(ngModel)]="message" #messageCtrl="ngModel" minlength="10" type="text" autocomplete="off" placeholder="Hello Alex, I am interested in..." />
+                            <span class="input-validation-message" *ngIf="submitted && message && message.length < 10">Please provide at least 10 characters.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-policy-container">
+                    <div class="privacy-policy-checkbox-content">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" name="acceptPrivacy" [(ngModel)]="acceptPrivacy" />
+                            <img alt="Privacy Checkbox" [src]="acceptPrivacy ? '/assets/img/icons/contact/check_box.png' : '/assets/img/icons/contact/check_box_outline_blank.png'">
+                        </label>
+                        <span>I've read the <a href="privacy-policy">privacy policy</a> and agree to the processing of my data as outlined.</span>
+                    </div>
+                    <div class="error-message-privacy-policy-container">
+                        <span class="error-message-privacy-policy" *ngIf="submitted && !acceptPrivacy"> Please accept the privacy policy. </span>
+                    </div>
+                    <div class="success-message-privacy-policy-container" *ngIf="formSuccess">
+                        <span class="form-success-message"> Thank you for contacting me! The email has been sent successfully. </span>
+                    </div>
+                    <div class="send-btn-container">
+                        <button type="submit" [disabled]="!name || !email || !acceptPrivacy">Say Hello ;)</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
