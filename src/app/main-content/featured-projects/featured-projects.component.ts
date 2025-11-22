@@ -42,7 +42,7 @@ export class FeaturedProjectsComponent {
       id: 'proj-2',
       title: 'El Pollo Loco',
       tech: ['HTML', 'CSS', 'JavaScript'],
-      image: '/assets/img/icons/featured-projects/project-images/02_el_pollo_loco_img.png',
+      image: '/assets/img/icons/featured-projects/project-images/02_el_pollo_loco_img.jpg',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       description: 'Jump, run and throw game based on object-oriented approach. Help Pepe to find coins and tabasco salsa to fight against the crazy hen.',
       github: 'https://github.com/yourname/el-pollo-loco',
