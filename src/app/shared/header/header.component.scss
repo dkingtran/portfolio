@@ -175,6 +175,10 @@ nav.overlay {
 
     nav {
         padding: 24px 24px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
     }
 
     /* hide desktop links and show mobile small logo + menu icon */
@@ -198,9 +202,9 @@ nav.overlay {
 
     /* mobile dropdown styles */
     .mobile-dropdown {
-        position: absolute;
+        position: fixed;
         right: 24px;
-        top: calc(100% + 12px);
+        top: 72px;
         display: none;
         flex-direction: column;
         gap: 24px;

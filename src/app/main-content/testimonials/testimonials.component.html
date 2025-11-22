@@ -25,13 +25,17 @@
             </div>
         </div>
         <div class="controls">
-            <button type="button" class="arrow left" (click)="prev()" aria-label="Previous">‹</button>
+            <button type="button" class="arrow left" (click)="prev()" aria-label="Previous">
+                <img src="/assets/img/icons/testimonials/arrow_back.png" alt="arrow left testimonials">
+            </button>
 
             <div class="dots" aria-hidden="true" role="presentation">
                 <span *ngFor="let t of testimonials; let i = index" class="dot" [class.active]="((trackIndex - 1 + testimonials.length) % testimonials.length) === i" tabindex="-1" aria-hidden="true" role="presentation"></span>
             </div>
-
-            <button type="button" class="arrow right" (click)="next()" aria-label="Next">›</button>
+            
+            <button type="button" class="arrow right" (click)="next()" aria-label="Next">
+                <img src="/assets/img/icons/testimonials/arrow_forward.png" alt="arrow right testimonials">
+            </button>
         </div>
     </div>
 </div>

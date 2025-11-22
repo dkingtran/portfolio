@@ -145,3 +145,9 @@ $color-green: #3DCFB6;
         text-align: left;
     }
 }
+
+@media (max-width: 500px) {
+    .footer-container {
+        padding: 32px 24px;
+    }
+}

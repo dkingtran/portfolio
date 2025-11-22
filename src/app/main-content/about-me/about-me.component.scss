@@ -45,6 +45,10 @@ h1 {
         gap: 24px;
         padding: 48px;
     }
+
+    @media (max-width: 500px) {
+        padding: 24px 24px;
+    }
 }
 
 .image-container {

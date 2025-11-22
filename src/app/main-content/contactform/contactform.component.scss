@@ -7,8 +7,7 @@ $color-green: #3DCFB6;
     display: flex;
     justify-content: space-between;
     max-width: 1920px;
-    gap: 96px;
-    width: auto;
+    width: 100%;
     padding: 96px;
 
     @media (max-width: 1300px) {
@@ -17,16 +16,97 @@ $color-green: #3DCFB6;
         gap: 24px;
         padding: 48px;
     }
+
+    @media (max-width: 500px) {
+        padding: 24px 24px;
+    }
 }
 
 .contact-form-content {
     display: flex;
     justify-content: space-between;
+    gap: 96px;
+    width: 100%;
+
+    @media (max-width: 1300px) {
+        gap: 48px;
+    }
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 640px;
+
+    @media (max-width: 1400px) {
+        max-width: 480px;
+    }
+
+    @media (max-width: 1000px) {
+        max-width: none;
+    }
+
+    h1 {
+        color: $color-green;
+        margin: 0;
+        font-family: 'FiraCode';
+        font-weight: 700;
+        font-size: 64px;
+        line-height: normal;
+    }
+
+    h2 {
+        color: $color-green;
+        margin: 0;
+        font-family: 'FiraCode';
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 120%;
+    }
+
+    h3 {
+        color: $color-green;
+        margin: 0;
+        font-family: 'Karla';
+        font-weight: 500;
+        font-size: 24px;
+    }
+
+    div {
+
+        p {
+            font-family: 'Karla';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 120%;
+            margin: 0;
+        }
+
+        span {
+            color: $color-green;
+            line-height: 120%;
+            font-family: 'Karla';
+            font-weight: 700;
+        }
+    }
+
+    ;
 }
 
 /* Form-specific styles */
 .contact-form {
-    max-width: 960px;
+    width: 800px;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+    }
 }
 
 .contact-form-container {
@@ -162,12 +242,7 @@ $color-green: #3DCFB6;
 }
 
 .send-btn-container button {
-    background: #3DCFB6;
-    color: #0b0b0b;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
+    @include animated-button;
 }
 
 .send-btn-container button[disabled] {

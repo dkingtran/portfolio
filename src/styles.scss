@@ -80,7 +80,73 @@ body {
     }
 }
 
-@mixin btn-text-animation {}
+@mixin animated-button {
+    @include button;
+    display: inline-block;
+    text-align: center;
+    width: auto;
+    overflow: hidden;
+    @include btn-text-animation;
+
+    .btn-text {
+        line-height: 48px;
+    }
+}
+
+/*
+    Mixin: btn-text-animation
+    Usage (HTML):
+        <button class="btn" @include button; @include btn-text-animation;>
+            <span class="btn-text" data-text="Label">Label</span>
+        </button>
+
+    Notes:
+    - The inner text element must carry `data-text` with the same text
+        (used to duplicate content for a seamless loop via ::after).
+    - Include this mixin only on buttons you want the animated hover effect for.
+    - On hover the text scrolls left and the duplicate (via ::after) continues
+        to create an infinite-looking loop.
+*/
+
+@keyframes btn-marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-100% - 6rem));
+    }
+}
+
+@mixin btn-text-animation {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+
+    .btn-text {
+        display: inline-block;
+        white-space: nowrap;
+        will-change: transform;
+        position: relative;
+        /* gap between repeats */
+    }
+
+    /* duplicate the text using ::after so the animation looks continuous */
+    .btn-text::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 100%;
+        top: 0;
+        display: inline-block;
+        margin-left: 6rem;
+    }
+
+    /* start marquee on hover only */
+    &:hover .btn-text {
+        animation: btn-marquee 2s linear infinite;
+    }
+}
+
 
 @mixin flex-column-center {
     display: flex;

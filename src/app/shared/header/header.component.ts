@@ -1,5 +1,5 @@
 
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -49,5 +49,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    if (window.innerWidth <= 1000) {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.mobile-dropdown') && !target.closest('.menu-icon')) {
+        this.isMenuOpen = false;
+      }
+    }
   }
 }

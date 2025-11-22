@@ -24,6 +24,10 @@ $color-green: #3DCFB6;
         align-items: center;
         gap: 48px;
     }
+
+    @media (max-width: 500px) {
+        padding: 24px 24px;
+    }
 }
 
 h3 {
@@ -77,7 +81,7 @@ h1 {
 .info-boxes {
 
     button {
-        @include button;
+        @include animated-button;
         margin-top: 16px;
     }
 }

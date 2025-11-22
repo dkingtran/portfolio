@@ -27,8 +27,7 @@ $color-green: #3DCFB6;
         gap: 48px;
 
         button {
-            @include button;
-
+            @include animated-button;
         }
     }
 
@@ -107,6 +106,10 @@ $color-green: #3DCFB6;
     @media (max-width: 1300px) {
         padding: 0 48px;
     }
+
+    @media (max-width: 500px) {
+        padding: 0px 24px;
+    }
 }
 
 .left-btm-container {
@@ -120,6 +123,10 @@ $color-green: #3DCFB6;
 
     @media (max-width: 1000px) {
         left: 48px;
+    }
+
+    @media (max-width: 500px) {
+        left: 24px;
     }
 
     .arrow {
@@ -171,6 +178,10 @@ $color-green: #3DCFB6;
 
     @media (max-width: 1000px) {
         right: 48px;
+    }
+
+    @media (max-width: 500px) {
+        right: 24px;
     }
 
     .icons {

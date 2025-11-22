@@ -10,6 +10,14 @@ $color-green: #3DCFB6;
     padding: 96px;
     font-family: 'Karla';
     color: white;
+
+    @media (max-width: 1000px) {
+        padding: 48px;
+    }
+
+    @media (max-width: 500px) {
+        padding: 24px;
+    }
 }
 
 h1 {
@@ -20,6 +28,19 @@ h1 {
     @include display-flex-center;
     margin-top: 0;
     margin-bottom: 64px;
+    line-height: 1.2;
+
+    @media (max-width: 1000px) {
+        font-size: 48px;
+        justify-content: flex-start;
+        margin-top: 48px;
+        margin-bottom: 32px;
+        color: white;
+    }
+
+    @media (max-width: 500px) {
+        font-size: 32px;
+    }
 }
 
 .text-content {
