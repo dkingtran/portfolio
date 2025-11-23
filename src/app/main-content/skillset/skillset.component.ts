@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-skillset',
@@ -9,6 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './skillset.component.scss'
 })
 export class SkillsetComponent {
+  constructor(public languageService: LanguageService) { }
+
   skills = [
     { icon: '/assets/img/icons/skill-set/img_1.png', text: 'HTML' },
     { icon: '/assets/img/icons/skill-set/img_2.png', text: 'CSS' },

@@ -4,31 +4,55 @@ $color-green: #3DCFB6;
 
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 0 96px;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    z-index: 20;
+    z-index: 1000;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 13.56%, rgba(0, 0, 0, 0.6) 84.01%);
 
     @media (max-width: 1000px) {
         background: transparent !important;
     }
 }
 
-/* When header is not over an `.aot` area, show its gradient background. */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1920px;
+    padding: 0 96px;
+
+    @media (max-width: 1000px) {
+        padding: 24px 24px;
+    }
+
+    @media (max-width: 400px) {
+        padding: 16px 16px;
+    }
+}
+
+nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    pointer-events: none;
+    z-index: -1;
+}
+
 nav:not(.overlay) {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 13.56%, rgba(0, 0, 0, 0.6) 84.01%);
     position: relative;
 }
 
-/* When overlaying the AOT, let the header sit absolutely on top and be transparent */
 nav.overlay {
-    position: absolute;
-    width: 100%;
-    max-width: 1920px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 13.56%, rgba(0, 0, 0, 0.6) 84.01%);
-
     @media (max-width: 1000px) {
         background: transparent !important;
     }
@@ -39,6 +63,7 @@ nav.overlay {
     gap: 24px;
     height: 98px;
     @include display-flex-center;
+
 
     a {
         color: white;
@@ -51,7 +76,6 @@ nav.overlay {
     position: relative;
 }
 
-/* small green dot under section links (About me / Skills / Projects) */
 .navbar a[href^="#"]::after {
     content: "";
     position: absolute;
@@ -130,17 +154,11 @@ nav.overlay {
     @include logo;
 }
 
-/* Ensure mobile dropdown is hidden by default globally */
 .mobile-dropdown {
     display: none;
 }
 
-/* default: small logo and menu hidden on desktop */
 .logo-small {
-    display: none;
-}
-
-.menu-icon {
     display: none;
 }
 
@@ -168,24 +186,12 @@ nav.overlay {
     display: flex;
     align-items: center;
     gap: 16px;
+    width: 32px;
+    height: 32px;
 }
 
-/* mobile styles */
 @media (max-width: 1000px) {
 
-    nav {
-        padding: 24px 24px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-
-        @media (max-width: 400px) {
-            padding: 16px 16px;
-        }
-    }
-
-    /* hide desktop links and show mobile small logo + menu icon */
     .nav-center .navbar {
         display: none !important;
     }
@@ -202,9 +208,14 @@ nav.overlay {
         display: block;
         width: 32px;
         height: 21px;
+        transition: all 125ms ease;
+
+        &:hover {
+            transform: scale(1.1);
+            filter: invert(61%) sepia(100%) saturate(700%) hue-rotate(134deg) brightness(120%) contrast(100%);
+        }
     }
 
-    /* mobile dropdown styles */
     .mobile-dropdown {
         position: fixed;
         right: 24px;
@@ -216,7 +227,7 @@ nav.overlay {
         border: 1px solid $color-green;
         border-radius: 30px;
         background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
-        z-index: 30;
+        z-index: 1001;
         min-width: 200px;
     }
 

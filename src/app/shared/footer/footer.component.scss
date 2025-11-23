@@ -7,7 +7,6 @@ $color-green: #3DCFB6;
     margin-bottom: 24px;
 }
 
-/* default: small logo hidden on desktop */
 .logo-small {
     display: none;
 }
@@ -53,7 +52,6 @@ $color-green: #3DCFB6;
     gap: 8px;
 }
 
-/* keep the link block right-aligned while text inside is left-aligned */
 .footer-right .footer-link {
     display: block;
     width: 92px;
@@ -82,7 +80,6 @@ $color-green: #3DCFB6;
     color: $color-green;
 }
 
-/* left green dot on hover (8px) similar to navbar/AOT dots but positioned to the left */
 .footer-link {
     position: relative;
 }
@@ -110,7 +107,6 @@ $color-green: #3DCFB6;
 
 @media (max-width: 1000px) {
 
-    /* top row: left (col1) and right (col2) side-by-side; center spans below */
     .footer-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -143,7 +139,6 @@ $color-green: #3DCFB6;
         text-align: center;
     }
 
-    /* ensure link blocks remain left-aligned within the right column */
     .footer-right .footer-link {
         width: 92px;
         text-align: left;

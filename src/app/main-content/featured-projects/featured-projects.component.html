@@ -3,10 +3,9 @@
 <div class="featured-projects-container">
     <div class="text-content">
         <div>
-            <h3>Portfolio</h3>
-            <h1>Featured Projects</h1>
-            <p>Explore a selection of my work here - Interact with <br>
-                 projects to see my skills in action.</p>
+            <h3>{{ languageService.translate('projects.header') }}</h3>
+            <h1>{{ languageService.translate('projects.title') }}</h1>
+            <p>{{ languageService.translate('projects.intro') }}</p>
         </div>
 
         <div class="projects-container">
@@ -27,14 +26,12 @@
     </div>
 
     <div class="interactive-container">
-        <!-- background 'capa' image, placed slightly offset behind the main preview -->
         <img class="interactive-bg"
              [src]="displayedBackground"
              [class.visible]="hoveredBackground"
              [style.transform]="'translate(-50%,-50%) translate(30px, 30px) translateY(' + (displayedOffset || 0) + 'px)'"
              alt="background">
 
-        <!-- primary preview image (appears on hover) -->
         <img class="interactive-img"
              [src]="displayedImage"
              [class.visible]="hoveredImage"
@@ -43,7 +40,6 @@
     </div>
 </div>
 
-<!-- project modal placed outside the featured-projects container to avoid layout/overflow issues -->
 <app-project-modal
   [project]="projects[modalIndex]"
   [index]="modalIndex"

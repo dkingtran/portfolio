@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-about-me',
@@ -9,6 +10,8 @@ import { Component } from '@angular/core';
 })
 export class AboutMeComponent {
   hovered: boolean = false;
+
+  constructor(public languageService: LanguageService) { }
 
   onMouseEnter() {
     this.hovered = true;

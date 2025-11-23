@@ -3,26 +3,26 @@
 <div class="layout">
     <div class="aot">
         <div class="content">
-            <h2>Frontend Developer</h2>
+            <h2>{{ languageService.translate('hero.title') }}</h2>
             <h1>Dennis Tran</h1>
             <div>
                 <button class="btn-text" (click)="scrollTo('featured-projects')">
-                    <span class="btn-text" data-text="Check my Work">Check my Work</span>
+                    <span class="btn-text" [attr.data-text]="languageService.translate('hero.checkWork')">{{ languageService.translate('hero.checkWork') }}</span>
                 </button>
                 <button class="btn-text" (click)="scrollTo('contactform')">
-                    <span class="btn-text" data-text="Contact me">Contact me</span>
+                    <span class="btn-text" [attr.data-text]="languageService.translate('hero.contact')">{{ languageService.translate('hero.contact') }}</span>
                 </button>
             </div>
         </div>
         <!--Marquee- Effekt-->
         <div class="marquee">
             <div class="marquee__inner" aria-hidden="true">
-                <span>Available for remote work</span><span class="bullet">•</span><span>Frontend Developer</span><span class="bullet">•</span><span>Based in Augsburg</span><span class="bullet">•</span><span>Open to work</span><span class="bullet">•</span>
-                <span>Available for remote work</span><span class="bullet">•</span><span>Frontend Developer</span><span class="bullet">•</span><span>Based in Augsburg</span><span class="bullet">•</span><span>Open to work</span><span class="bullet">•</span>
-                <span>Available for remote work</span><span class="bullet">•</span><span>Frontend Developer</span><span class="bullet">•</span><span>Based in Augsburg</span><span class="bullet">•</span><span>Open to work</span><span class="bullet">•</span>
-                <span>Available for remote work</span><span class="bullet">•</span><span>Frontend Developer</span><span class="bullet">•</span><span>Based in Augsburg</span><span class="bullet">•</span><span>Open to work</span><span class="bullet">•</span>
-                <span>Available for remote work</span><span class="bullet">•</span><span>Frontend Developer</span><span class="bullet">•</span><span>Based in Augsburg</span><span class="bullet">•</span><span>Open to work</span><span class="bullet">•</span>
-                <span>Available for remote work</span><span class="bullet">•</span><span>Frontend Developer</span><span class="bullet">•</span><span>Based in Augsburg</span><span class="bullet">•</span><span>Open to work</span><span class="bullet">•</span>
+                <span>{{ languageService.translate('hero.marquee1') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee2') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee3') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee4') }}</span><span class="bullet">•</span>
+                <span>{{ languageService.translate('hero.marquee1') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee2') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee3') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee4') }}</span><span class="bullet">•</span>
+                <span>{{ languageService.translate('hero.marquee1') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee2') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee3') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee4') }}</span><span class="bullet">•</span>
+                <span>{{ languageService.translate('hero.marquee1') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee2') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee3') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee4') }}</span><span class="bullet">•</span>
+                <span>{{ languageService.translate('hero.marquee1') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee2') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee3') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee4') }}</span><span class="bullet">•</span>
+                <span>{{ languageService.translate('hero.marquee1') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee2') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee3') }}</span><span class="bullet">•</span><span>{{ languageService.translate('hero.marquee4') }}</span><span class="bullet">•</span>
             </div>
         </div>
         <div class="bottom-container">

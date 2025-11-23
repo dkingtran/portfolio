@@ -4,20 +4,20 @@
     <div class="skillset-container">
         <div class="text-content">
             <div>
-                <h3>Technologies</h3>
+                <h3>{{ languageService.translate('skills.subtitle') }}</h3>
             </div>
             <div class="text-container">
-                <h1>Skill Set</h1>
-                <p>A short introduction of your skills. Highlight your experience of  using different front-end technologies and emphasise your openness to learning and adapting to new technologies. Show how important it is for you to keep up with the rapid changes in web development.</p>
+                <h1>{{ languageService.translate('skills.title') }}</h1>
+                <p>{{ languageService.translate('skills.intro') }}</p>
                 <div class ="info-boxes">
                     <div class="text-box">
-                        <h2>You need <span class="colored-h2">another skill?</span></h2>
+                        <h2>{{ languageService.translate('skills.needSkill') }} <span class="colored-h2">{{ languageService.translate('skills.anotherSkill') }}</span></h2>
                     </div>
                     <div class="text-box">
-                        <p>Feel free to contact me. I look forward to expanding on my previous knowledge.</p>
+                        <p>{{ languageService.translate('skills.contact') }}</p>
                     </div>
                     <button (click)="scrollTo('contactform')">
-                        <span class="btn-text" data-text="Let's talk">Let's talk</span>
+                        <span class="btn-text" [attr.data-text]="languageService.translate('skills.letsTalk')">{{ languageService.translate('skills.letsTalk') }}</span>
                     </button>
                 </div>
             </div>

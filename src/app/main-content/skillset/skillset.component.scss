@@ -4,15 +4,21 @@ $color-green: #3DCFB6;
 
 .layout {
     background: radial-gradient(22.43% 43.85% at 1.22% 52.45%, rgba(8, 70, 59, 0.3) 0%, #1C1C1C 100%);
-    width: 100%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
 
 .skillset-container {
     display: flex;
     justify-content: space-between;
     max-width: 1920px;
+    margin: 0 auto;
     gap: 96px;
-    width: auto;
+    width: 100%;
     padding: 96px;
 
     @media (max-width: 1300px) {

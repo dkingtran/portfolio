@@ -2,7 +2,7 @@
 
 <div class="testimonials-container">
     <div>
-        <h1>What my colleagues say about me</h1>
+        <h1>{{ languageService.translate('testimonials.header') }}</h1>
     </div>
 
     <div class="text-content">
@@ -11,7 +11,7 @@
         <div #viewport class="viewport">
             <div #track class="track">
                 <div class="testimonial-card" *ngFor="let testimonial of carouselItems; let i = index" [class.active]="i === trackIndex">
-                    <p class="testimonial-message">"{{ testimonial.message }}"</p>
+                    <p class="testimonial-message">"{{ languageService.translate(testimonial.messageKey) }}"</p>
                     <div class="testimonial-client-info">
                         <div class="client-details">
                             <div class="pipe"></div>

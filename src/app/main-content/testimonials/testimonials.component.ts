@@ -1,10 +1,11 @@
 import { Component, AfterViewInit, HostListener, ViewChild, ElementRef, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../services/language.service';
 
 interface Testimonial {
   name: string;
   position: string;
-  message: string;
+  messageKey: string;
 }
 
 @Component({
@@ -15,26 +16,28 @@ interface Testimonial {
   styleUrl: './testimonials.component.scss'
 })
 export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
+  constructor(public languageService: LanguageService, private renderer: Renderer2) { }
+
   testimonials: Testimonial[] = [
     {
       name: 'Olivia Harper',
       position: 'Product Manager',
-      message: 'Working with Dennis was a delight — his attention to accessibility and detail lifted our product quality significantly.'
+      messageKey: 'testimonials.t1.message'
     },
     {
       name: 'Marcus Lee',
       position: 'Senior Frontend Engineer',
-      message: 'Dennis brings thoughtful design and pragmatic engineering together; he ships reliable UI that feels polished.'
+      messageKey: 'testimonials.t2.message'
     },
     {
       name: 'Sofia Alvarez',
       position: 'UX Designer',
-      message: 'He iterates quickly, listens closely to feedback and consistently delivers delightful micro-interactions.'
+      messageKey: 'testimonials.t3.message'
     },
     {
       name: 'Ethan Brown',
       position: 'CTO',
-      message: 'A dependable teammate — Dennis turns ambiguous tasks into clear, production-ready features with care.'
+      messageKey: 'testimonials.t4.message'
     }
   ];
 
@@ -62,7 +65,6 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private onTransitionEndBound = this.onTransitionEnd.bind(this);
 
-  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
     const n = this.testimonials.length;

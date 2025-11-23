@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-contactform',
@@ -10,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contactform.component.scss'
 })
 export class ContactformComponent {
+  constructor(public languageService: LanguageService) { }
 
   name = '';
   email = '';
@@ -17,11 +19,8 @@ export class ContactformComponent {
   acceptPrivacy = false;
   formSuccess = false;
   submitted = false;
-  // track per-field touch state so we can show errors on blur immediately
   touched: { [key: string]: boolean } = {};
-  // track error state per field
   errors: { [key: string]: string } = {};
-  // store original values before showing error
   tempValues: { [key: string]: string } = {};
 
   onBlur(field: string) {
@@ -78,9 +77,9 @@ export class ContactformComponent {
 
   validateName() {
     if (!this.name || this.name.trim().length === 0) {
-      this.errors['name'] = 'Oops! It seems your name is missing.';
+      this.errors['name'] = this.languageService.translate('contact.errorNameMissing');
     } else if (!this.isValidName(this.name)) {
-      this.errors['name'] = 'Please enter your first and last name.';
+      this.errors['name'] = this.languageService.translate('contact.errorNameFormat');
     } else {
       this.errors['name'] = '';
     }
@@ -88,9 +87,9 @@ export class ContactformComponent {
 
   validateEmail() {
     if (!this.email || this.email.trim().length === 0) {
-      this.errors['email'] = 'Hoopla! Your email is required.';
+      this.errors['email'] = this.languageService.translate('contact.errorEmailMissing');
     } else if (!this.isValidEmail(this.email)) {
-      this.errors['email'] = 'Please enter a valid email address.';
+      this.errors['email'] = this.languageService.translate('contact.errorEmailInvalid');
     } else {
       this.errors['email'] = '';
     }
@@ -98,7 +97,7 @@ export class ContactformComponent {
 
   validateMessage() {
     if (this.message && this.message.trim().length > 0 && this.message.trim().length < 10) {
-      this.errors['message'] = 'Please provide at least 10 characters.';
+      this.errors['message'] = this.languageService.translate('contact.errorMessageTooShort');
     } else {
       this.errors['message'] = '';
     }

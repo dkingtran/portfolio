@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../../services/language.service';
 
 export interface Project {
   id?: string;
@@ -7,7 +8,7 @@ export interface Project {
   tech?: string[];
   image?: string;
   background?: string;
-  description?: string;
+  descriptionKey?: string;
   github?: string;
   live?: string;
   techIcons?: { src: string; label: string }[];
@@ -22,29 +23,26 @@ export interface Project {
 })
 export class ProjectModalComponent {
   @Input() project: Project | null = null;
+  constructor(public languageService: LanguageService) { }
   private _isOpen = false;
   private _prevBodyOverflow: string | null = null;
+
+  private setBodyOverflow(hidden: boolean): void {
+    try {
+      if (hidden) {
+        this._prevBodyOverflow = document.body.style.overflow || null;
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = this._prevBodyOverflow || '';
+        this._prevBodyOverflow = null;
+      }
+    } catch (e) { }
+  }
 
   @Input()
   set isOpen(value: boolean) {
     this._isOpen = !!value;
-    if (this._isOpen) {
-      try {
-        this._prevBodyOverflow = document.body.style.overflow || null;
-        document.body.style.overflow = 'hidden';
-      } catch (e) {
-      }
-    } else {
-      try {
-        if (this._prevBodyOverflow !== null) {
-          document.body.style.overflow = this._prevBodyOverflow;
-        } else {
-          document.body.style.overflow = '';
-        }
-        this._prevBodyOverflow = null;
-      } catch (e) {
-      }
-    }
+    this.setBodyOverflow(this._isOpen);
   }
 
   get isOpen(): boolean {

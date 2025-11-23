@@ -3,6 +3,7 @@ import { Component, Inject, OnInit, OnDestroy, HostListener } from '@angular/cor
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-header',
@@ -12,19 +13,27 @@ import { Subscription } from 'rxjs';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  currentLang: 'en' | 'de' = 'de';
+  currentLang: 'en' | 'de' = 'en';
   isMenuOpen = false;
   isOverlay = false;
 
   private routerSub: Subscription | null = null;
+  private langSub: Subscription | null = null;
 
-  constructor(private router: Router, @Inject(DOCUMENT) private document: Document) { }
+  constructor(
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document,
+    public languageService: LanguageService
+  ) { }
 
   ngOnInit(): void {
+    this.currentLang = this.languageService.currentLang;
+    this.langSub = this.languageService.currentLang$.subscribe(lang => {
+      this.currentLang = lang;
+    });
     this.updateOverlayState();
     this.routerSub = this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
-        // small timeout to allow page components to render
         setTimeout(() => this.updateOverlayState(), 30);
       }
     });
@@ -32,6 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routerSub?.unsubscribe();
+    this.langSub?.unsubscribe();
   }
 
   private updateOverlayState() {
@@ -40,7 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   toggleLanguage() {
-    this.currentLang = this.currentLang === 'en' ? 'de' : 'en';
+    this.languageService.toggleLanguage();
   }
 
   toggleMenu() {

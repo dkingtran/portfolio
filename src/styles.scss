@@ -10,9 +10,20 @@ body {
     background-color: #1c1c1c;
     color: white;
     max-width: 1920px;
+    overflow-x: hidden;
 }
 
-/* full-page legal notice background class applied to body so background runs under footer */
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-main {
+    display: block;
+    flex: 1 1 auto;
+}
+
 .imprint-bg-full {
     background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
     background-attachment: fixed;
@@ -93,21 +104,6 @@ body {
     }
 }
 
-/*
-    Mixin: btn-text-animation
-    Usage (HTML):
-        <button class="btn" @include button; @include btn-text-animation;>
-            <span class="btn-text" data-text="Label">Label</span>
-        </button>
-
-    Notes:
-    - The inner text element must carry `data-text` with the same text
-        (used to duplicate content for a seamless loop via ::after).
-    - Include this mixin only on buttons you want the animated hover effect for.
-    - On hover the text scrolls left and the duplicate (via ::after) continues
-        to create an infinite-looking loop.
-*/
-
 @keyframes btn-marquee {
     0% {
         transform: translateX(0);
@@ -128,10 +124,8 @@ body {
         white-space: nowrap;
         will-change: transform;
         position: relative;
-        /* gap between repeats */
     }
 
-    /* duplicate the text using ::after so the animation looks continuous */
     .btn-text::after {
         content: attr(data-text);
         position: absolute;
@@ -141,7 +135,6 @@ body {
         margin-left: 6rem;
     }
 
-    /* start marquee on hover only */
     &:hover .btn-text {
         animation: btn-marquee 2s linear infinite;
     }
@@ -180,4 +173,9 @@ body {
 .logo-name:hover text:nth-child(1),
 .logo-name:hover text:nth-child(2) {
     stroke: #3DCFB6;
+}
+
+.legal-notice-text span {
+    color: #FFFFFF !important;
+    padding: 0 !important;
 }

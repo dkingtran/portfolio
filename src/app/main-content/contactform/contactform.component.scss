@@ -122,7 +122,6 @@ $color-green: #3DCFB6;
     ;
 }
 
-/* Form-specific styles */
 .contact-form {
     width: 800px;
 
@@ -198,7 +197,6 @@ $color-green: #3DCFB6;
     }
 }
 
-// Error state styling for input field
 .input-error input[type="text"],
 .input-error input[type="email"] {
     color: #EC7B7BCC;
@@ -213,7 +211,6 @@ $color-green: #3DCFB6;
     }
 }
 
-// Placeholder styling for error state
 .input-error input::placeholder {
     color: #EC7B7BCC;
     font-size: 18px;
@@ -262,7 +259,6 @@ $color-green: #3DCFB6;
     align-items: center;
     justify-content: center;
     min-width: 24px;
-    /* larger clickable area */
     min-height: 24px;
     border-radius: 50%;
     box-sizing: border-box;
@@ -275,7 +271,6 @@ $color-green: #3DCFB6;
     }
 }
 
-/* make the native checkbox fill the visible area so it stays keyboard-accessible */
 .custom-checkbox input[type="checkbox"] {
     position: absolute;
     inset: 0;
@@ -295,12 +290,10 @@ $color-green: #3DCFB6;
 }
 
 
-/* when checked, keep a slight scale for feedback */
 .custom-checkbox input:checked+img {
     transform: scale(1);
 }
 
-/* privacy link styling: base color and positioned pseudo-underline (hidden by default) */
 .privacy-policy-container a {
     position: relative;
     color: #3DCFB6;
@@ -316,7 +309,6 @@ $color-green: #3DCFB6;
     height: 2px;
     background: #3DCFB6;
     bottom: -4px;
-    /* lower the underline by a few pixels */
     opacity: 0;
     transform-origin: left center;
     transform: scaleX(0);

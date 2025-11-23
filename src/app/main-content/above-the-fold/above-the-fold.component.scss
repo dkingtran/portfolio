@@ -4,7 +4,12 @@ $color-green: #3DCFB6;
 
 .layout {
     background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
-    width: 100%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
 
 .aot {
@@ -13,6 +18,9 @@ $color-green: #3DCFB6;
     grid-template-rows: 1fr auto;
     font-family: 'Karla';
     overflow-x: hidden;
+    max-width: 1920px;
+    margin: 0 auto;
+    width: 100%;
 
     .content {
         display: flex;

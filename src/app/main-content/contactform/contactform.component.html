@@ -3,45 +3,45 @@
 <div class="contactform-container-all">
     <div class="contact-form-content">
         <div class="text-content">
-            <h3>Contact me</h3>
-            <h1>Let's work <br>
-                together</h1>
+            <h3>{{ languageService.translate('contact.subtitle') }}</h3>
+            <h1>{{ languageService.translate('contact.titleLine1') }} <br>
+                {{ languageService.translate('contact.titleLine2') }}</h1>
 
             <div>
-                <h2>Got a problem to solve?</h2>
-                <p>Encourage people to contact you and describe what role 
-                    you are interested in. Show that you will add value to 
-                    their projects through your work. 
+                <h2>{{ languageService.translate('contact.h2') }}</h2>
+                <p>
+                    {{ languageService.translate('contact.intro') }}
                     <br>
                     <br>
-                    Need a Frontend developer? <span>Let’s talk!</span></p>
+                    {{ languageService.translate('contact.needDevPrefix') }} <span>{{ languageService.translate('contact.needDevSpan') }}</span>
+                </p>
             </div>
         </div>
         <div class="contact-form">
             <form (ngSubmit)="onSubmit()" #f="ngForm" novalidate autocomplete="off">
                 <div class="contact-form-container">
                     <div class="name-form" [class.input-error]="hasError('name')">
-                        <span class="question-span">What´s your name?</span>
+                        <span class="question-span">{{ languageService.translate('contact.nameQuestion') }}</span>
                         <div>
-                            <input name="name" [(ngModel)]="name" #nameCtrl="ngModel" type="text" autocomplete="off" [placeholder]="getPlaceholder('name', 'Your name goes here?')" (blur)="onBlur('name')" (focus)="onFocus('name')" required />
+                            <input name="name" [(ngModel)]="name" #nameCtrl="ngModel" type="text" autocomplete="off" [placeholder]="getPlaceholder('name', languageService.translate('contact.placeholder.name'))" (blur)="onBlur('name')" (focus)="onFocus('name')" required />
                         </div>
                     </div>
                 </div>
 
                 <div class="contact-form-container">
                     <div class="email-form" [class.input-error]="hasError('email')">
-                        <span class="question-span">What´s your email?</span>
+                        <span class="question-span">{{ languageService.translate('contact.emailQuestion') }}</span>
                         <div>
-                            <input name="email" [(ngModel)]="email" #emailCtrl="ngModel" type="email" autocomplete="off" [placeholder]="getPlaceholder('email', 'youremail@email.com')" (blur)="onBlur('email')" (focus)="onFocus('email')" required />
+                            <input name="email" [(ngModel)]="email" #emailCtrl="ngModel" type="email" autocomplete="off" [placeholder]="getPlaceholder('email', languageService.translate('contact.placeholder.email'))" (blur)="onBlur('email')" (focus)="onFocus('email')" required />
                         </div>
                     </div>
                 </div>
 
                 <div class="contact-form-container">
                     <div class="message-form" [class.input-error]="hasError('message')">
-                        <span class="question-span">How can I help you?</span>
+                        <span class="question-span">{{ languageService.translate('contact.messageQuestion') }}</span>
                         <div>
-                            <input name="message" [(ngModel)]="message" #messageCtrl="ngModel" minlength="10" type="text" autocomplete="off" [placeholder]="getPlaceholder('message', 'Hello Alex, I am interested in...')" (blur)="onBlur('message')" (focus)="onFocus('message')" />
+                            <input name="message" [(ngModel)]="message" #messageCtrl="ngModel" minlength="10" type="text" autocomplete="off" [placeholder]="getPlaceholder('message', languageService.translate('contact.placeholder.message'))" (blur)="onBlur('message')" (focus)="onFocus('message')" />
                         </div>
                     </div>
                 </div>
@@ -52,17 +52,19 @@
                             <input type="checkbox" name="acceptPrivacy" [(ngModel)]="acceptPrivacy" />
                             <img alt="Privacy Checkbox" [src]="acceptPrivacy ? '/assets/img/icons/contact/check_box.png' : '/assets/img/icons/contact/check_box_outline_blank.png'">
                         </label>
-                        <span>I've read the <a href="privacy-policy">privacy policy</a> and agree to the processing of my data as outlined.</span>
+                        <span>
+                            {{ languageService.translate('contact.privacy.prefix') }} <a href="/privacy-policy">{{ languageService.translate('contact.privacy.link') }}</a> {{ languageService.translate('contact.privacy.suffix') }}
+                        </span>
                     </div>
                     <div class="error-message-privacy-policy-container">
-                        <span class="error-message-privacy-policy" *ngIf="submitted && !acceptPrivacy"> Please accept the privacy policy. </span>
+                        <span class="error-message-privacy-policy" *ngIf="submitted && !acceptPrivacy"> {{ languageService.translate('contact.privacy.error') }} </span>
                     </div>
                     <div class="success-message-privacy-policy-container" *ngIf="formSuccess">
-                        <span class="form-success-message"> Thank you for contacting me! The email has been sent successfully. </span>
+                        <span class="form-success-message"> {{ languageService.translate('contact.success') }} </span>
                     </div>
                     <div class="send-btn-container">
                         <button type="submit" [disabled]="!name || !email || !acceptPrivacy">
-                            <span class="btn-text" data-text="Say Hello ;)">Say Hello ;)</span>
+                            <span class="btn-text" [attr.data-text]="languageService.translate('contact.submit')">{{ languageService.translate('contact.submit') }}</span>
                         </button>
                     </div>
                 </div>

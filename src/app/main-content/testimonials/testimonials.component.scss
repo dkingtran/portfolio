@@ -102,21 +102,16 @@ $color-green: #3DCFB6;
         }
 
         .viewport {
-            /* viewport sized to show up to 3 cards on large screens but shrink to fit smaller screens */
             width: min(1440px, 100%);
             max-width: 100%;
             padding: 0;
             margin: 0 auto;
             overflow-x: hidden;
-            /* fixed viewport height to avoid layout jumps */
             height: 360px;
             position: relative;
-            /* for gradient overlays */
             box-sizing: border-box;
         }
 
-        /* Soft side overlays to visually hide non-active cards at the edges
-           These are purely visual and do not change layout or card sizes. */
         .viewport::before,
         .viewport::after {
             content: "";
@@ -187,14 +182,12 @@ $color-green: #3DCFB6;
             }
         }
 
-        /* active card visually larger via transform (no height change) */
         .testimonial-card.active {
             transform: translateY(0) scale(1);
             background: rgba(61, 207, 182, 0.30);
             opacity: 1;
         }
 
-        /* inactive cards appear smaller and slightly lower using transform (no layout change) */
         .testimonial-card:not(.active) {
             transform: translateY(18px) scale(0.86);
             background: rgba(61, 207, 182, 0.10);
@@ -221,9 +214,7 @@ $color-green: #3DCFB6;
             font-family: 'Karla';
 
             .pipe {
-                /* grow to take available space but not force name shrink */
                 flex: 1 1 auto;
-                /* allow flex child to shrink if needed */
                 min-width: 0;
                 height: 1px;
                 background-color: rgba(255, 255, 255, 0.8);
@@ -238,12 +229,9 @@ $color-green: #3DCFB6;
                 flex-direction: row;
                 align-items: center;
                 gap: 6px;
-                /* smaller gap between name, sep and position */
                 flex: 0 0 auto;
                 white-space: nowrap;
-                /* keep items on one line */
 
-                /* ensure paragraphs behave as inline items inside the meta group */
                 &>* {
                     display: inline-block;
                     vertical-align: middle;
@@ -262,6 +250,7 @@ $color-green: #3DCFB6;
                     flex-direction: column;
                     align-items: flex-start;
                     gap: 4px;
+                    margin-bottom: 8px;
                 }
             }
 
@@ -269,9 +258,7 @@ $color-green: #3DCFB6;
                 margin: 0;
                 opacity: 0.8;
                 flex: 0 0 auto;
-                /* don't shrink the name */
                 white-space: nowrap;
-                /* avoid wrapping/being squeezed */
             }
 
             .client-position {

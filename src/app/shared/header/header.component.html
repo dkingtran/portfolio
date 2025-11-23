@@ -1,47 +1,49 @@
 <nav [class.overlay]="isOverlay">
-			<div class="nav-left">
-				<!-- small logo (shows on mobile) -->
-				<svg class="logo logo-small" width="76" height="46" aria-label="DT Logo" (click)="scrollToTop()">
-					<title>DT Logo</title>
-					<text x="48%" y="98%" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="60" fill="#E8B91B">DT</text>
-				</svg>
-			</div>
+	<div class="nav-container">
+		<div class="nav-left">
+			<!-- small logo (shows on mobile) -->
+			<svg class="logo logo-small" width="76" height="46" aria-label="DT Logo" (click)="scrollToTop()">
+				<title>DT Logo</title>
+				<text x="48%" y="98%" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="60" fill="#E8B91B">DT</text>
+			</svg>
+		</div>
 
-			<div class="nav-center">
-				<div class="navbar">
-					<!-- Slide/Switch von 'EN' zu 'DE' -->
+		<div class="nav-center">
+			<div class="navbar">
+				<!-- Slide/Switch von 'EN' zu 'DE' -->
+				<button class="language-toggle" [class.active-en]="currentLang === 'en'" [class.active-de]="currentLang === 'de'" (click)="toggleLanguage()">
+						<span class="en">EN</span><span class="de">DE</span>
+				</button>
+				<a href="#about-me">{{ languageService.translate('nav.aboutMe') }}</a>
+				<a href="#skillset">{{ languageService.translate('nav.skills') }}</a>
+				<a href="#featured-projects">{{ languageService.translate('nav.projects') }}</a>
+			</div>
+		</div>
+
+		<div class="nav-right">
+			<!-- full logo/name on desktop (right side) -->
+			<svg class="logo logo-name" (click)="scrollToTop()" width="178" height="48" aria-label="DT Dennis Logo">
+				<title>DT Name Logo</title>
+				<text x="-0.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="60" fill="#E8B91B">DT</text>
+				<text x="46%" y="49%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Dennis</text>
+				<text x="46.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Tran</text>
+			</svg>
+
+			<!-- menu icon for mobile (appears on <=1000px) -->
+			<img class="menu-icon" src="/assets/img/icons/header-footer/menu-white.png" alt="Menu" (click)="toggleMenu()" />
+
+			<!-- mobile dropdown (shown when menu open) -->
+			<div class="mobile-dropdown" [class.open]="isMenuOpen">
+				<a href="#about-me" (click)="toggleMenu()">{{ languageService.translate('nav.aboutMe') }}</a>
+				<a href="#skillset" (click)="toggleMenu()">{{ languageService.translate('nav.skills') }}</a>
+				<a href="#featured-projects" (click)="toggleMenu()">{{ languageService.translate('nav.projects') }}</a>
+				<div class="dropdown-lang">
 					<button class="language-toggle" [class.active-en]="currentLang === 'en'" [class.active-de]="currentLang === 'de'" (click)="toggleLanguage()">
-							<span class="en">EN</span><span class="de">DE</span>
+						<span class="en">EN</span><span class="de">DE</span>
 					</button>
-					<a href="#about-me">About me</a>
-					<a href="#skillset">Skills</a>
-					<a href="#featured-projects">Projects</a>
 				</div>
 			</div>
-
-			<div class="nav-right">
-				<!-- full logo/name on desktop (right side) -->
-				<svg class="logo logo-name" (click)="scrollToTop()" width="178" height="48" aria-label="DT Dennis Logo">
-					<title>DT Name Logo</title>
-					<text x="-0.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="60" fill="#E8B91B">DT</text>
-					<text x="46%" y="49%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Dennis</text>
-					<text x="46.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Tran</text>
-				</svg>
-
-				<!-- menu icon for mobile (appears on <=1000px) -->
-				<img class="menu-icon" src="/assets/img/icons/header-footer/menu-white.png" alt="Menu" (click)="toggleMenu()" />
-
-				<!-- mobile dropdown (shown when menu open) -->
-				<div class="mobile-dropdown" [class.open]="isMenuOpen">
-					<a href="#about-me" (click)="toggleMenu()">About me</a>
-					<a href="#skillset" (click)="toggleMenu()">Skills</a>
-					<a href="#featured-projects" (click)="toggleMenu()">Projects</a>
-					<div class="dropdown-lang">
-						<button class="language-toggle" [class.active-en]="currentLang === 'en'" [class.active-de]="currentLang === 'de'" (click)="toggleLanguage()">
-							<span class="en">EN</span><span class="de">DE</span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</nav>
+		</div>
+	</div>
+</nav>
 

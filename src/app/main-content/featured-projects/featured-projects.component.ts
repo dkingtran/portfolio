@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectModalComponent } from './project-modal/project-modal.component';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-featured-projects',
@@ -10,17 +11,16 @@ import { ProjectModalComponent } from './project-modal/project-modal.component';
   styleUrl: './featured-projects.component.scss'
 })
 export class FeaturedProjectsComponent {
+  constructor(public languageService: LanguageService) { }
 
   hoveredImage: string | null = null;
   hoveredBackground: string | null = null;
   displayedImage: string | null = null;
   displayedBackground: string | null = null;
-  // vertical offset in px for the current preview (staggering)
   hoveredOffset: number = 0;
   displayedOffset: number = 0;
   private _clearTimer: any = null;
 
-  // canonical, index-prefixed filenames for images (recommended pattern)
   projects = [
     {
       id: 'proj-1',
@@ -28,7 +28,7 @@ export class FeaturedProjectsComponent {
       tech: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
       image: '/assets/img/icons/featured-projects/project-images/01_join_img.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
-      description: 'Task manager inspired by the Kanban System. Create and organize tasks using drag and drop functions, assign users and categories.',
+      descriptionKey: 'projects.proj1.description',
       github: 'https://github.com/yourname/join',
       live: 'https://yourdomain.com/join',
       techIcons: [
@@ -44,7 +44,7 @@ export class FeaturedProjectsComponent {
       tech: ['HTML', 'CSS', 'JavaScript'],
       image: '/assets/img/icons/featured-projects/project-images/02_el_pollo_loco_img.jpg',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
-      description: 'Jump, run and throw game based on object-oriented approach. Help Pepe to find coins and tabasco salsa to fight against the crazy hen.',
+      descriptionKey: 'projects.proj2.description',
       github: 'https://github.com/yourname/el-pollo-loco',
       live: 'https://yourdomain.com/el-pollo-loco',
       techIcons: [
@@ -59,7 +59,7 @@ export class FeaturedProjectsComponent {
       tech: ['HTML', 'CSS', 'JavaScript', 'REST-API'],
       image: '/assets/img/icons/featured-projects/project-images/03_pokedex_img.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
-      description: 'This interactive Pokédex, built with HTML, CSS, and JavaScript, pulls data from an API to display each Pokémon’s name, image, and type.',
+      descriptionKey: 'projects.proj3.description',
       github: 'https://github.com/yourname/pokedex',
       live: 'https://yourdomain.com/pokedex',
       techIcons: [
@@ -71,13 +71,11 @@ export class FeaturedProjectsComponent {
     }
   ];
 
-  // Modal state
   isModalOpen = false;
-  modalIndex = 0; // index into projects array
+  modalIndex = 0;
 
   openModal(index: number) {
     this.modalIndex = index;
-    // ensure preview state corresponds
     const proj = this.projects[index];
     this.displayedImage = proj.image;
     this.displayedBackground = proj.background;

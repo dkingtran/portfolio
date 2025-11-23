@@ -97,7 +97,6 @@ $color-green: #3DCFB6;
             font-size: 24px;
             line-height: 1.2;
 
-            // the <img> inside the span; always in the flow but hidden visually
             >.hover-icon {
                 display: inline-block;
                 width: 13px;
@@ -111,13 +110,11 @@ $color-green: #3DCFB6;
             }
         }
 
-        // show the image with a smooth fade when hovering the entire project item
         &:hover span>.hover-icon {
             opacity: 1;
             visibility: visible;
         }
 
-        // show the image when hovering the entire project item
         &:hover span>.hover-icon {
             display: inline-block;
         }
@@ -153,7 +150,6 @@ $color-green: #3DCFB6;
     }
 }
 
-// interactive preview container (absolute to the right)
 .interactive-container {
     position: relative;
     flex: 0 0 35%;
@@ -170,7 +166,6 @@ $color-green: #3DCFB6;
         flex: 0 0 0%;
     }
 
-    // background 'capa' image placed behind the main preview and offset
     .interactive-bg {
         position: absolute;
         left: 50%;

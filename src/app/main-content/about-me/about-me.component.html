@@ -7,31 +7,29 @@
     </div>
     <div class="text-content">
         <div>
-            <h3>Who I am</h3>
+            <h3>{{ languageService.translate('about.subtitle') }}</h3>
         </div>
         <div class="text-container">
-            <h1>About Me</h1>
-            <p>Hey there, I'm Dennis! Write some information about yourself that is IT related. Why are you passionate about coding? What is your source of inspiration for improving your programming skills?</p>
+            <h1>{{ languageService.translate('about.title') }}</h1>
+            <p>{{ languageService.translate('about.intro') }}</p>
             <div class ="info-boxes">
                 <div class="text-box">
                     <div>
                         <img src="/assets/img/icons/about-me/location_on.png" alt="">
                     </div>
-                    <p>Where are you based? Would you be open to working remotely or potentially relocating?</p>
+                    <p>{{ languageService.translate('about.location') }}</p>
                 </div>
                 <div class="text-box">
                     <div>
                         <img src="/assets/img/icons/about-me/cognition.png" alt="">
                     </div>
-                    <p>Show that you are open-minded. Are you enthusiastic about learning new technologies and continually improving your skills?</p>
+                    <p>{{ languageService.translate('about.mindset') }}</p>
                 </div>
                 <div class="text-box">
                     <div>
                         <img src="/assets/img/icons/about-me/new_releases.png" alt="">
                     </div>
-                    <p>A brief description of your problem-solving approach. 
-                        Do you learn from each challenge as you search for the most efficient or elegant solution? You can include some keywords like: analytical thinking, creativity, persistence and  collaboration.
-                    </p>
+                    <p>{{ languageService.translate('about.approach') }}</p>
                 </div>
             </div>
         </div>
