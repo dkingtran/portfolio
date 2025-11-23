@@ -12,6 +12,7 @@ $color-green: #3DCFB6;
     display: grid;
     grid-template-rows: 1fr auto;
     font-family: 'Karla';
+    overflow-x: hidden;
 
     .content {
         display: flex;
@@ -20,6 +21,10 @@ $color-green: #3DCFB6;
         align-items: center;
         max-width: 1920px;
         width: auto;
+
+        @media (max-width: 400px) {
+            padding: 16px 16px;
+        }
     }
 
     .content div {
@@ -29,6 +34,11 @@ $color-green: #3DCFB6;
         button {
             @include animated-button;
         }
+
+        @media (max-width: 500px) {
+            flex-direction: column;
+            gap: 16px;
+        }
     }
 
     h2 {
@@ -37,6 +47,14 @@ $color-green: #3DCFB6;
         font-weight: 400;
         margin: 0;
         text-align: center;
+
+        @media (max-width: 1300px) {
+            font-size: 32px;
+        }
+
+        @media (max-width: 900px) {
+            font-size: 24px;
+        }
     }
 
     h1 {
@@ -45,6 +63,19 @@ $color-green: #3DCFB6;
         font-weight: 700;
         margin: 48px 0;
         text-align: center;
+
+        @media (max-width: 1300px) {
+            font-size: 96px;
+        }
+
+        @media (max-width: 900px) {
+            font-size: 78px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 64px;
+        }
     }
 
     .marquee {
@@ -62,7 +93,16 @@ $color-green: #3DCFB6;
         bottom: 80px;
         z-index: 2;
         transform: rotate(-3deg);
+        mask: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 
+        @media (max-width: 1000px) {
+            height: 58px;
+        }
+
+        @media (max-width: 600px) {
+            height: 53px;
+            bottom: 40px;
+        }
 
         &__inner {
             display: flex;
@@ -77,6 +117,14 @@ $color-green: #3DCFB6;
             font-weight: 400;
             padding-left: 8px;
             @include color;
+
+            @media (max-width: 1000px) {
+                font-size: 28px;
+            }
+
+            @media (max-width: 500px) {
+                font-size: 24px;
+            }
         }
 
         .bullet {
@@ -129,6 +177,10 @@ $color-green: #3DCFB6;
         left: 24px;
     }
 
+    @media (max-width: 400px) {
+        left: 16px;
+    }
+
     .arrow {
         width: 30px;
         height: 48px;
@@ -165,6 +217,10 @@ $color-green: #3DCFB6;
         height: 240px;
         background-color: $color-green;
         margin-top: 16px;
+
+        @media (max-width: 600px) {
+            height: 184px;
+        }
     }
 }
 
@@ -182,6 +238,10 @@ $color-green: #3DCFB6;
 
     @media (max-width: 500px) {
         right: 24px;
+    }
+
+    @media (max-width: 400px) {
+        right: 16px;
     }
 
     .icons {
@@ -239,6 +299,10 @@ $color-green: #3DCFB6;
         opacity: 0;
         transition: opacity 125ms ease, transform 125ms cubic-bezier(.2, .9, .2, 1);
         pointer-events: none;
+
+        @media (max-width: 600px) {
+            display: none;
+        }
     }
 
     .icons .icon:hover::after,
@@ -268,5 +332,9 @@ $color-green: #3DCFB6;
         height: 186px;
         background-color: $color-green;
         margin-top: 16px;
+
+        @media (max-width: 600px) {
+            height: 124px;
+        }
     }
 }

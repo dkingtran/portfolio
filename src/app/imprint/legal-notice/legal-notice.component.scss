@@ -18,6 +18,10 @@ $color-green: #3DCFB6;
     @media (max-width: 500px) {
         padding: 24px;
     }
+
+    @media (max-width: 400px) {
+        padding: 16px;
+    }
 }
 
 h1 {
@@ -58,7 +62,7 @@ h1 {
 
         &:hover {
             transform: scale(1.1);
-            filter: invert(61%) sepia(100%) saturate(1200%) hue-rotate(134deg) brightness(120%) contrast(100%);
+            filter: invert(61%) sepia(100%) saturate(700%) hue-rotate(134deg) brightness(120%) contrast(100%);
         }
     }
 

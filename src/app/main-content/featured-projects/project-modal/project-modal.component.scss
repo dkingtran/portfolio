@@ -29,6 +29,12 @@ $color-green: #3DCFB6;
     display: flex;
     flex-direction: column;
     border: 0.5px solid $color-green;
+
+    @media (max-width: 500px) {
+        height: 95vh;
+        max-height: 96vh;
+        width: 92vw;
+    }
 }
 
 .modal-close {
@@ -253,6 +259,11 @@ $color-green: #3DCFB6;
     display: flex;
     gap: 12px;
     margin-top: 16px;
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+        gap: 16px;
+    }
 }
 
 .modal-links .button {
@@ -316,20 +327,39 @@ $color-green: #3DCFB6;
 
     .modal-right {
         padding: 36px;
+
+        @media (max-width: 500px) {
+            padding: 12px 0 !important;
+        }
     }
 
     .modal-left {
         padding: 36px;
+        overflow-y: auto;
+
+        @media (max-width: 500px) {
+            padding: 0 12px;
+        }
     }
 
     .modal-close {
         top: 32px;
         right: 32px;
+
+        @media (max-width: 500px) {
+            top: 16px;
+            right: 16px;
+        }
     }
 
     .modal-next {
         right: 32px;
         bottom: 32px;
+
+        @media (max-width: 500px) {
+            right: 16px;
+            bottom: 16px;
+        }
     }
 }
 

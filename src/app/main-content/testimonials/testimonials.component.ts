@@ -42,7 +42,6 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly gap = 24;
   viewportWidth = 0;
   carouselItems: Testimonial[] = [];
-  // how many visible slides (desktop); clone this many items to each end to avoid flicker
   readonly visibleSlides = 3;
   private cloneCount = this.visibleSlides;
   trackIndex = this.cloneCount;
@@ -66,21 +65,29 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    // build carouselItems with multiple clones at each end to make wrap seamless
     const n = this.testimonials.length;
     if (n > 0) {
-      const leftClones: Testimonial[] = [];
-      const rightClones: Testimonial[] = [];
-      // number of clones is cloneCount (visibleSlides). If there are fewer testimonials than cloneCount, wrap accordingly
-      for (let i = 0; i < this.cloneCount; i++) {
-        // left clones: take from end
-        leftClones.unshift(this.testimonials[(n - 1 - (i % n))]);
-        // right clones: take from start
-        rightClones.push(this.testimonials[i % n]);
-      }
+      const leftClones = this.createLeftClones(n);
+      const rightClones = this.createRightClones(n);
       this.carouselItems = [...leftClones, ...this.testimonials, ...rightClones];
-      this.trackIndex = this.cloneCount; // start at first real
+      this.trackIndex = this.cloneCount;
     }
+  }
+
+  private createLeftClones(n: number): Testimonial[] {
+    const clones: Testimonial[] = [];
+    for (let i = 0; i < this.cloneCount; i++) {
+      clones.unshift(this.testimonials[(n - 1 - (i % n))]);
+    }
+    return clones;
+  }
+
+  private createRightClones(n: number): Testimonial[] {
+    const clones: Testimonial[] = [];
+    for (let i = 0; i < this.cloneCount; i++) {
+      clones.push(this.testimonials[i % n]);
+    }
+    return clones;
   }
 
   prev() {
@@ -109,35 +116,37 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.isAnimating) return;
     this.isAnimating = true;
     this.dragOffset = 0;
-    // map real index (0..n-1) to carousel index offset by cloneCount
     this.trackIndex = index + this.cloneCount;
     if (this.trackEl && this.trackEl.nativeElement) {
       this.renderer.removeStyle(this.trackEl.nativeElement, 'transition');
       this.applyTransform();
     }
   }
-
-  // compute translateX for the track
   ngAfterViewInit(): void {
     this.updateViewportWidth();
-    // attach transitionend to track to handle clone-jump
+    this.setupTrackListeners();
+    this.setupViewportListeners();
+  }
+
+  private setupTrackListeners() {
     if (this.trackEl && this.trackEl.nativeElement) {
       this.trackEl.nativeElement.addEventListener('transitionend', this.onTransitionEndBound);
-      // initialize transform from TS to avoid simultaneous template binding
       this.applyTransform();
     }
-    // attach pointerdown to viewport for swipe
+  }
+
+  private setupViewportListeners() {
     if (this.viewportEl && this.viewportEl.nativeElement) {
       this.viewportEl.nativeElement.addEventListener('pointerdown', this.pointerDownBound);
-      // ensure touch-action none for panning
       this.viewportEl.nativeElement.style.touchAction = 'pan-y';
-      // observe size changes to keep active card centered when the viewport is resized
-      if (typeof ResizeObserver !== 'undefined') {
-        this.resizeObserver = new ResizeObserver(() => {
-          this.updateViewportWidth();
-        });
-        this.resizeObserver.observe(this.viewportEl.nativeElement);
-      }
+      this.setupResizeObserver();
+    }
+  }
+
+  private setupResizeObserver() {
+    if (typeof ResizeObserver !== 'undefined' && this.viewportEl) {
+      this.resizeObserver = new ResizeObserver(() => this.updateViewportWidth());
+      this.resizeObserver.observe(this.viewportEl.nativeElement);
     }
   }
 
@@ -148,58 +157,56 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private updateViewportWidth() {
     const el = (document.querySelector('.viewport') as HTMLElement | null);
-    if (el) {
-      this.viewportWidth = el.clientWidth;
-    } else {
-      this.viewportWidth = window.innerWidth;
-    }
-    // re-apply transform when viewport changes so the active card stays centered
+    this.viewportWidth = el ? el.clientWidth : window.innerWidth;
     this.applyTransform();
   }
 
   ngOnDestroy(): void {
+    this.cleanupTrackListeners();
+    this.cleanupViewportListeners();
+    this.cleanupResizeObserver();
+  }
+
+  private cleanupTrackListeners() {
     if (this.trackEl && this.trackEl.nativeElement) {
       this.trackEl.nativeElement.removeEventListener('transitionend', this.onTransitionEndBound);
     }
+  }
+
+  private cleanupViewportListeners() {
     if (this.viewportEl && this.viewportEl.nativeElement) {
       this.viewportEl.nativeElement.removeEventListener('pointerdown', this.pointerDownBound);
     }
+  }
+
+  private cleanupResizeObserver() {
     if (this.resizeObserver && this.viewportEl && this.viewportEl.nativeElement) {
       this.resizeObserver.unobserve(this.viewportEl.nativeElement);
       this.resizeObserver.disconnect();
     }
   }
-
-  // compute transform based on trackIndex inside carouselItems
   trackTransform(): string {
     const step = this.cardWidth + this.gap;
-    // centerOffset when viewport shows 3 cards: center card is the 2nd visible item
     const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
     const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
     return `translate3d(${x}px, 0, 0)`;
   }
-
-  // pointer handlers for swipe
   private onPointerDown(ev: PointerEvent) {
     if (this.isAnimating) return;
     this.isDragging = true;
     this.startX = ev.clientX;
     this.dragOffset = 0;
-    // disable transition while dragging
     if (this.trackEl && this.trackEl.nativeElement) {
       this.renderer.setStyle(this.trackEl.nativeElement, 'transition', 'none');
     }
     window.addEventListener('pointermove', this.pointerMoveBound);
     window.addEventListener('pointerup', this.pointerUpBound);
-    // prevent default to avoid scrolling on touch
     ev.preventDefault();
   }
 
   private onPointerMove(ev: PointerEvent) {
     if (!this.isDragging) return;
-    const delta = ev.clientX - this.startX;
-    this.dragOffset = delta;
-    // apply transform immediately
+    this.dragOffset = ev.clientX - this.startX;
     if (this.trackEl && this.trackEl.nativeElement) {
       this.renderer.setStyle(this.trackEl.nativeElement, 'transform', this.trackTransform());
     }
@@ -211,32 +218,40 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     window.removeEventListener('pointermove', this.pointerMoveBound);
     window.removeEventListener('pointerup', this.pointerUpBound);
     const delta = ev.clientX - this.startX;
-    // center the currently focused card using its real DOM position
+    this.centerCurrentCard();
+    this.handleSwipeOrSnap(delta);
+  }
+
+  private centerCurrentCard() {
     const track = this.trackEl.nativeElement as HTMLElement;
     const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
     const child = track.children[this.trackIndex] as HTMLElement | undefined;
     if (child && viewport) {
-      const cardCenter = child.offsetLeft + child.offsetWidth / 2;
-      const viewportCenter = viewport.clientWidth / 2;
-      const translate = viewportCenter - cardCenter + this.dragOffset;
-      track.style.transform = `translate3d(${translate}px, 0, 0)`;
+      this.centerCardByPosition(child, viewport, track);
     } else {
-      // fallback to previous calculation
-      const step = this.cardWidth + this.gap;
-      const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-      const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
-      this.trackEl.nativeElement.style.transform = `translate3d(${x}px, 0, 0)`;
+      this.centerCardByCalculation(track);
     }
+  }
+
+  private centerCardByPosition(child: HTMLElement, viewport: HTMLElement, track: HTMLElement) {
+    const cardCenter = child.offsetLeft + child.offsetWidth / 2;
+    const viewportCenter = viewport.clientWidth / 2;
+    const translate = viewportCenter - cardCenter + this.dragOffset;
+    track.style.transform = `translate3d(${translate}px, 0, 0)`;
+  }
+
+  private centerCardByCalculation(track: HTMLElement) {
+    const step = this.cardWidth + this.gap;
+    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
+    const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
+    track.style.transform = `translate3d(${x}px, 0, 0)`;
+  }
+
+  private handleSwipeOrSnap(delta: number) {
     if (Math.abs(delta) > this.swipeThreshold) {
       this.dragOffset = 0;
-      // perform navigation
-      if (delta < 0) {
-        this.next();
-      } else {
-        this.prev();
-      }
+      delta < 0 ? this.next() : this.prev();
     } else {
-      // snap back
       this.dragOffset = 0;
       if (this.trackEl && this.trackEl.nativeElement) {
         this.applyTransform();
@@ -245,79 +260,85 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private onTransitionEnd(): void {
+    if (!this.isAnimating) return;
     const realCount = this.testimonials.length;
     const total = this.carouselItems.length;
-    if (!this.isAnimating) return;
-    // if we've moved past the right clones, jump back to the corresponding real index
-    if (this.trackIndex >= total - this.cloneCount) {
-      const target = this.trackIndex - realCount;
-      this.jumpWithoutAnimation(target);
-    } else if (this.trackIndex < this.cloneCount) {
-      // moved into left clones, jump forward by realCount
-      const target = this.trackIndex + realCount;
-      this.jumpWithoutAnimation(target);
-    }
-
+    this.handleCloneJump(realCount, total);
     this.isAnimating = false;
   }
 
-  private computeTransformForIndex(index: number): string {
-    const step = this.cardWidth + this.gap;
-    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-    const x = -(index * step) + centerOffset;
-    return `translate3d(${x}px, 0, 0)`;
+  private handleCloneJump(realCount: number, total: number) {
+    if (this.trackIndex >= total - this.cloneCount) {
+      this.jumpWithoutAnimation(this.trackIndex - realCount);
+    } else if (this.trackIndex < this.cloneCount) {
+      this.jumpWithoutAnimation(this.trackIndex + realCount);
+    }
   }
 
   private jumpWithoutAnimation(targetIndex: number) {
     const el = this.trackEl?.nativeElement;
     if (!el) {
-      this.dragOffset = 0;
-      this.trackIndex = targetIndex;
+      this.resetToTarget(targetIndex);
       return;
     }
-    // remove transition
     this.renderer.setStyle(el, 'transition', 'none');
     this.dragOffset = 0;
-    // set transform directly to the target card using DOM measurements (more robust)
-    const track = el as HTMLElement;
+    this.applyJumpTransform(el, targetIndex);
+    this.scheduleTransitionRestore(el, targetIndex);
+  }
+
+  private resetToTarget(targetIndex: number) {
+    this.dragOffset = 0;
+    this.trackIndex = targetIndex;
+  }
+
+  private applyJumpTransform(el: HTMLElement, targetIndex: number) {
     const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
-    const child = track.children[targetIndex] as HTMLElement | undefined;
+    const child = el.children[targetIndex] as HTMLElement | undefined;
     if (child && viewport) {
       const cardCenter = child.offsetLeft + child.offsetWidth / 2;
       const viewportCenter = viewport.clientWidth / 2;
       const translate = viewportCenter - cardCenter;
-      track.style.transform = `translate3d(${translate}px, 0, 0)`;
+      el.style.transform = `translate3d(${translate}px, 0, 0)`;
     } else {
-      // fallback: algebraic calculation
-      const step = this.cardWidth + this.gap;
-      const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-      const x = -(targetIndex * step) + centerOffset;
-      el.style.transform = `translate3d(${x}px, 0, 0)`;
+      this.applyCalculatedTransform(el, targetIndex);
     }
+  }
 
-    // update index in next macrotask to avoid ExpressionChangedAfterItHasBeenChecked
+  private applyCalculatedTransform(el: HTMLElement, targetIndex: number) {
+    const step = this.cardWidth + this.gap;
+    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
+    const x = -(targetIndex * step) + centerOffset;
+    el.style.transform = `translate3d(${x}px, 0, 0)`;
+  }
+
+  private scheduleTransitionRestore(el: HTMLElement, targetIndex: number) {
     setTimeout(() => {
       this.trackIndex = targetIndex;
-      // restore inline transition so future moves animate
       this.renderer.setStyle(el, 'transition', 'transform 420ms cubic-bezier(.22, .9, .36, 1)');
     }, 0);
   }
 
-  // apply computed transform using current trackIndex and dragOffset
   private applyTransform() {
     const track = this.trackEl?.nativeElement as HTMLElement | undefined;
     const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
     if (!track || !viewport) return;
-    // prefer DOM measurements for accurate centering (handles padding, responsive sizes)
     const child = track.children[this.trackIndex] as HTMLElement | undefined;
     if (child) {
-      const cardCenter = child.offsetLeft + child.offsetWidth / 2;
-      const viewportCenter = viewport.clientWidth / 2;
-      const translate = viewportCenter - cardCenter + this.dragOffset;
-      track.style.transform = `translate3d(${translate}px, 0, 0)`;
-      return;
+      this.applyTransformByChild(child, viewport, track);
+    } else {
+      this.applyTransformByCalculation(track);
     }
-    // fallback to arithmetic calculation
+  }
+
+  private applyTransformByChild(child: HTMLElement, viewport: HTMLElement, track: HTMLElement) {
+    const cardCenter = child.offsetLeft + child.offsetWidth / 2;
+    const viewportCenter = viewport.clientWidth / 2;
+    const translate = viewportCenter - cardCenter + this.dragOffset;
+    track.style.transform = `translate3d(${translate}px, 0, 0)`;
+  }
+
+  private applyTransformByCalculation(track: HTMLElement) {
     const step = this.cardWidth + this.gap;
     const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
     const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;

@@ -16,7 +16,7 @@ $color-green: #3DCFB6;
     }
 
     @media (max-width: 500px) {
-        padding: 24px 0px;
+        padding: 40px 0px;
     }
 
     h1 {
@@ -29,6 +29,10 @@ $color-green: #3DCFB6;
 
         @media (max-width: 500px) {
             padding: 24px 24px !important;
+        }
+
+        @media (max-width: 400px) {
+            padding: 16px 16px !important;
         }
     }
 
@@ -177,6 +181,10 @@ $color-green: #3DCFB6;
                 min-width: 260px;
                 padding: 24px;
             }
+
+            @media (max-width: 400px) {
+                padding: 16px 16px;
+            }
         }
 
         /* active card visually larger via transform (no height change) */
@@ -219,6 +227,10 @@ $color-green: #3DCFB6;
                 min-width: 0;
                 height: 1px;
                 background-color: rgba(255, 255, 255, 0.8);
+
+                @media (max-width: 450px) {
+                    display: none;
+                }
             }
 
             .client-meta {
@@ -240,6 +252,16 @@ $color-green: #3DCFB6;
 
                 .sep {
                     opacity: 0.8;
+
+                    @media (max-width: 450px) {
+                        display: none;
+                    }
+                }
+
+                @media (max-width: 450px) {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 4px;
                 }
             }
 
@@ -258,6 +280,12 @@ $color-green: #3DCFB6;
                 font-size: 16px;
                 flex: 0 0 auto;
                 white-space: nowrap;
+            }
+
+            @media (max-width: 450px) {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
             }
         }
     }

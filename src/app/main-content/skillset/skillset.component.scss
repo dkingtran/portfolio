@@ -27,6 +27,12 @@ $color-green: #3DCFB6;
 
     @media (max-width: 500px) {
         padding: 24px 24px;
+        gap: 40px;
+    }
+
+    @media (max-width: 400px) {
+        padding: 40px 16px;
+        gap: 24px;
     }
 }
 
@@ -57,6 +63,14 @@ h1 {
     letter-spacing: -4%;
     white-space: nowrap;
 
+    @media (max-width: 550px) {
+        font-size: 56px;
+        margin: 8px 0;
+    }
+
+    @media (max-width: 440px) {
+        font-size: 40px;
+    }
 }
 
 .colored-h2 {
@@ -70,6 +84,23 @@ h1 {
     h1 {
         margin-bottom: 0;
         white-space: inherit;
+    }
+
+    p {
+        font-family: 'Karla';
+        font-weight: 400;
+        font-size: 18px;
+        color: white;
+        margin-top: 0;
+        line-height: 1.2;
+
+        @media (max-width: 400px) {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        padding: 20px 20px;
     }
 }
 
@@ -89,13 +120,11 @@ h1 {
 .icons-container {
     display: flex;
     gap: 68px;
-    margin-top: 80px;
     flex: 0 0 50%;
     flex-wrap: wrap;
     justify-content: start;
 
     @media (max-width: 883px) {
-        margin-top: 40px;
         gap: 40px;
         justify-content: center;
     }
@@ -107,6 +136,10 @@ h1 {
         gap: 8px;
         width: 100px;
         position: relative;
+
+        @media (max-width: 630px) {
+            width: 80px;
+        }
 
         img {
             width: 64px;

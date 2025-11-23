@@ -95,7 +95,6 @@ export class FeaturedProjectsComponent {
   }
 
   showPreview(imagePath: string | null, backgroundPath: string | null, index: number = 0) {
-    // cancel any pending clear
     if (this._clearTimer) {
       clearTimeout(this._clearTimer);
       this._clearTimer = null;
@@ -103,30 +102,24 @@ export class FeaturedProjectsComponent {
 
     this.hoveredImage = imagePath;
     this.hoveredBackground = backgroundPath;
-    // determine offset (80px per item index)
     this.hoveredOffset = index * 100;
 
-    // ensure the image srcs are present so they can fade in
     this.displayedImage = imagePath;
     this.displayedBackground = backgroundPath;
 
-    // set displayedOffset immediately so transform updates
     this.displayedOffset = this.hoveredOffset;
   }
 
   clearPreview() {
-    // start fade-out by removing the "visible" flag
     this.hoveredImage = null;
     this.hoveredBackground = null;
 
-    // after transition (125ms) remove the srcs to avoid broken/empty img
     if (this._clearTimer) {
       clearTimeout(this._clearTimer);
     }
     this._clearTimer = setTimeout(() => {
       this.displayedImage = null;
       this.displayedBackground = null;
-      // reset displayed offset too
       this.displayedOffset = 0;
       this._clearTimer = null;
     }, 150);
