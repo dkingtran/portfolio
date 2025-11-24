@@ -72,7 +72,7 @@ export class LanguageService {
         'contact.privacy.link': { en: 'privacy policy', de: 'Datenschutzerklärung' },
         'contact.privacy.suffix': { en: 'and agree to the processing of my data as outlined.', de: 'gelesen und stimme der Verarbeitung meiner Daten wie beschrieben zu.' },
         'contact.privacy.error': { en: 'Please accept the privacy policy.', de: 'Bitte akzeptiere die Datenschutzerklärung.' },
-        'contact.success': { en: 'Thank you for contacting me! The email has been sent successfully.', de: 'Danke für deine Nachricht! Die E-Mail wurde erfolgreich gesendet.' },
+        'contact.success': { en: 'Thank you for contacting me! <br> The email has been sent successfully.', de: 'Danke für deine Nachricht! <br> Die E-Mail wurde erfolgreich gesendet.' },
         'contact.submit': { en: 'Say Hello ;)', de: 'Sag Hallo ;)' },
         'footer.webDev': { en: 'Web Developer', de: 'Web Entwickler' },
         'footer.email': { en: 'Email', de: 'E-Mail' },

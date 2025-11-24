@@ -1,21 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-contactform',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './contactform.component.html',
   styleUrl: './contactform.component.scss'
 })
 export class ContactformComponent {
-  constructor(public languageService: LanguageService) { }
+  constructor(public languageService: LanguageService, private http: HttpClient) { }
 
-  name = '';
-  email = '';
-  message = '';
+  contactdata = {
+    name: '',
+    email: '',
+    message: ''
+  }
+
   acceptPrivacy = false;
   formSuccess = false;
   submitted = false;
@@ -23,12 +27,23 @@ export class ContactformComponent {
   errors: { [key: string]: string } = {};
   tempValues: { [key: string]: string } = {};
 
+  // Mail test toggle and post configuration (mentor pattern)
+  mailTest = true;
+
+  post = {
+    endPoint: 'https://deineDomain.de/sendMail.php',
+    body: (payload: any) => JSON.stringify(payload),
+    options: {
+      headers: {
+        'Content-Type': 'text/plain',
+        responseType: 'text',
+      },
+    },
+  };
+
   onBlur(field: string) {
     this.touched[field] = true;
     this.validateField(field);
-    if (this.errors[field]) {
-      this.storeAndClearField(field);
-    }
   }
 
   onFocus(field: string) {
@@ -51,18 +66,18 @@ export class ContactformComponent {
 
   getFieldValue(field: string): string {
     switch (field) {
-      case 'name': return this.name;
-      case 'email': return this.email;
-      case 'message': return this.message;
+      case 'name': return this.contactdata.name;
+      case 'email': return this.contactdata.email;
+      case 'message': return this.contactdata.message;
       default: return '';
     }
   }
 
   setFieldValue(field: string, value: string) {
     switch (field) {
-      case 'name': this.name = value; break;
-      case 'email': this.email = value; break;
-      case 'message': this.message = value; break;
+      case 'name': this.contactdata.name = value; break;
+      case 'email': this.contactdata.email = value; break;
+      case 'message': this.contactdata.message = value; break;
     }
   }
 
@@ -76,9 +91,9 @@ export class ContactformComponent {
   }
 
   validateName() {
-    if (!this.name || this.name.trim().length === 0) {
+    if (!this.contactdata.name || this.contactdata.name.trim().length === 0) {
       this.errors['name'] = this.languageService.translate('contact.errorNameMissing');
-    } else if (!this.isValidName(this.name)) {
+    } else if (!this.isValidName(this.contactdata.name)) {
       this.errors['name'] = this.languageService.translate('contact.errorNameFormat');
     } else {
       this.errors['name'] = '';
@@ -86,9 +101,9 @@ export class ContactformComponent {
   }
 
   validateEmail() {
-    if (!this.email || this.email.trim().length === 0) {
+    if (!this.contactdata.email || this.contactdata.email.trim().length === 0) {
       this.errors['email'] = this.languageService.translate('contact.errorEmailMissing');
-    } else if (!this.isValidEmail(this.email)) {
+    } else if (!this.isValidEmail(this.contactdata.email)) {
       this.errors['email'] = this.languageService.translate('contact.errorEmailInvalid');
     } else {
       this.errors['email'] = '';
@@ -96,7 +111,7 @@ export class ContactformComponent {
   }
 
   validateMessage() {
-    if (this.message && this.message.trim().length > 0 && this.message.trim().length < 10) {
+    if (this.contactdata.message && this.contactdata.message.trim().length > 0 && this.contactdata.message.trim().length < 10) {
       this.errors['message'] = this.languageService.translate('contact.errorMessageTooShort');
     } else {
       this.errors['message'] = '';
@@ -104,7 +119,7 @@ export class ContactformComponent {
   }
 
   isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email.trim());
   }
 
@@ -122,14 +137,56 @@ export class ContactformComponent {
     return this.hasError(field) ? this.errors[field] : defaultPlaceholder;
   }
 
+  /* ORIGINAL onSubmit kept for reference (commented out)
   onSubmit() {
     this.submitted = true;
     this.validateAllFields();
 
     if (this.isFormValid()) {
+      // Log the submitted data before the form is reset
+      console.log({ ...this.contactdata });
       this.handleSuccessfulSubmit();
     } else {
       this.formSuccess = false;
+      // Log current values to help debugging when the form is invalid
+      console.log({ ...this.contactdata });
+    }
+
+  }
+  */
+
+  // New onSubmit that accepts the template-driven form and optionally sends a real HTTP POST
+  onSubmit(ngForm: NgForm) {
+    // Keep existing validation behaviour
+    this.submitted = true;
+    this.validateAllFields();
+
+    // If the form is valid, either send the mail (when mailTest === false)
+    // or run the local test flow (when mailTest === true)
+    if (ngForm.submitted && this.isFormValid() && !this.mailTest) {
+      // Attempt to post the payload to the configured endpoint
+      this.http.post(this.post.endPoint, this.post.body(this.contactdata), this.post.options as any)
+        .subscribe({
+          next: (response) => {
+            console.log('mail send response', response);
+            // show success modal and reset local state
+            this.handleSuccessfulSubmit();
+            ngForm.resetForm();
+          },
+          error: (error) => {
+            console.error('mail send error', error);
+          },
+          complete: () => console.info('send post complete'),
+        });
+    } else if (ngForm.submitted && this.isFormValid() && this.mailTest) {
+      // Mail test mode — do not send HTTP request, show success and reset
+      console.log('mailTest enabled — skipping actual HTTP request', { ...this.contactdata });
+      this.handleSuccessfulSubmit();
+      ngForm.resetForm();
+    } else {
+      // invalid form — keep existing behaviour: mark as not-success and log
+      this.formSuccess = false;
+      console.log({ ...this.contactdata });
     }
   }
 
@@ -143,9 +200,9 @@ export class ContactformComponent {
   }
 
   isFormValid(): boolean {
-    const validName = !!(this.name && this.name.trim().length > 0 && this.isValidName(this.name));
-    const validEmail = !!(this.email && this.email.trim().length > 0 && this.isValidEmail(this.email));
-    const validMessage = !this.message || this.message.trim().length >= 10;
+    const validName = !!(this.contactdata.name && this.contactdata.name.trim().length > 0 && this.isValidName(this.contactdata.name));
+    const validEmail = !!(this.contactdata.email && this.contactdata.email.trim().length > 0 && this.isValidEmail(this.contactdata.email));
+    const validMessage = !this.contactdata.message || this.contactdata.message.trim().length >= 10;
     const validPrivacy = this.acceptPrivacy === true;
     return validName && validEmail && validMessage && validPrivacy;
   }
@@ -153,12 +210,15 @@ export class ContactformComponent {
   handleSuccessfulSubmit() {
     this.formSuccess = true;
     this.resetForm();
+    setTimeout(() => {
+      this.formSuccess = false;
+    }, 3000);
   }
 
   resetForm() {
-    this.name = '';
-    this.email = '';
-    this.message = '';
+    this.contactdata.name = '';
+    this.contactdata.email = '';
+    this.contactdata.message = '';
     this.acceptPrivacy = false;
     this.submitted = false;
     this.touched = {};
