@@ -155,7 +155,7 @@ $color-green: #3DCFB6;
     flex: 0 0 35%;
     padding: 80px;
     pointer-events: none;
-    @include display-flex-center;
+    @include flex-center-center;
 
     @media (max-width: 1300px) {
         flex: 0 0 45%;

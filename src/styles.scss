@@ -67,11 +67,23 @@ app-root {
     border-color: #3DCFB6;
 }
 
-@mixin display-flex-center {
+@mixin flex-center-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-sb-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 @mixin logo {
     cursor: pointer;
@@ -88,7 +100,7 @@ app-root {
     color: white;
     padding: 0px 16px;
     font-size: 18px;
-    @include display-flex-center;
+    @include flex-center-center;
     transition: color 300ms ease;
 
     &:hover {
@@ -147,23 +159,9 @@ app-root {
 }
 
 
-@mixin flex-column-center {
+x-column-center {
     display: flex;
     flex-direction: column;
-}
-
-.logo-small text {
-    fill: #3DCFB6;
-}
-
-.logo-small:hover text {
-    fill: none;
-    stroke: #3DCFB6;
-    stroke-width: 1;
-}
-
-.logo-name text {
-    fill: #FFFFFF;
 }
 
 .logo-name text:nth-child(1),

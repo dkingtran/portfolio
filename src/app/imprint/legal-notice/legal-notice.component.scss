@@ -30,7 +30,7 @@ h1 {
     font-weight: 700;
     font-size: 64px;
     color: $color-green;
-    @include display-flex-center;
+    @include flex-center-center;
     margin-top: 0;
     margin-bottom: 64px;
     line-height: 1.2;
@@ -98,7 +98,6 @@ h1 {
     }
 }
 
-/* Ensure component scrollbars match the global appearance (WebKit + Firefox) */
 :host ::-webkit-scrollbar {
     width: 8px;
     height: 8px;

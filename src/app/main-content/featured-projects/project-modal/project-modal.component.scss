@@ -25,8 +25,7 @@ $color-green: #3DCFB6;
     background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
     position: relative;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     border: 0.5px solid $color-green;
 
     @media (max-width: 500px) {
@@ -120,8 +119,7 @@ $color-green: #3DCFB6;
     grid-area: left;
     padding: 80px;
     color: white;
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     align-items: flex-start;
     justify-items: center;
     overflow-y: hidden;
@@ -192,18 +190,14 @@ $color-green: #3DCFB6;
 
 .modal-right {
     grid-area: right;
-    display: flex;
+    @include flex-center-center;
     padding: 80px;
-    align-items: center;
-    justify-content: center;
     background: transparent;
     min-width: 0;
     top: 40px !important;
     overflow: hidden;
 
     @media (max-width: 1300px) {
-        display: flex;
-        justify-content: center;
         padding: 36px;
     }
 
@@ -311,9 +305,8 @@ $color-green: #3DCFB6;
     color: white;
     padding: 0px 24px;
     font-size: 18px;
-    @include display-flex-center;
+    @include flex-center-center;
     transition: color 300ms ease;
-    @include display-flex-center;
     text-decoration: none;
     gap: 4px;
 
@@ -341,7 +334,7 @@ $color-green: #3DCFB6;
     .modal-wrapper {
         height: auto;
         min-height: 80vh;
-        @include display-flex-center;
+        @include flex-center-center;
     }
 
     .modal {

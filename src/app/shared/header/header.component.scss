@@ -62,7 +62,7 @@ nav.overlay {
     display: flex;
     gap: 24px;
     height: 98px;
-    @include display-flex-center;
+    @include flex-center-center;
 
 
     a {
@@ -106,7 +106,7 @@ nav.overlay {
     color: white;
     font-size: 16px;
     font-weight: 400;
-    @include display-flex-center;
+    @include flex-center-center;
     padding-left: 12px;
     padding-right: 12px;
     cursor: pointer;
@@ -118,7 +118,7 @@ nav.overlay {
         padding: 0px 12px;
         height: 28px;
         line-height: 120%;
-        @include display-flex-center;
+        @include flex-center-center;
         border-radius: 100px;
         color: $color-green;
     }

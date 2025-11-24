@@ -29,7 +29,7 @@ export class FeaturedProjectsComponent {
       image: '/assets/img/icons/featured-projects/project-images/01_join_img.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj1.description',
-      github: 'https://github.com/yourname/join',
+      github: 'https://github.com/dkingtran/Join',
       live: 'https://yourdomain.com/join',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
@@ -45,7 +45,7 @@ export class FeaturedProjectsComponent {
       image: '/assets/img/icons/featured-projects/project-images/02_el_pollo_loco_img.jpg',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj2.description',
-      github: 'https://github.com/yourname/el-pollo-loco',
+      github: 'https://github.com/dkingtran/EL-Pollo-Loco',
       live: 'https://yourdomain.com/el-pollo-loco',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
@@ -60,7 +60,7 @@ export class FeaturedProjectsComponent {
       image: '/assets/img/icons/featured-projects/project-images/03_pokedex_img.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj3.description',
-      github: 'https://github.com/yourname/pokedex',
+      github: 'https://github.com/dkingtran/pokedex',
       live: 'https://yourdomain.com/pokedex',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },

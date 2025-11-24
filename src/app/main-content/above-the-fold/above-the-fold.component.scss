@@ -23,10 +23,8 @@ $color-green: #3DCFB6;
     width: 100%;
 
     .content {
-        display: flex;
+        @include flex-center-center;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         max-width: 1920px;
         width: auto;
 
@@ -173,7 +171,7 @@ $color-green: #3DCFB6;
     bottom: 0px;
     left: 96px;
     gap: 24px;
-    @include flex-column-center;
+    @include flex-column;
     align-items: center;
     z-index: 1;
 
@@ -194,7 +192,7 @@ $color-green: #3DCFB6;
         height: 48px;
         border: 1px solid $color-green;
         border-radius: 32px;
-        @include display-flex-center;
+        @include flex-center-center;
 
         img {
             display: block;
@@ -238,7 +236,7 @@ $color-green: #3DCFB6;
     right: 96px;
     gap: 24px;
     align-items: center;
-    @include flex-column-center;
+    @include flex-column;
 
     @media (max-width: 1000px) {
         right: 48px;
@@ -253,7 +251,7 @@ $color-green: #3DCFB6;
     }
 
     .icons {
-        @include flex-column-center;
+        @include flex-column;
         gap: 12px;
         width: auto;
         height: auto;
@@ -329,7 +327,14 @@ $color-green: #3DCFB6;
         writing-mode: vertical-rl;
         transform: rotate(180deg);
         text-orientation: mixed;
+        transform-origin: center;
+        transition: color 150ms ease, transform 150ms ease;
         margin: 0;
+
+        &:hover {
+            color: $color-green;
+            transform: rotate(180deg) scale(1.05);
+        }
 
         @media (max-width: 1000px) {
             display: none;

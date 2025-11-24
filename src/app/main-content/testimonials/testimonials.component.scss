@@ -50,7 +50,7 @@ $color-green: #3DCFB6;
             gap: 16px;
 
             .arrow {
-                @include display-flex-center;
+                @include flex-center-center;
                 border: none;
                 background: transparent;
                 color: $color-green;
