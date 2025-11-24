@@ -3,6 +3,12 @@
     scroll-behavior: smooth;
 }
 
+:root {
+    --header-height: 98px;
+}
+
+$color-green: #3DCFB6;
+
 body {
     margin: 0 auto;
     padding: 0;
@@ -178,4 +184,87 @@ app-root {
 .legal-notice-text span {
     color: #FFFFFF !important;
     padding: 0 !important;
+}
+
+/* disable background scroll when mobile dropdown is open */
+body.no-scroll {
+    overflow: hidden;
+    touch-action: none;
+}
+
+/* Custom scrollbars (subtle): narrow green thumb, transparent track (global) */
+/* WebKit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba($color-green, 0.88);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    /* slight padding effect */
+    background-clip: padding-box;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    filter: brightness(0.95);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba($color-green, 0.88) #1c1c1c;
+}
+
+/* Make sure the page-level scrollbars (body/html/app-root) match the same style */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar,
+app-root::-webkit-scrollbar,
+.legal-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+body::-webkit-scrollbar-track,
+html::-webkit-scrollbar-track,
+app-root::-webkit-scrollbar-track,
+.legal-content::-webkit-scrollbar-track {
+    background: #1c1c1c;
+}
+
+body::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb,
+app-root::-webkit-scrollbar-thumb,
+.legal-content::-webkit-scrollbar-thumb {
+    background-color: rgba($color-green, 0.88);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+body::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:hover,
+app-root::-webkit-scrollbar-thumb:hover,
+.legal-content::-webkit-scrollbar-thumb:hover {
+    filter: brightness(0.95);
+}
+
+/* Firefox page-level */
+body,
+html,
+app-root,
+.legal-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba($color-green, 0.88) #1c1c1c;
 }

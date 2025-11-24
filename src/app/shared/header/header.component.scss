@@ -160,6 +160,8 @@ nav.overlay {
 
 .logo-small {
     display: none;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.38));
+    transition: filter 180ms ease, transform 180ms ease;
 }
 
 .menu-icon {
@@ -186,8 +188,6 @@ nav.overlay {
     display: flex;
     align-items: center;
     gap: 16px;
-    width: 32px;
-    height: 32px;
 }
 
 @media (max-width: 1000px) {
@@ -202,24 +202,61 @@ nav.overlay {
 
     .logo-small {
         display: block;
+        background: rgba(0, 0, 0, 0.10);
+        backdrop-filter: blur(4px);
+        align-items: center;
+        height: 62px;
+        width: 94px;
+        padding: 8px 8px;
+        border-radius: 8px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+        filter: none;
+        transition: transform 180ms ease, box-shadow 180ms ease;
     }
 
     .menu-icon {
         display: block;
+
+        padding: 8px;
         width: 32px;
-        height: 21px;
-        transition: all 125ms ease;
+        height: 22px;
+        border: none;
+        backdrop-filter: blur(4px);
+        box-sizing: content-box;
+        background: rgba(0, 0, 0, 0.10);
+        border-radius: 10px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+        transition: transform 125ms ease, box-shadow 180ms ease, filter 180ms ease;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 32px;
+            height: 22px;
+        }
+
+        .bar {
+            transition: fill 260ms cubic-bezier(.2, .9, .2, 1);
+            will-change: fill;
+            fill: #FFFFFF;
+        }
 
         &:hover {
-            transform: scale(1.1);
-            filter: invert(61%) sepia(100%) saturate(700%) hue-rotate(134deg) brightness(120%) contrast(100%);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+            transform: translateZ(0);
+        }
+
+        &:hover .bar {
+            fill: $color-green;
         }
     }
 
     .mobile-dropdown {
-        position: fixed;
+        position: absolute;
         right: 24px;
-        top: 72px;
+        top: 80px;
         display: none;
         flex-direction: column;
         gap: 24px;

@@ -45,8 +45,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private updateOverlayState() {
-    const aot = this.document.querySelector('.aot');
-    this.isOverlay = !!aot;
+    // Header should behave like an overlay (fixed, full-width gradient)
+    // on pages that have the above-the-fold layout or the imprint background.
+    const aotOrImprint = this.document.querySelector('.aot, .imprint-bg-full');
+    this.isOverlay = !!aotOrImprint;
   }
 
   toggleLanguage() {
@@ -68,6 +70,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (!target.closest('.mobile-dropdown') && !target.closest('.menu-icon')) {
         this.isMenuOpen = false;
       }
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(_event: Event) {
+    // If viewport expands beyond mobile breakpoint ensure body scroll is enabled
+    if (window.innerWidth > 1000) {
+      // Sync state: on larger viewports the mobile menu should be considered closed
+      this.isMenuOpen = false;
     }
   }
 }

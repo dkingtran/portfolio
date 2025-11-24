@@ -30,7 +30,16 @@
 			</svg>
 
 			<!-- menu icon for mobile (appears on <=1000px) -->
-			<img class="menu-icon" src="/assets/img/icons/header-footer/menu-white.png" alt="Menu" (click)="toggleMenu()" />
+			<button class="menu-icon" aria-label="Menu" (click)="toggleMenu()" type="button">
+				<svg width="36" height="36" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<title>Menu</title>
+					<g fill="none" fill-rule="evenodd">
+						<rect class="bar" x="-4" y="0" width="32" height="2" rx="1" fill="#FFFFFF"></rect>
+						<rect class="bar" x="-4" y="10" width="32" height="2" rx="1" fill="#FFFFFF"></rect>
+						<rect class="bar" x="-4" y="20" width="32" height="2" rx="1" fill="#FFFFFF"></rect>
+					</g>
+				</svg>
+			</button>
 
 			<!-- mobile dropdown (shown when menu open) -->
 			<div class="mobile-dropdown" [class.open]="isMenuOpen">

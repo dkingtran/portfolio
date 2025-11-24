@@ -46,7 +46,7 @@ $color-green: #3DCFB6;
 .text-content {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     max-width: 640px;
 
     @media (max-width: 1400px) {
@@ -81,11 +81,11 @@ $color-green: #3DCFB6;
 
     h2 {
         color: $color-green;
-        margin: 0;
         font-family: 'FiraCode';
         font-weight: 700;
         font-size: 24px;
         line-height: 120%;
+        margin-top: 20px;
         margin-bottom: 12px;
 
         @media (max-width: 500px) {

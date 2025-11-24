@@ -127,15 +127,24 @@ $color-green: #3DCFB6;
     overflow-y: hidden;
     overflow-x: hidden;
     min-width: 0;
+    margin-bottom: 80px;
 
     h1 {
         font-size: 128px;
         font-family: 'Karla';
         font-weight: 700;
 
+
+
         @media (max-width: 1200px) {
             font-size: 72px;
             margin: 0;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 64px;
+            margin-bottom: 24px !important;
         }
     }
 
@@ -144,6 +153,14 @@ $color-green: #3DCFB6;
         font-family: 'FiraCode';
         font-weight: 700;
         line-height: 80%;
+
+        @media (max-width: 1200px) {
+            font-size: 56px;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 48px;
+        }
     }
 
     h3 {
@@ -151,6 +168,14 @@ $color-green: #3DCFB6;
         font-family: 'FiraCode';
         font-weight: 700;
         color: $color-green;
+
+        @media (max-width: 1200px) {
+            font-size: 20px;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 20px;
+        }
     }
 
     @media (max-width: 1300px) {
@@ -160,7 +185,6 @@ $color-green: #3DCFB6;
     }
 
     @media (max-width: 1200px) {
-        padding-top: 0 !important;
         padding: 36px;
         flex: 0 0 60%;
     }
@@ -174,6 +198,7 @@ $color-green: #3DCFB6;
     justify-content: center;
     background: transparent;
     min-width: 0;
+    top: 40px !important;
     overflow: hidden;
 
     @media (max-width: 1300px) {
@@ -183,7 +208,7 @@ $color-green: #3DCFB6;
     }
 
     @media (max-width: 1200px) {
-
+        padding-bottom: 0 !important;
         flex: 0 0 40%;
     }
 }
@@ -198,9 +223,21 @@ $color-green: #3DCFB6;
     object-fit: contain;
 
     @media (max-width: 1200px) {
-        width: 90%;
+        width: 80%;
         aspect-ratio: 16 / 9;
         object-fit: cover;
+    }
+
+    @media (max-width: 1000px) {
+        width: 90%;
+    }
+
+    @media (max-width: 800px) {
+        width: 100%;
+    }
+
+    @media (max-width: 500px) {
+        width: 90%;
     }
 }
 
@@ -344,7 +381,7 @@ $color-green: #3DCFB6;
         top: 32px;
         right: 32px;
 
-        @media (max-width: 500px) {
+        @media (max-width: 650px) {
             top: 16px;
             right: 16px;
         }
@@ -354,7 +391,7 @@ $color-green: #3DCFB6;
         right: 32px;
         bottom: 32px;
 
-        @media (max-width: 500px) {
+        @media (max-width: 650px) {
             right: 16px;
             bottom: 16px;
         }
