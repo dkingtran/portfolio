@@ -152,9 +152,7 @@ $color-green: #3DCFB6;
 .bottom-container {
     position: relative;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-sb-center;
     box-sizing: border-box;
 
     @media (max-width: 1300px) {
@@ -271,8 +269,7 @@ $color-green: #3DCFB6;
     .icons .icon {
         position: relative;
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        @include aj-center;
         width: 32px;
         height: 32px;
         cursor: pointer;
@@ -290,6 +287,14 @@ $color-green: #3DCFB6;
     .icons .icon:hover img,
     .icons .icon img:hover {
         filter: brightness(0) saturate(100%) invert(1);
+    }
+
+    .icon.mail {
+        transform: rotate(0deg);
+
+        &:hover {
+            transform: rotate(0deg);
+        }
     }
 
     .icons .icon::after {
@@ -318,8 +323,7 @@ $color-green: #3DCFB6;
     }
 
     a:nth-child(1) {
-        font-size: 18px;
-        font-family: 'Karla';
+        @include karla-eighteen;
         font-weight: 400;
         line-height: 120%;
         color: white;

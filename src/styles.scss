@@ -78,12 +78,21 @@ app-root {
     flex-direction: column;
 }
 
+@mixin flex-sb {
+    display: flex;
+    justify-content: space-between;
+}
+
 @mixin flex-sb-center {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+@mixin aj-center {
+    align-items: center;
+    justify-content: center;
+}
 
 @mixin logo {
     cursor: pointer;
@@ -158,6 +167,20 @@ app-root {
     }
 }
 
+@mixin container-hover-effects() {
+    border-bottom: 1px solid rgba($color-green, 0.8);
+    transition: background-color 125ms ease, border-color 125ms ease;
+
+    &:hover {
+        border-bottom-color: rgba($color-green, 1);
+        box-shadow: inset 0 1px 0 rgba($color-green, 1), 0 0 0 rgba($color-green, 1), 0 1px 0 rgba($color-green, 0.9);
+    }
+}
+
+@mixin karla-eighteen {
+    font-family: 'Karla';
+    font-size: 18px;
+}
 
 x-column-center {
     display: flex;
@@ -178,7 +201,6 @@ x-column-center {
 .logo-name:hover text:nth-child(2) {
     stroke: #3DCFB6;
 }
-
 
 .logo-small {
     fill: #3DCFB6;

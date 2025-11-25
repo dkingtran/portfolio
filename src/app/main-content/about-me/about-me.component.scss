@@ -58,8 +58,7 @@ h1 {
 }
 
 .about-me-container {
-    display: flex;
-    justify-content: space-between;
+    @include flex-sb;
     max-width: 1920px;
     gap: 96px;
     width: auto;
@@ -137,8 +136,7 @@ h1 {
 }
 
 .info-boxes {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     gap: 16px;
     margin-top: 32px;
 
@@ -160,9 +158,6 @@ h1 {
         }
     }
 }
-
-
-
 
 @keyframes moveBackground {
     0% {

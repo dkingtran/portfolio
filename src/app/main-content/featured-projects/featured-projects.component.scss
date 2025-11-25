@@ -76,20 +76,22 @@ $color-green: #3DCFB6;
 }
 
 .projects-container {
+    border-top: 1px solid rgba($color-green, 0.8);
 
     .project-description {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         padding: 40px 32px;
-        border-width: 1px 0px 1px 0px;
-        border-style: solid;
-        border-color: #3DCFB6;
+        @include container-hover-effects();
         cursor: pointer;
 
         &:hover {
             background-color: rgba($color-green, 0.2);
+            transition: background-color 125ms ease, border-color 125ms ease, box-shadow 125ms ease;
         }
+
+
 
         span {
             font-family: 'FiraCode';
