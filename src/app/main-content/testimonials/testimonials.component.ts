@@ -4,7 +4,7 @@ import { LanguageService } from '../../services/language.service';
 
 interface Testimonial {
   name: string;
-  position: string;
+  positionKey: string;
   messageKey: string;
 }
 
@@ -15,28 +15,32 @@ interface Testimonial {
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.scss'
 })
+/**
+ * Testimonials carousel component.
+ * Handles centered sliding, pointer drag/swipe, and infinite looping via clones.
+ */
 export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(public languageService: LanguageService, private renderer: Renderer2) { }
 
   testimonials: Testimonial[] = [
     {
-      name: 'Olivia Harper',
-      position: 'Product Manager',
+      name: 'O. Harper',
+      positionKey: 'testimonials.t1.position',
       messageKey: 'testimonials.t1.message'
     },
     {
-      name: 'Marcus Lee',
-      position: 'Senior Frontend Engineer',
+      name: 'M. Lee',
+      positionKey: 'testimonials.t2.position',
       messageKey: 'testimonials.t2.message'
     },
     {
-      name: 'Sofia Alvarez',
-      position: 'UX Designer',
+      name: 'S. Alvarez',
+      positionKey: 'testimonials.t3.position',
       messageKey: 'testimonials.t3.message'
     },
     {
-      name: 'Ethan Brown',
-      position: 'CTO',
+      name: 'E. Brown',
+      positionKey: 'testimonials.t4.position',
       messageKey: 'testimonials.t4.message'
     }
   ];
@@ -58,6 +62,7 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
   private pointerUpBound = this.onPointerUp.bind(this);
   private pointerDownBound = this.onPointerDown.bind(this);
   private swipeThreshold = this.cardWidth * 0.25;
+  private pointerListenersActive = false;
 
   @ViewChild('track', { static: false }) trackEl!: ElementRef<HTMLDivElement>;
 
@@ -69,61 +74,78 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     const n = this.testimonials.length;
     if (n > 0) {
-      const leftClones = this.createLeftClones(n);
-      const rightClones = this.createRightClones(n);
+      const { leftClones, rightClones } = this.createClones(n);
       this.carouselItems = [...leftClones, ...this.testimonials, ...rightClones];
       this.trackIndex = this.cloneCount;
     }
   }
 
-  private createLeftClones(n: number): Testimonial[] {
-    const clones: Testimonial[] = [];
+  private createClones(n: number): { leftClones: Testimonial[]; rightClones: Testimonial[] } {
+    const leftClones: Testimonial[] = [];
+    const rightClones: Testimonial[] = [];
     for (let i = 0; i < this.cloneCount; i++) {
-      clones.unshift(this.testimonials[(n - 1 - (i % n))]);
+      // left clones in reverse order
+      leftClones.unshift(this.testimonials[(n - 1 - (i % n))]);
+      rightClones.push(this.testimonials[i % n]);
     }
-    return clones;
+    return { leftClones, rightClones };
   }
 
-  private createRightClones(n: number): Testimonial[] {
-    const clones: Testimonial[] = [];
-    for (let i = 0; i < this.cloneCount; i++) {
-      clones.push(this.testimonials[i % n]);
-    }
-    return clones;
-  }
-
+  /** Move the carousel one step to the previous slide. */
   prev() {
     if (this.isAnimating) return;
     this.isAnimating = true;
     this.dragOffset = 0;
     this.trackIndex -= 1;
     if (this.trackEl && this.trackEl.nativeElement) {
-      this.renderer.removeStyle(this.trackEl.nativeElement, 'transition');
+      // ensure an animated transition when moving programmatically
+      this.renderer.setStyle(this.trackEl.nativeElement, 'transition', 'transform 420ms cubic-bezier(.22, .9, .36, 1)');
       this.applyTransform();
     }
   }
 
+  /** Move the carousel one step to the next slide. */
   next() {
     if (this.isAnimating) return;
     this.isAnimating = true;
     this.dragOffset = 0;
     this.trackIndex += 1;
     if (this.trackEl && this.trackEl.nativeElement) {
-      this.renderer.removeStyle(this.trackEl.nativeElement, 'transition');
+      this.renderer.setStyle(this.trackEl.nativeElement, 'transition', 'transform 420ms cubic-bezier(.22, .9, .36, 1)');
       this.applyTransform();
     }
   }
 
+  /**
+   * Jump to a testimonial by its logical index in the original `testimonials` array.
+   * @param index index in the original `testimonials` array (0..n-1)
+   */
   goTo(index: number) {
     if (this.isAnimating) return;
     this.isAnimating = true;
     this.dragOffset = 0;
     this.trackIndex = index + this.cloneCount;
     if (this.trackEl && this.trackEl.nativeElement) {
-      this.renderer.removeStyle(this.trackEl.nativeElement, 'transition');
+      this.renderer.setStyle(this.trackEl.nativeElement, 'transition', 'transform 420ms cubic-bezier(.22, .9, .36, 1)');
       this.applyTransform();
     }
   }
+
+  /**
+   * Handle clicks on a card in the rendered `carouselItems` list (which includes clones).
+   * Maps the clicked `carouselItems` index to the real testimonial index and navigates there.
+   * @param i index in `carouselItems` (includes clones)
+   */
+  onCardClick(i: number) {
+    if (this.isAnimating) return;
+    const realCount = this.testimonials.length;
+    if (realCount === 0) return;
+
+    const raw = i - this.cloneCount;
+    const realIndex = ((raw % realCount) + realCount) % realCount;
+    this.goTo(realIndex);
+  }
+
   ngAfterViewInit(): void {
     this.updateViewportWidth();
     this.setupTrackListeners();
@@ -139,9 +161,8 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private setupViewportListeners() {
     if (this.viewportEl && this.viewportEl.nativeElement) {
-      this.viewportEl.nativeElement.addEventListener('pointerdown', this.pointerDownBound);
-      this.viewportEl.nativeElement.style.touchAction = 'pan-y';
       this.setupResizeObserver();
+      this.updatePointerListeners();
     }
   }
 
@@ -161,6 +182,7 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     const el = (document.querySelector('.viewport') as HTMLElement | null);
     this.viewportWidth = el ? el.clientWidth : window.innerWidth;
     this.applyTransform();
+    this.updatePointerListeners();
   }
 
   ngOnDestroy(): void {
@@ -177,7 +199,39 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private cleanupViewportListeners() {
     if (this.viewportEl && this.viewportEl.nativeElement) {
+      if (this.pointerListenersActive) {
+        this.viewportEl.nativeElement.removeEventListener('pointerdown', this.pointerDownBound);
+        window.removeEventListener('pointermove', this.pointerMoveBound);
+        window.removeEventListener('pointerup', this.pointerUpBound);
+        this.viewportEl.nativeElement.style.touchAction = '';
+        this.pointerListenersActive = false;
+        this.isDragging = false;
+        this.dragOffset = 0;
+      }
+    }
+  }
+
+  private updatePointerListeners() {
+    const hasViewport = !!(this.viewportEl && this.viewportEl.nativeElement);
+    const shouldEnable = this.viewportWidth <= 1000 && hasViewport;
+
+    if (shouldEnable && !this.pointerListenersActive) {
+      this.viewportEl.nativeElement.addEventListener('pointerdown', this.pointerDownBound);
+      this.viewportEl.nativeElement.style.touchAction = 'pan-y';
+      this.pointerListenersActive = true;
+    }
+
+    if (!shouldEnable && this.pointerListenersActive) {
       this.viewportEl.nativeElement.removeEventListener('pointerdown', this.pointerDownBound);
+      window.removeEventListener('pointermove', this.pointerMoveBound);
+      window.removeEventListener('pointerup', this.pointerUpBound);
+      this.viewportEl.nativeElement.style.touchAction = '';
+      this.pointerListenersActive = false;
+      this.isDragging = false;
+      this.dragOffset = 0;
+      if (this.trackEl && this.trackEl.nativeElement) {
+        this.renderer.setStyle(this.trackEl.nativeElement, 'transition', 'transform 420ms cubic-bezier(.22, .9, .36, 1)');
+      }
     }
   }
 
@@ -188,10 +242,23 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   trackTransform(): string {
+    return `translate3d(${this.computeTranslateForIndex(this.trackIndex, this.dragOffset)}px, 0, 0)`;
+  }
+
+  private computeTranslateForIndex(index: number, offset = 0): number {
     const step = this.cardWidth + this.gap;
     const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-    const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
-    return `translate3d(${x}px, 0, 0)`;
+    return -(index * step) + centerOffset + offset;
+  }
+
+  /**
+   * Returns the index (0..n-1) of the currently centered testimonial
+   * relative to the original `testimonials` array (ignores clones).
+   */
+  get currentRealIndex(): number {
+    const realCount = this.testimonials.length;
+    if (realCount === 0) return 0;
+    return (((this.trackIndex - this.cloneCount) % realCount) + realCount) % realCount;
   }
   private onPointerDown(ev: PointerEvent) {
     if (this.isAnimating) return;
@@ -220,44 +287,28 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     window.removeEventListener('pointermove', this.pointerMoveBound);
     window.removeEventListener('pointerup', this.pointerUpBound);
     const delta = ev.clientX - this.startX;
-    this.centerCurrentCard();
-    this.handleSwipeOrSnap(delta);
-  }
 
-  private centerCurrentCard() {
-    const track = this.trackEl.nativeElement as HTMLElement;
+    const track = this.trackEl?.nativeElement as HTMLElement | undefined;
     const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
-    const child = track.children[this.trackIndex] as HTMLElement | undefined;
-    if (child && viewport) {
-      this.centerCardByPosition(child, viewport, track);
-    } else {
-      this.centerCardByCalculation(track);
+    if (track && viewport) {
+      const child = track.children[this.trackIndex] as HTMLElement | undefined;
+      if (child) {
+        const cardCenter = child.offsetLeft + child.offsetWidth / 2;
+        const viewportCenter = viewport.clientWidth / 2;
+        const translate = viewportCenter - cardCenter;
+        track.style.transform = `translate3d(${translate}px, 0, 0)`;
+      } else {
+        const x = this.computeTranslateForIndex(this.trackIndex);
+        track.style.transform = `translate3d(${x}px, 0, 0)`;
+      }
     }
-  }
 
-  private centerCardByPosition(child: HTMLElement, viewport: HTMLElement, track: HTMLElement) {
-    const cardCenter = child.offsetLeft + child.offsetWidth / 2;
-    const viewportCenter = viewport.clientWidth / 2;
-    const translate = viewportCenter - cardCenter + this.dragOffset;
-    track.style.transform = `translate3d(${translate}px, 0, 0)`;
-  }
-
-  private centerCardByCalculation(track: HTMLElement) {
-    const step = this.cardWidth + this.gap;
-    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-    const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
-    track.style.transform = `translate3d(${x}px, 0, 0)`;
-  }
-
-  private handleSwipeOrSnap(delta: number) {
     if (Math.abs(delta) > this.swipeThreshold) {
       this.dragOffset = 0;
       delta < 0 ? this.next() : this.prev();
     } else {
       this.dragOffset = 0;
-      if (this.trackEl && this.trackEl.nativeElement) {
-        this.applyTransform();
-      }
+      if (this.trackEl && this.trackEl.nativeElement) this.applyTransform();
     }
   }
 
@@ -280,18 +331,14 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
   private jumpWithoutAnimation(targetIndex: number) {
     const el = this.trackEl?.nativeElement;
     if (!el) {
-      this.resetToTarget(targetIndex);
+      this.dragOffset = 0;
+      this.trackIndex = targetIndex;
       return;
     }
     this.renderer.setStyle(el, 'transition', 'none');
     this.dragOffset = 0;
     this.applyJumpTransform(el, targetIndex);
     this.scheduleTransitionRestore(el, targetIndex);
-  }
-
-  private resetToTarget(targetIndex: number) {
-    this.dragOffset = 0;
-    this.trackIndex = targetIndex;
   }
 
   private applyJumpTransform(el: HTMLElement, targetIndex: number) {
@@ -303,15 +350,9 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
       const translate = viewportCenter - cardCenter;
       el.style.transform = `translate3d(${translate}px, 0, 0)`;
     } else {
-      this.applyCalculatedTransform(el, targetIndex);
+      const x = this.computeTranslateForIndex(targetIndex);
+      el.style.transform = `translate3d(${x}px, 0, 0)`;
     }
-  }
-
-  private applyCalculatedTransform(el: HTMLElement, targetIndex: number) {
-    const step = this.cardWidth + this.gap;
-    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-    const x = -(targetIndex * step) + centerOffset;
-    el.style.transform = `translate3d(${x}px, 0, 0)`;
   }
 
   private scheduleTransitionRestore(el: HTMLElement, targetIndex: number) {
@@ -327,23 +368,13 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!track || !viewport) return;
     const child = track.children[this.trackIndex] as HTMLElement | undefined;
     if (child) {
-      this.applyTransformByChild(child, viewport, track);
+      const cardCenter = child.offsetLeft + child.offsetWidth / 2;
+      const viewportCenter = viewport.clientWidth / 2;
+      const translate = viewportCenter - cardCenter + this.dragOffset;
+      track.style.transform = `translate3d(${translate}px, 0, 0)`;
     } else {
-      this.applyTransformByCalculation(track);
+      const x = this.computeTranslateForIndex(this.trackIndex, this.dragOffset);
+      track.style.transform = `translate3d(${x}px, 0, 0)`;
     }
-  }
-
-  private applyTransformByChild(child: HTMLElement, viewport: HTMLElement, track: HTMLElement) {
-    const cardCenter = child.offsetLeft + child.offsetWidth / 2;
-    const viewportCenter = viewport.clientWidth / 2;
-    const translate = viewportCenter - cardCenter + this.dragOffset;
-    track.style.transform = `translate3d(${translate}px, 0, 0)`;
-  }
-
-  private applyTransformByCalculation(track: HTMLElement) {
-    const step = this.cardWidth + this.gap;
-    const centerOffset = (this.viewportWidth - this.cardWidth) / 2;
-    const x = -(this.trackIndex * step) + centerOffset + this.dragOffset;
-    track.style.transform = `translate3d(${x}px, 0, 0)`;
   }
 }

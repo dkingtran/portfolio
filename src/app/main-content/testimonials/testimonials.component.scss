@@ -91,7 +91,7 @@ $color-green: #3DCFB6;
                     opacity: 0.9;
                     cursor: default;
                     pointer-events: none;
-                    transition: background 160ms ease, transform 160ms cubic-bezier(.2, .9, .2, 1);
+                    transition: background 125ms ease, transform 125ms cubic-bezier(.2, .9, .2, 1);
                 }
 
                 .dot.active {
@@ -140,7 +140,7 @@ $color-green: #3DCFB6;
         .track {
             display: flex;
             gap: 24px;
-            transition: transform 420ms cubic-bezier(.22, .9, .36, 1);
+            transition: transform 125ms cubic-bezier(.22, .9, .36, 1);
             align-items: center;
             will-change: transform;
 
@@ -160,7 +160,7 @@ $color-green: #3DCFB6;
             flex: 0 0 auto;
             background: rgba(61, 207, 182, 0.1);
             border: 1px solid $color-green;
-            transition: transform 420ms cubic-bezier(.22, .9, .36, 1), background 300ms ease, opacity 300ms ease;
+            transition: transform 125ms cubic-bezier(.22, .9, .36, 1), background 300ms ease, opacity 300ms ease;
             color: white;
             display: flex;
             flex-direction: column;
@@ -180,6 +180,8 @@ $color-green: #3DCFB6;
             @media (max-width: 400px) {
                 padding: 16px 16px;
             }
+
+            cursor: pointer;
         }
 
         .testimonial-card.active {
@@ -203,6 +205,11 @@ $color-green: #3DCFB6;
             display: flex;
             align-items: center;
             white-space: normal;
+            user-select: none;
+        }
+
+        .testimonial-client-info {
+            user-select: none;
         }
 
         .client-details {

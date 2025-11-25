@@ -82,6 +82,11 @@ $color-green: #3DCFB6;
         @media (max-width: 500px) {
             font-size: 64px;
         }
+
+        @media (max-height: 480px) {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
     }
 
     .marquee {
@@ -108,6 +113,11 @@ $color-green: #3DCFB6;
         @media (max-width: 600px) {
             height: 53px;
             bottom: 40px;
+        }
+
+        @media (max-height: 480px) {
+            height: 48px;
+            bottom: 24px;
         }
 
         &__inner {
@@ -225,6 +235,10 @@ $color-green: #3DCFB6;
         @media (max-width: 600px) {
             height: 184px;
         }
+
+        @media (max-height: 480px) {
+            height: 104px;
+        }
     }
 }
 
@@ -277,7 +291,7 @@ $color-green: #3DCFB6;
 
     .icons .icon img {
         filter: none;
-        transition: filter 180ms ease, transform 180ms ease;
+        transition: filter 125ms ease, transform 125ms ease;
         display: block;
         width: 26px;
         height: 26px;
@@ -332,7 +346,7 @@ $color-green: #3DCFB6;
         transform: rotate(180deg);
         text-orientation: mixed;
         transform-origin: center;
-        transition: color 150ms ease, transform 150ms ease;
+        transition: color 125ms ease, transform 125ms ease;
         margin: 0;
 
         &:hover {
@@ -353,6 +367,10 @@ $color-green: #3DCFB6;
 
         @media (max-width: 600px) {
             height: 124px;
+        }
+
+        @media (max-height: 480px) {
+            height: 64px;
         }
     }
 }

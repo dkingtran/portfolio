@@ -73,7 +73,7 @@ $color-green: #3DCFB6;
     border-bottom: 0;
     font-family: 'Karla';
     font-weight: 400;
-    transition: color 140ms ease;
+    transition: color 125ms ease;
 }
 
 .footer-link:hover {
@@ -95,7 +95,7 @@ $color-green: #3DCFB6;
     border-radius: 50%;
     background-color: $color-green;
     opacity: 0;
-    transition: opacity 140ms ease, transform 140ms cubic-bezier(.2, .9, .2, 1);
+    transition: opacity 125ms ease, transform 125ms cubic-bezier(.2, .9, .2, 1);
     pointer-events: none;
 }
 

@@ -174,7 +174,7 @@ $color-green: #3DCFB6;
     @include karla-eighteen;
     font-weight: 400;
     line-height: 1.2;
-    transition: color 0.3s ease;
+    transition: color 0.125s ease;
 
     @media (max-width: 400px) {
         font-size: 16px;
@@ -242,7 +242,7 @@ $color-green: #3DCFB6;
     min-height: 24px;
     border-radius: 50%;
     box-sizing: border-box;
-    transition: background 180ms ease, transform 120ms ease;
+    transition: background 125ms ease, transform 125ms ease;
     cursor: pointer;
     line-height: 0;
 
@@ -278,7 +278,7 @@ $color-green: #3DCFB6;
     position: relative;
     color: $color-green;
     text-decoration: none;
-    transition: color 180ms ease;
+    transition: color 125ms ease;
 }
 
 .privacy-policy-container a::after {
@@ -292,7 +292,7 @@ $color-green: #3DCFB6;
     opacity: 0;
     transform-origin: left center;
     transform: scaleX(0);
-    transition: transform 180ms ease, opacity 180ms ease;
+    transition: transform 125ms ease, opacity 125ms ease;
     pointer-events: none;
 }
 

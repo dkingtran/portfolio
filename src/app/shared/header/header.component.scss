@@ -87,7 +87,7 @@ nav.overlay {
     border-radius: 50%;
     background-color: $color-green;
     opacity: 0;
-    transition: opacity 140ms ease, transform 140ms cubic-bezier(.2, .9, .2, 1);
+    transition: opacity 125ms ease, transform 125ms cubic-bezier(.2, .9, .2, 1);
 }
 
 .navbar a[href^="#"]:hover::after,
@@ -110,7 +110,7 @@ nav.overlay {
     padding-left: 12px;
     padding-right: 12px;
     cursor: pointer;
-    transition: all 300ms ease-out;
+    transition: all 125ms ease-out;
 
     .en,
     .de {
@@ -127,7 +127,7 @@ nav.overlay {
         background-color: $color-green;
         opacity: 1;
         font-weight: 700;
-        transition: color 300ms ease-out;
+        transition: color 125ms ease-out;
         color: white !important;
     }
 
@@ -135,7 +135,7 @@ nav.overlay {
         background-color: $color-green;
         opacity: 1;
         font-weight: 700;
-        transition: color 300ms ease-out;
+        transition: color 125ms ease-out;
         color: white !important;
     }
 
@@ -161,7 +161,7 @@ nav.overlay {
 .logo-small {
     display: none;
     filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.38));
-    transition: filter 180ms ease, transform 180ms ease;
+    transition: filter 125ms ease, transform 125ms ease;
 }
 
 .menu-icon {
@@ -211,7 +211,7 @@ nav.overlay {
         border-radius: 8px;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
         filter: none;
-        transition: transform 180ms ease, box-shadow 180ms ease;
+        transition: transform 125ms ease, box-shadow 125ms ease;
     }
 
     .menu-icon {
@@ -238,7 +238,7 @@ nav.overlay {
         }
 
         .bar {
-            transition: fill 260ms cubic-bezier(.2, .9, .2, 1);
+            transition: fill 125ms cubic-bezier(.2, .9, .2, 1);
             will-change: fill;
             fill: #FFFFFF;
         }
@@ -266,6 +266,12 @@ nav.overlay {
         background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
         z-index: 1001;
         min-width: 200px;
+
+        @media (max-height: 480px) {
+            padding: 20px 37px;
+            min-width: 220px;
+            @include flex-center-center;
+        }
     }
 
     .mobile-dropdown.open {

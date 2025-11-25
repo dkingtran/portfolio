@@ -10,14 +10,14 @@
 
         <div #viewport class="viewport">
             <div #track class="track">
-                <div class="testimonial-card" *ngFor="let testimonial of carouselItems; let i = index" [class.active]="i === trackIndex">
+                <div class="testimonial-card" *ngFor="let testimonial of carouselItems; let i = index" [class.active]="i === trackIndex" (click)="onCardClick(i)">
                     <p class="testimonial-message">"{{ languageService.translate(testimonial.messageKey) }}"</p>
                     <div class="testimonial-client-info">
                         <div class="client-details">
                             <div class="pipe"></div>
                                     <div class="client-meta">
                                         <p class="client-name">{{ testimonial.name }} <span class="sep">-</span></p>
-                                        <p class="client-position">{{ testimonial.position }}</p>
+                                        <p class="client-position">{{ languageService.translate(testimonial.positionKey) }}</p>
                                     </div>
                         </div>
                     </div>
@@ -29,8 +29,8 @@
                 <img src="/assets/img/icons/testimonials/arrow_back.png" alt="arrow left testimonials">
             </button>
 
-            <div class="dots" aria-hidden="true" role="presentation">
-                <span *ngFor="let t of testimonials; let i = index" class="dot" [class.active]="((trackIndex - 1 + testimonials.length) % testimonials.length) === i" tabindex="-1" aria-hidden="true" role="presentation"></span>
+                <div class="dots" aria-hidden="true" role="presentation">
+                <span *ngFor="let t of testimonials; let i = index" class="dot" [class.active]="currentRealIndex === i" tabindex="-1" aria-hidden="true" role="presentation"></span>
             </div>
             
             <button type="button" class="arrow right" (click)="next()" aria-label="Next">

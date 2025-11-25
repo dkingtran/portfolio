@@ -50,6 +50,16 @@ $color-green: #3DCFB6;
         transform: scale(1.2);
         filter: invert(61%) sepia(100%) saturate(700%) hue-rotate(134deg) brightness(120%) contrast(100%);
     }
+
+    @media (max-width: 1300px) {
+        top: 32px;
+        right: 32px;
+    }
+
+    @media (max-width: 650px) {
+        top: 16px;
+        right: 16px;
+    }
 }
 
 .modal-close img {
@@ -73,6 +83,17 @@ $color-green: #3DCFB6;
     color: $color-green;
     cursor: pointer;
     transition: color 125ms ease;
+
+    @media (max-width: 1300px) {
+        bottom: 32px;
+        right: 32px;
+    }
+
+    @media (max-width: 650px) {
+        right: 16px;
+        bottom: 16px;
+    }
+
 
     &:hover {
         color: white;
@@ -132,8 +153,6 @@ $color-green: #3DCFB6;
         font-family: 'Karla';
         font-weight: 700;
 
-
-
         @media (max-width: 1200px) {
             font-size: 72px;
             margin: 0;
@@ -192,18 +211,26 @@ $color-green: #3DCFB6;
     grid-area: right;
     @include flex-center-center;
     padding: 80px;
+    padding-left: 0 !important;
     background: transparent;
     min-width: 0;
     top: 40px !important;
     overflow: hidden;
 
     @media (max-width: 1300px) {
+        padding-left: 36px !important;
         padding: 36px;
     }
 
     @media (max-width: 1200px) {
         padding-bottom: 0 !important;
         flex: 0 0 40%;
+    }
+
+    @media (max-width: 1000px) {
+        .modal-right {
+            padding: 36px;
+        }
     }
 }
 
@@ -306,7 +333,7 @@ $color-green: #3DCFB6;
     padding: 0px 24px;
     font-size: 18px;
     @include flex-center-center;
-    transition: color 300ms ease;
+    transition: color 125ms ease;
     text-decoration: none;
     gap: 4px;
 
@@ -368,31 +395,5 @@ $color-green: #3DCFB6;
         @media (max-width: 500px) {
             padding: 0 12px;
         }
-    }
-
-    .modal-close {
-        top: 32px;
-        right: 32px;
-
-        @media (max-width: 650px) {
-            top: 16px;
-            right: 16px;
-        }
-    }
-
-    .modal-next {
-        right: 32px;
-        bottom: 32px;
-
-        @media (max-width: 650px) {
-            right: 16px;
-            bottom: 16px;
-        }
-    }
-}
-
-@media (max-width: 1000px) {
-    .modal-right {
-        padding: 36px;
     }
 }
