@@ -11,6 +11,7 @@
         <div #viewport class="viewport">
             <div #track class="track">
                 <div class="testimonial-card" *ngFor="let testimonial of carouselItems; let i = index" [class.active]="i === trackIndex" (click)="onCardClick(i)">
+                    <img class="quote" src="/assets/img/icons/testimonials/quotes.png" alt="quote icon" aria-hidden="true">
                     <p class="testimonial-message">"{{ languageService.translate(testimonial.messageKey) }}"</p>
                     <div class="testimonial-client-info">
                         <div class="client-details">
@@ -19,6 +20,7 @@
                                         <p class="client-name">{{ testimonial.name }} <span class="sep">-</span></p>
                                         <p class="client-position">{{ languageService.translate(testimonial.positionKey) }}</p>
                                     </div>
+
                         </div>
                     </div>
                 </div>
