@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -12,7 +12,10 @@ import { LanguageService } from '../../services/language.service';
   styleUrl: './contactform.component.scss'
 })
 export class ContactformComponent {
-  constructor(public languageService: LanguageService, private http: HttpClient) { }
+
+  http = inject(HttpClient);
+
+  constructor(public languageService: LanguageService) { }
 
   contactdata = {
     name: '',
