@@ -30,7 +30,7 @@ export class FeaturedProjectsComponent {
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj1.description',
       github: 'https://github.com/dkingtran/Join',
-      live: 'https://yourdomain.com/join',
+      live: 'https://join.dennistran.de',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
         { src: '/assets/img/icons/featured-projects/modal/css.png', label: 'CSS' },
@@ -46,7 +46,7 @@ export class FeaturedProjectsComponent {
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj2.description',
       github: 'https://github.com/dkingtran/EL-Pollo-Loco',
-      live: 'https://yourdomain.com/el-pollo-loco',
+      live: 'https://el-pollo-loco.dennistran.de',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
         { src: '/assets/img/icons/featured-projects/modal/css.png', label: 'CSS' },
@@ -61,7 +61,7 @@ export class FeaturedProjectsComponent {
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj3.description',
       github: 'https://github.com/dkingtran/pokedex',
-      live: 'https://yourdomain.com/pokedex',
+      live: 'https://pokedex.dennistran.de',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
         { src: '/assets/img/icons/featured-projects/modal/css.png', label: 'CSS' },

@@ -2,6 +2,7 @@
 
 $color-green: #3DCFB6;
 
+// Overlay
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -10,31 +11,33 @@ $color-green: #3DCFB6;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-}
 
-.modal-overlay.open {
-    display: flex;
-}
-
-.modal-wrapper {
-    width: 80vw;
-    max-width: 1200px;
-    max-height: 1000px;
-    height: 860px;
-    border-radius: 30px;
-    background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
-    position: relative;
-    overflow: hidden;
-    @include flex-column;
-    border: 0.5px solid $color-green;
-
-    @media (max-width: 500px) {
-        height: 95vh;
-        max-height: 96vh;
-        width: 92vw;
+    &.open {
+        display: flex;
     }
 }
 
+// Modal wrapper
+.modal-wrapper {
+    width: 80vw;
+    max-width: 1200px;
+    height: 60vh;
+    max-height: 800px;
+    border-radius: 30px;
+    background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 0.5px solid $color-green;
+    overflow: hidden;
+
+    @media (max-width: 500px) {
+        width: 92vw;
+        height: 95vh;
+    }
+}
+
+// Close button
 .modal-close {
     position: absolute;
     top: 80px;
@@ -51,52 +54,44 @@ $color-green: #3DCFB6;
         filter: invert(61%) sepia(100%) saturate(700%) hue-rotate(134deg) brightness(120%) contrast(100%);
     }
 
-    @media (max-width: 1300px) {
-        top: 32px;
-        right: 32px;
-    }
-
-    @media (max-width: 650px) {
+    @media (max-width: 800px) {
         top: 16px;
         right: 16px;
     }
+
+    img {
+        display: block;
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+    }
 }
 
-.modal-close img {
-    display: block;
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    transition: all 125ms ease;
-}
-
+// Next button
 .modal-next {
     position: absolute;
+    right: 32px;
+    bottom: 32px;
     display: flex;
     align-items: center;
-    flex-direction: row;
     gap: 8px;
-    right: 80px;
-    bottom: 80px;
     border: none;
     background: transparent;
     color: $color-green;
     cursor: pointer;
     transition: color 125ms ease;
 
-    @media (max-width: 1300px) {
-        bottom: 32px;
-        right: 32px;
-    }
-
-    @media (max-width: 650px) {
+    @media (max-width: 800px) {
         right: 16px;
         bottom: 16px;
     }
 
-
     &:hover {
         color: white;
+
+        img {
+            transform: scale(1.1) translate3d(4px, 0, 0);
+        }
     }
 
     p {
@@ -107,130 +102,56 @@ $color-green: #3DCFB6;
     }
 
     img {
-        display: inline-block;
         width: 18px;
         height: 18px;
         object-fit: contain;
         transition: transform 125ms ease;
-        transform: translate3d(0, 0, 0);
-    }
-
-    &:hover img,
-    &:focus img {
-        transform: scale(1.1) translate3d(4px, 0, 0);
     }
 }
 
+// Modal content grid
 .modal-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-template-areas: "left right";
-    align-items: stretch;
     width: 100%;
     height: 100%;
-    box-sizing: border-box;
-
-    @media (max-width: 1200px) {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-}
-
-.modal-left {
-    grid-area: left;
-    padding: 80px;
-    color: white;
-    @include flex-column;
-    align-items: flex-start;
-    justify-items: center;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    min-width: 0;
-    margin-bottom: 80px;
-
-    h1 {
-        font-size: 128px;
-        font-family: 'Karla';
-        font-weight: 700;
-
-        @media (max-width: 1200px) {
-            font-size: 72px;
-            margin: 0;
-            overflow-y: auto;
-        }
-
-        @media (max-width: 500px) {
-            font-size: 64px;
-            margin-bottom: 24px !important;
-        }
-    }
-
-    h2 {
-        font-size: 64px;
-        font-family: 'FiraCode';
-        font-weight: 700;
-        line-height: 80%;
-
-        @media (max-width: 1200px) {
-            font-size: 56px;
-        }
-
-        @media (max-width: 500px) {
-            font-size: 48px;
-        }
-    }
-
-    h3 {
-        font-size: 24px;
-        font-family: 'FiraCode';
-        font-weight: 700;
-        color: $color-green;
-
-        @media (max-width: 1200px) {
-            font-size: 20px;
-        }
-
-        @media (max-width: 500px) {
-            font-size: 20px;
-        }
-    }
-
-    @media (max-width: 1300px) {
-        display: flex;
-        justify-content: center;
-        padding: 36px;
-    }
-
-    @media (max-width: 1200px) {
-        padding: 36px;
-        flex: 0 0 60%;
-    }
-}
-
-.modal-right {
-    grid-area: right;
-    @include flex-center-center;
-    padding: 80px;
-    padding-left: 0 !important;
-    background: transparent;
-    min-width: 0;
-    top: 40px !important;
     overflow: hidden;
 
     @media (max-width: 1300px) {
-        padding-left: 36px !important;
-        padding: 36px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "right"
+            "left";
+    }
+}
+
+// Image area
+.modal-right {
+    grid-area: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    padding-left: 40px;
+    background: transparent;
+    overflow: hidden;
+
+    @media (max-width: 1300px) {
+        padding: 40px 36px 20px;
+        max-height: 40vh;
     }
 
-    @media (max-width: 1200px) {
-        padding-bottom: 0 !important;
-        flex: 0 0 40%;
+    @media (max-width: 800px) {
+        padding: 32px 16px 16px;
+        max-height: 35vh;
     }
 
-    @media (max-width: 1000px) {
-        .modal-right {
-            padding: 36px;
-        }
+    @media (max-width: 500px) {
+        padding: 24px 16px 12px;
+        max-height: 30vh;
     }
 }
 
@@ -238,77 +159,116 @@ $color-green: #3DCFB6;
     display: block;
     max-width: 100%;
     max-height: 100%;
-    border-radius: 30px;
     width: auto;
     height: auto;
+    border-radius: 20px;
     object-fit: contain;
+}
 
-    @media (max-width: 1200px) {
-        width: 80%;
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-    }
+// Info area (scrollable)
+.modal-left {
+    grid-area: left;
+    padding: 80px;
+    padding-right: 40px;
+    color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    @media (max-width: 1000px) {
-        width: 90%;
+    @media (max-width: 1300px) {
+        padding: 20px 36px 60px;
     }
 
     @media (max-width: 800px) {
-        width: 100%;
+        padding: 16px 16px 60px;
     }
 
     @media (max-width: 500px) {
-        width: 90%;
+        padding: 12px 16px 48px;
+    }
+
+    h1 {
+        font-size: 96px;
+        font-family: 'Karla';
+        font-weight: 700;
+        margin: 0 0 8px;
+
+        @media (max-width: 1200px) {
+            font-size: 72px;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 56px;
+        }
+    }
+
+    h2 {
+        font-size: 48px;
+        font-family: 'FiraCode';
+        font-weight: 700;
+        line-height: 1.1;
+        margin: 0 0 16px;
+
+        @media (max-width: 1200px) {
+            font-size: 40px;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 32px;
+        }
+    }
+
+    h3 {
+        font-size: 20px;
+        font-family: 'FiraCode';
+        font-weight: 700;
+        color: $color-green;
+        margin: 0 0 8px;
     }
 }
 
+// Typography & content elements
 .modal-number {
     font-family: 'FiraCode';
     font-weight: 700;
     font-size: 48px;
     color: $color-green;
-    margin: 0 0 8px 0;
 }
 
 .modal-title {
-    margin: 0 0 16px 0;
+    margin: 0 0 16px;
 }
 
 .modal-project-description {
-    margin-bottom: 24px;
-    font-size: 18px;
+    margin-bottom: 16px;
+    font-size: 16px;
     font-family: 'Karla';
     font-weight: 400;
-    line-height: 1.2;
-
+    line-height: 1.4;
 }
 
 .modal-tech-stack {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 
     p {
-        font-size: 16px;
-    }
-
-    @media (max-width: 1200px) {
+        font-size: 14px;
         margin: 0;
     }
 }
 
 .tech-item {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
-}
 
-.tech-item img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
+    img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
 }
 
 .modal-links {
@@ -318,82 +278,38 @@ $color-green: #3DCFB6;
 
     @media (max-width: 400px) {
         flex-direction: column;
-        gap: 16px;
-    }
-}
-
-.modal-links .button {
-    border: 1px solid #FFFFFF;
-    border-radius: 100px;
-    background-color: transparent;
-    cursor: pointer;
-    font-family: 'Karla';
-    height: 48px;
-    color: white;
-    padding: 0px 24px;
-    font-size: 18px;
-    @include flex-center-center;
-    transition: color 125ms ease;
-    text-decoration: none;
-    gap: 4px;
-
-    &:hover {
-        border-color: $color-green;
-        color: $color-green;
     }
 
-}
+    .button {
+        border: 1px solid #FFFFFF;
+        border-radius: 100px;
+        background-color: transparent;
+        cursor: pointer;
+        font-family: 'Karla';
+        height: 48px;
+        color: white;
+        padding: 0 24px;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 125ms ease;
+        text-decoration: none;
+        gap: 6px;
 
-.modal-links img {
-    width: 10px;
-    height: 10px;
-    display: inline-block;
-    transition: transform 125ms ease;
-    transform: translate3d(0, 0, 0);
-}
+        &:hover {
+            border-color: $color-green;
+            color: $color-green;
 
-.modal-links .button:hover img,
-.modal-links .button:focus img {
-    transform: translate3d(4px, -4px, 0);
-}
-
-@media (max-width: 1200px) {
-    .modal-wrapper {
-        height: auto;
-        min-height: 80vh;
-        @include flex-center-center;
-    }
-
-    .modal {
-        width: 92vw;
-        height: 90vh;
-        max-height: 92vh;
-    }
-
-    .modal-content {
-        grid-template-columns: 1fr;
-        grid-template-areas: "right" "left";
-    }
-
-    .modal-left,
-    .modal-right {
-        width: 100%;
-    }
-
-    .modal-right {
-        padding: 36px;
-
-        @media (max-width: 500px) {
-            padding: 12px 0 !important;
+            img {
+                transform: translate3d(4px, -4px, 0);
+            }
         }
-    }
 
-    .modal-left {
-        padding: 36px;
-        overflow-y: auto;
-
-        @media (max-width: 500px) {
-            padding: 0 12px;
+        img {
+            width: 10px;
+            height: 10px;
+            transition: transform 125ms ease;
         }
     }
 }

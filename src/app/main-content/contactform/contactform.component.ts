@@ -30,7 +30,6 @@ export class ContactformComponent {
   errors: { [key: string]: string } = {};
   tempValues: { [key: string]: string } = {};
 
-  // Mail test toggle and post configuration (mentor pattern)
   mailTest = true;
 
   post = {
