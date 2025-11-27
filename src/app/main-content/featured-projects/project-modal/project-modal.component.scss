@@ -2,7 +2,6 @@
 
 $color-green: #3DCFB6;
 
-// Overlay
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -17,27 +16,36 @@ $color-green: #3DCFB6;
     }
 }
 
-// Modal wrapper
 .modal-wrapper {
     width: 80vw;
     max-width: 1200px;
     height: 60vh;
-    max-height: 800px;
+    max-height: 720px;
     border-radius: 30px;
     background: linear-gradient(55.22deg, #1C1C1C 36.26%, #08463B 93.28%);
     position: relative;
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     border: 0.5px solid $color-green;
     overflow: hidden;
 
-    @media (max-width: 500px) {
+    @media (max-width: 1300px) {
+        width: 60vw;
+        height: 75vh;
+        max-height: none;
+    }
+
+    @media (max-width: 800px) {
         width: 92vw;
+        height: 95vh !important;
+    }
+
+    @media (max-width: 1000px) and (orientation: landscape) {
         height: 95vh;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }
 
-// Close button
 .modal-close {
     position: absolute;
     top: 80px;
@@ -54,6 +62,16 @@ $color-green: #3DCFB6;
         filter: invert(61%) sepia(100%) saturate(700%) hue-rotate(134deg) brightness(120%) contrast(100%);
     }
 
+    @media (max-width: 1300px) {
+        top: 36px;
+        right: 36px;
+    }
+
+    @media (max-width: 1000px) and (orientation: landscape) {
+        top: 16px;
+        right: 16px;
+    }
+
     @media (max-width: 800px) {
         top: 16px;
         right: 16px;
@@ -67,11 +85,10 @@ $color-green: #3DCFB6;
     }
 }
 
-// Next button
 .modal-next {
     position: absolute;
-    right: 32px;
-    bottom: 32px;
+    right: 80px;
+    bottom: 80px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -81,9 +98,14 @@ $color-green: #3DCFB6;
     cursor: pointer;
     transition: color 125ms ease;
 
+    @media (max-width: 1300px) {
+        right: 36px;
+        bottom: 24px;
+    }
+
     @media (max-width: 800px) {
-        right: 16px;
         bottom: 16px;
+        right: 16px;
     }
 
     &:hover {
@@ -95,9 +117,8 @@ $color-green: #3DCFB6;
     }
 
     p {
-        font-family: 'Karla';
+        @include karla-eighteen;
         font-weight: 400;
-        font-size: 18px;
         line-height: 1.2;
     }
 
@@ -109,7 +130,24 @@ $color-green: #3DCFB6;
     }
 }
 
-// Modal content grid
+@media (max-width: 1000px) and (orientation: landscape) {
+    .modal-next {
+        position: static;
+        display: flex;
+        padding: 24px 24px;
+        justify-content: end;
+        align-self: stretch;
+        z-index: 1;
+        order: 2;
+    }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+    .modal-content {
+        order: 1;
+    }
+}
+
 .modal-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -126,32 +164,41 @@ $color-green: #3DCFB6;
             "right"
             "left";
     }
+
+    @media (max-width: 1000px) and (orientation: landscape) {
+        overflow: visible;
+        height: auto;
+        min-height: auto;
+    }
 }
 
-// Image area
 .modal-right {
     grid-area: right;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center-center;
     padding: 80px;
     padding-left: 40px;
     background: transparent;
     overflow: hidden;
 
     @media (max-width: 1300px) {
-        padding: 40px 36px 20px;
+        padding: 72px 36px 20px;
         max-height: 40vh;
     }
 
     @media (max-width: 800px) {
-        padding: 32px 16px 16px;
+        padding: 64px 16px 16px;
         max-height: 35vh;
     }
 
     @media (max-width: 500px) {
-        padding: 24px 16px 12px;
-        max-height: 30vh;
+        padding: 48px 16px 12px;
+    }
+
+    @media (max-width: 1000px) and (orientation: landscape) {
+        max-height: none;
+        padding: 48px 24px 24px;
+        overflow: visible;
+        align-items: flex-start;
     }
 }
 
@@ -165,34 +212,58 @@ $color-green: #3DCFB6;
     object-fit: contain;
 }
 
-// Info area (scrollable)
+@media (max-width: 1000px) and (orientation: landscape) {
+    .modal-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+        border-radius: 16px;
+    }
+}
+
 .modal-left {
     grid-area: left;
     padding: 80px;
     padding-right: 40px;
+    @include flex-column;
     color: white;
     overflow-y: auto;
     overflow-x: hidden;
 
     @media (max-width: 1300px) {
-        padding: 20px 36px 60px;
+        padding: 20px 36px 24px;
+        margin-bottom: 80px;
     }
 
     @media (max-width: 800px) {
-        padding: 16px 16px 60px;
+        padding: 16px 16px 24px;
+        margin-bottom: 80px;
     }
 
     @media (max-width: 500px) {
-        padding: 12px 16px 48px;
+        padding: 12px 16px 24px;
+        margin-bottom: 80px;
+    }
+
+    @media (max-width: 1000px) and (orientation: landscape) {
+        overflow: visible !important;
+        overflow-x: visible;
+        overflow-y: visible;
+        max-height: none;
+        -webkit-overflow-scrolling: auto;
+        padding: 16px 24px 0 24px;
+        margin: 0 !important;
     }
 
     h1 {
-        font-size: 96px;
+        font-size: 128px;
         font-family: 'Karla';
         font-weight: 700;
         margin: 0 0 8px;
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1300px) {
             font-size: 72px;
         }
 
@@ -202,14 +273,14 @@ $color-green: #3DCFB6;
     }
 
     h2 {
-        font-size: 48px;
+        font-size: 64px;
         font-family: 'FiraCode';
         font-weight: 700;
         line-height: 1.1;
         margin: 0 0 16px;
 
-        @media (max-width: 1200px) {
-            font-size: 40px;
+        @media (max-width: 1300px) {
+            font-size: 48px;
         }
 
         @media (max-width: 500px) {
@@ -218,15 +289,25 @@ $color-green: #3DCFB6;
     }
 
     h3 {
-        font-size: 20px;
+        font-size: 24px;
         font-family: 'FiraCode';
         font-weight: 700;
         color: $color-green;
         margin: 0 0 8px;
+
+        @media (max-width: 500px) {
+            font-size: 20px;
+        }
+    }
+
+    p {
+        @include karla-eighteen;
+        font-weight: 400;
+        line-height: 1.2;
+        margin: 0 0 16px;
     }
 }
 
-// Typography & content elements
 .modal-number {
     font-family: 'FiraCode';
     font-weight: 700;
@@ -269,6 +350,10 @@ $color-green: #3DCFB6;
         height: 24px;
         object-fit: contain;
     }
+
+    p {
+        font-size: 16px;
+    }
 }
 
 .modal-links {
@@ -276,9 +361,7 @@ $color-green: #3DCFB6;
     gap: 12px;
     margin-top: 16px;
 
-    @media (max-width: 400px) {
-        flex-direction: column;
-    }
+    @media (max-width: 400px) {}
 
     .button {
         border: 1px solid #FFFFFF;
@@ -290,12 +373,12 @@ $color-green: #3DCFB6;
         color: white;
         padding: 0 24px;
         font-size: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex-center-center;
         transition: all 125ms ease;
         text-decoration: none;
         gap: 6px;
+        width: auto;
+        align-self: flex-start;
 
         &:hover {
             border-color: $color-green;

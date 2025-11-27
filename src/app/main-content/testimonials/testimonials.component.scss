@@ -111,6 +111,9 @@ $color-green: #3DCFB6;
             height: 360px;
             position: relative;
             box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
+            -webkit-user-select: none;
+            user-select: none;
 
             @media (max-width: 600px) {
                 height: 420px;
@@ -145,9 +148,12 @@ $color-green: #3DCFB6;
         .track {
             display: flex;
             gap: 24px;
-            transition: transform 125ms cubic-bezier(.22, .9, .36, 1);
+            transition: transform 420ms cubic-bezier(.22, .9, .36, 1);
             align-items: center;
             will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
 
             @media (max-width: 600px) {
                 gap: 0;
@@ -167,12 +173,16 @@ $color-green: #3DCFB6;
             flex: 0 0 auto;
             background: rgba(61, 207, 182, 0.1);
             border: 1px solid $color-green;
-            transition: transform 125ms cubic-bezier(.22, .9, .36, 1), background 300ms ease, opacity 300ms ease;
+            transition: transform 420ms cubic-bezier(.22, .9, .36, 1), background 300ms ease, opacity 300ms ease;
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             transform-origin: center top;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
 
             @media (max-width: 600px) {
                 height: 356px;

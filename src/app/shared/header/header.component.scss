@@ -270,7 +270,6 @@ nav.overlay {
         @media (max-height: 480px) {
             padding: 20px 37px;
             min-width: 220px;
-            @include flex-center-center;
         }
     }
 

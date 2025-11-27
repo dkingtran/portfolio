@@ -289,26 +289,18 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
     const delta = ev.clientX - this.startX;
 
     const track = this.trackEl?.nativeElement as HTMLElement | undefined;
-    const viewport = this.viewportEl?.nativeElement as HTMLElement | undefined;
-    if (track && viewport) {
-      const child = track.children[this.trackIndex] as HTMLElement | undefined;
-      if (child) {
-        const cardCenter = child.offsetLeft + child.offsetWidth / 2;
-        const viewportCenter = viewport.clientWidth / 2;
-        const translate = viewportCenter - cardCenter;
-        track.style.transform = `translate3d(${translate}px, 0, 0)`;
-      } else {
-        const x = this.computeTranslateForIndex(this.trackIndex);
-        track.style.transform = `translate3d(${x}px, 0, 0)`;
-      }
-    }
+    if (!track) return;
+
+    // Reaktiviere Transition für smooth Animation
+    this.renderer.setStyle(track, 'transition', 'transform 420ms cubic-bezier(.22, .9, .36, 1)');
 
     if (Math.abs(delta) > this.swipeThreshold) {
       this.dragOffset = 0;
       delta < 0 ? this.next() : this.prev();
     } else {
+      // Bei kleinem Swipe: spring zurück zur aktuellen Karte
       this.dragOffset = 0;
-      if (this.trackEl && this.trackEl.nativeElement) this.applyTransform();
+      this.applyTransform();
     }
   }
 
