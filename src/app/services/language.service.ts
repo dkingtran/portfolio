@@ -85,7 +85,7 @@ export class LanguageService {
         'legal.title': { en: 'Legal Notice', de: 'Impressum' },
         'legal.subtitle': { en: 'Imprint', de: 'Impressum' },
         'legal.exploring.title': { en: 'Exploring the Board', de: 'Impressum' },
-        'legal.exploring.text': { en: 'Email: dennis.tran&#64;hotmail.de', de: 'Email: dennis.tran&#64;hotmail.de' },
+        'legal.exploring.text': { en: 'Email: dennis.tran@hotmail.de', de: 'Email: dennis.tran&#64;hotmail.de' },
         'legal.acceptance.title': { en: 'Acceptance of terms', de: 'Zustimmung zu den Bedingungen' },
         'legal.acceptance.text': { en: 'By accessing and using <span>Portfolio</span> (Product), you acknowledge and agree to the following terms and conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time. We, the listed students, may update or change the terms and conditions from time to time without notice.', de: 'Durch den Zugriff und die Nutzung von <span>Portfolio</span> (Produkt) erkennen Sie die folgenden Bedingungen an und stimmen ihnen zu. Wir, die aufgeführten Studierenden, können die Bedingungen von Zeit zu Zeit ohne Vorankündigung ändern.' },
         'legal.scope.title': { en: 'Scope and ownership of the product', de: 'Geltungsbereich und Eigentum' },

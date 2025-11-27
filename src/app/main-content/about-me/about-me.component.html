@@ -1,11 +1,11 @@
-<section id="about-me"></section>
+<section id="about-me" tabindex="-1"></section>
 
 <div class="about-me-container">
-    <div class="image-container" (mouseenter)="onMouseEnter()">
+    <div data-aos="fade-right" data-aos-duration="2000" data-aos-once="false" class="image-container" (mouseenter)="onMouseEnter()">
         <img src="assets/img/me/DSC_1000-min.jpg" alt="">
         <img class="background-image" [class.hovered]="hovered" src="assets/img/background/Capa_1.png" alt="">
     </div>
-    <div class="text-content">
+    <div data-aos="fade-left" data-aos-duration="2000" data-aos-once="false" class="text-content">
         <div>
             <h3>{{ languageService.translate('about.subtitle') }}</h3>
         </div>

@@ -27,6 +27,26 @@ export class SkillsetComponent {
   ];
 
   scrollTo(section: string) {
-    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(section);
+    if (!el) return;
+    // ensure focusable for accessibility
+    if (!el.hasAttribute('tabindex')) {
+      el.setAttribute('tabindex', '-1');
+    }
+    try {
+      (el as HTMLElement).focus({ preventScroll: true });
+    } catch (e) {
+      // ignore if browser doesn't support options
+    }
+    // compute header offset from CSS var
+    const cs = getComputedStyle(document.documentElement);
+    const headerVar = cs.getPropertyValue('--header-height') || '';
+    let offset = 98;
+    const matches = headerVar.match(/(\d+)(px)?/);
+    if (matches && matches[1]) {
+      offset = parseInt(matches[1], 10);
+    }
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 }

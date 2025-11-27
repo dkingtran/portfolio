@@ -6,17 +6,23 @@ $color-green: #3DCFB6;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
+    @include flex-center-center;
     z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease-in-out;
 
     &.open {
-        display: flex;
+        opacity: 1;
+        pointer-events: auto;
     }
 }
 
 .modal-wrapper {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 360ms ease-in-out;
     width: 80vw;
     max-width: 1200px;
     height: 60vh;
@@ -44,6 +50,16 @@ $color-green: #3DCFB6;
         overflow-y: auto;
         overflow-x: hidden;
     }
+}
+
+.modal-overlay.open .modal-wrapper {
+    transform: translate3d(0, 0, 0);
+    opacity: 1
+}
+
+.modal-overlay.closing .modal-wrapper {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0
 }
 
 .modal-close {
@@ -89,8 +105,7 @@ $color-green: #3DCFB6;
     position: absolute;
     right: 80px;
     bottom: 80px;
-    display: flex;
-    align-items: center;
+    @include flex-ai-center;
     gap: 8px;
     border: none;
     background: transparent;
@@ -239,12 +254,6 @@ $color-green: #3DCFB6;
 
     @media (max-width: 800px) {
         padding: 16px 16px 24px;
-        margin-bottom: 80px;
-    }
-
-    @media (max-width: 500px) {
-        padding: 12px 16px 24px;
-        margin-bottom: 80px;
     }
 
     @media (max-width: 1000px) and (orientation: landscape) {
@@ -328,9 +337,8 @@ $color-green: #3DCFB6;
 }
 
 .modal-tech-stack {
-    display: flex;
+    @include flex-ai-center;
     gap: 12px;
-    align-items: center;
     margin-bottom: 20px;
     flex-wrap: wrap;
 
@@ -341,9 +349,8 @@ $color-green: #3DCFB6;
 }
 
 .tech-item {
-    display: flex;
     gap: 6px;
-    align-items: center;
+    @include flex-ai-center;
 
     img {
         width: 24px;
@@ -361,20 +368,12 @@ $color-green: #3DCFB6;
     gap: 12px;
     margin-top: 16px;
 
-    @media (max-width: 400px) {}
-
     .button {
-        border: 1px solid #FFFFFF;
-        border-radius: 100px;
-        background-color: transparent;
-        cursor: pointer;
-        font-family: 'Karla';
-        height: 48px;
-        color: white;
-        padding: 0 24px;
-        font-size: 16px;
+        @include button;
         @include flex-center-center;
         transition: all 125ms ease;
+        font-size: 16px;
+        padding: 0 24px;
         text-decoration: none;
         gap: 6px;
         width: auto;

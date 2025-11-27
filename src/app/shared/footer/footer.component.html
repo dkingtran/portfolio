@@ -3,17 +3,21 @@
 <footer class="footer-container">
     <div class="footer-col footer-left">
         <!-- full logo/name on desktop -->
-        <svg class="logo logo-name" (click)="scrollToTop()" width="178" height="50" aria-label="DT Dennis Logo">
-            <title>DT Name Logo</title>
-            <text x="-0.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="60" fill="#3DCFB6">DT</text>
-            <text x="46%" y="49%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Dennis</text>
-            <text x="46.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Tran</text>
-        </svg>
+        <a routerLink="/" class="logo-link" aria-label="Home" (click)="onLogoClick($event)">
+            <svg class="logo logo-name" width="178" height="50" aria-label="DT Dennis Logo">
+                <title>DT Name Logo</title>
+                <text x="-0.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="60" fill="#3DCFB6">DT</text>
+                <text x="46%" y="49%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Dennis</text>
+                <text x="46.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Tran</text>
+            </svg>
+        </a>
         <!-- small logo (shows on mobile) -->
-        <svg class="logo logo-small" width="76" height="46" aria-label="DT Logo" (click)="scrollToTop()">
-            <title>DT Logo</title>
-            <text x="48%" y="98%" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="60" fill="#3DCFB6">DT</text>
-        </svg>
+        <a routerLink="/" class="logo-link" aria-label="Home" (click)="onLogoClick($event)">
+            <svg class="logo logo-small" width="76" height="46" aria-label="DT Logo">
+                <title>DT Logo</title>
+                <text x="48%" y="98%" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="60" fill="#3DCFB6">DT</text>
+            </svg>
+        </a>
         <p class="muted">{{ languageService.translate('footer.webDev') }}</p>
         <p class="muted">Augsburg Germany</p>
     </div>
@@ -26,6 +30,6 @@
         <a class="footer-link" href="https://github.com/dkingtran" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="footer-link" href="https://www.linkedin.com/in/dennis-king-tran-18ba34373/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a class="footer-link" href="mailto:dennis.tran@hotmail.de">{{ languageService.translate('footer.email') }}</a>
-        <a class="footer-link" href="/legal-notice">{{ languageService.translate('footer.legal') }}</a>
+        <a class="footer-link" routerLink="/legal-notice">{{ languageService.translate('footer.legal') }}</a>
     </div>
 </footer>

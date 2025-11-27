@@ -1,16 +1,16 @@
 
 import { Component, Inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   currentLang: 'en' | 'de' = 'en';
@@ -55,6 +55,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  navigateToFragment(event: Event, fragment: string) {
+    event.preventDefault();
+    this.router.navigate(['/'], { fragment }).then(() => setTimeout(() => {
+      const el = this.document.getElementById(fragment);
+      if (!el) return;
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+      try { (el as HTMLElement).focus({ preventScroll: true }); } catch { }
+      const cs = getComputedStyle(this.document.documentElement);
+      const matches = cs.getPropertyValue('--header-height').match(/(\d+)/);
+      const offset = matches ? parseInt(matches[1], 10) : 98;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 20));
+  }
+
+  onLogoClick(event: Event) {
+    const current = this.router.url ? this.router.url.split('?')[0].split('#')[0] : '';
+    if (current === '/' || current === '') {
+      event.preventDefault();
+      this.scrollToTop();
+    }
   }
 
   scrollToTop() {

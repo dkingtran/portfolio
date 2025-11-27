@@ -55,13 +55,13 @@ export class FeaturedProjectsComponent {
     },
     {
       id: 'proj-3',
-      title: 'Pokédex',
-      tech: ['HTML', 'CSS', 'JavaScript', 'REST-API'],
+      title: 'DA Bubble',
+      tech: ['HTML', 'CSS', 'JavaScript', 'Angular', 'REST-API'],
       image: '/assets/img/icons/featured-projects/project-images/03_pokedex_img.png',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj3.description',
       github: 'https://github.com/dkingtran/pokedex',
-      live: 'https://pokedex.dennistran.de',
+      live: 'https://da-bubble.dennistran.de',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
         { src: '/assets/img/icons/featured-projects/modal/css.png', label: 'CSS' },

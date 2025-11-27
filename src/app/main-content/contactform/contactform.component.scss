@@ -202,8 +202,7 @@ $color-green: #3DCFB6;
     opacity: 1;
 
     @media (max-width: 400px) {
-        font-size: 14px;
-
+        font-size: 16px;
     }
 }
 
@@ -225,7 +224,7 @@ $color-green: #3DCFB6;
     align-items: center;
     gap: 12px;
     font-family: 'karla';
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
 
     span {

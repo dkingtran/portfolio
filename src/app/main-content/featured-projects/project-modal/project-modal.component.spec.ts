@@ -10,8 +10,8 @@ describe('ProjectModalComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProjectModalComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ProjectModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

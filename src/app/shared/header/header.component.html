@@ -2,10 +2,12 @@
 	<div class="nav-container">
 		<div class="nav-left">
 			<!-- small logo (shows on mobile) -->
-			<svg class="logo logo-small" width="76" height="46" aria-label="DT Logo" (click)="scrollToTop()">
-				<title>DT Logo</title>
-				<text x="48%" y="98%" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="60" fill="#3DCFB6">DT</text>
-			</svg>
+			<a routerLink="/" class="logo-link" aria-label="Home" (click)="onLogoClick($event)">
+				<svg class="logo logo-small" width="76" height="46" aria-label="DT Logo">
+					<title>DT Logo</title>
+					<text x="48%" y="98%" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="60" fill="#3DCFB6">DT</text>
+				</svg>
+			</a>
 		</div>
 
 		<div class="nav-center">
@@ -14,20 +16,22 @@
 				<button class="language-toggle" [class.active-en]="currentLang === 'en'" [class.active-de]="currentLang === 'de'" (click)="toggleLanguage()">
 						<span class="en">EN</span><span class="de">DE</span>
 				</button>
-				<a href="#about-me">{{ languageService.translate('nav.aboutMe') }}</a>
-				<a href="#skillset">{{ languageService.translate('nav.skills') }}</a>
-				<a href="#featured-projects">{{ languageService.translate('nav.projects') }}</a>
+				<a href="#" (click)="navigateToFragment($event, 'about-me')">{{ languageService.translate('nav.aboutMe') }}</a>
+				<a href="#" (click)="navigateToFragment($event, 'skillset')">{{ languageService.translate('nav.skills') }}</a>
+				<a href="#" (click)="navigateToFragment($event, 'featured-projects')">{{ languageService.translate('nav.projects') }}</a>
 			</div>
 		</div>
 
 		<div class="nav-right">
 			<!-- full logo/name on desktop (right side) -->
-			<svg class="logo logo-name" (click)="scrollToTop()" width="178" height="50" aria-label="DT Dennis Logo">
-				<title>DT Name Logo</title>
-				<text x="-0.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="60" fill="#E8B91B">DT</text>
-				<text x="46%" y="49%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Dennis</text>
-				<text x="46.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Tran</text>
-			</svg>
+			<a routerLink="/" class="logo-link" aria-label="Home" (click)="onLogoClick($event)">
+				<svg class="logo logo-name" width="178" height="50" aria-label="DT Dennis Logo">
+					<title>DT Name Logo</title>
+					<text x="-0.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="60" fill="#E8B91B">DT</text>
+					<text x="46%" y="49%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Dennis</text>
+					<text x="46.5%" y="98%" font-family="sans-serif" font-weight="700" font-size="28" fill="#FFFFFF">Tran</text>
+				</svg>
+			</a>
 
 			<!-- menu icon for mobile (appears on <=1000px) -->
 			<button class="menu-icon" aria-label="Menu" (click)="toggleMenu()" type="button">
@@ -43,9 +47,9 @@
 
 			<!-- mobile dropdown (shown when menu open) -->
 			<div class="mobile-dropdown" [class.open]="isMenuOpen">
-				<a href="#about-me" (click)="toggleMenu()">{{ languageService.translate('nav.aboutMe') }}</a>
-				<a href="#skillset" (click)="toggleMenu()">{{ languageService.translate('nav.skills') }}</a>
-				<a href="#featured-projects" (click)="toggleMenu()">{{ languageService.translate('nav.projects') }}</a>
+				<a href="#" (click)="navigateToFragment($event, 'about-me'); toggleMenu()">{{ languageService.translate('nav.aboutMe') }}</a>
+				<a href="#" (click)="navigateToFragment($event, 'skillset'); toggleMenu()">{{ languageService.translate('nav.skills') }}</a>
+				<a href="#" (click)="navigateToFragment($event, 'featured-projects'); toggleMenu()">{{ languageService.translate('nav.projects') }}</a>
 				<div class="dropdown-lang">
 					<button class="language-toggle" [class.active-en]="currentLang === 'en'" [class.active-de]="currentLang === 'de'" (click)="toggleLanguage()">
 						<span class="en">EN</span><span class="de">DE</span>
