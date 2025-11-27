@@ -167,14 +167,11 @@ export class ContactformComponent {
           complete: () => console.info('send post complete'),
         });
     } else if (ngForm.submitted && this.isFormValid() && this.mailTest) {
-      // Mail test mode — do not send HTTP request, show success and reset
-      console.log('mailTest enabled — skipping actual HTTP request', { ...this.contactdata });
       this.handleSuccessfulSubmit();
       ngForm.resetForm();
     } else {
       // invalid form — keep existing behaviour: mark as not-success and log
       this.formSuccess = false;
-      console.log({ ...this.contactdata });
     }
   }
 
