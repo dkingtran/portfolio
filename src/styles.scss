@@ -7,6 +7,18 @@
     --header-height: 98px;
 }
 
+/* Ensure anchor jumps and browser scrolling account for the fixed header */
+html {
+    scroll-padding-top: var(--header-height);
+}
+
+/* Reduce offset for smaller screens where the header is shorter */
+@media (max-width: 1000px) {
+    :root {
+        --header-height: 48px;
+    }
+}
+
 $color-green: #3DCFB6;
 
 body {
