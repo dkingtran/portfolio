@@ -33,7 +33,7 @@ export class ContactformComponent {
   mailTest = true;
 
   post = {
-    endPoint: 'https://deineDomain.de/sendMail.php',
+    endPoint: 'https://dennistran.de/sendMail.php',
     body: (payload: any) => JSON.stringify(payload),
     options: {
       headers: {
@@ -46,6 +46,10 @@ export class ContactformComponent {
   onBlur(field: string) {
     this.touched[field] = true;
     this.validateField(field);
+    // If there's an error, store the current value and clear the field so the placeholder (error message) is visible
+    if (this.errors[field]) {
+      this.storeAndClearField(field);
+    }
   }
 
   onFocus(field: string) {
@@ -138,24 +142,6 @@ export class ContactformComponent {
   getPlaceholder(field: string, defaultPlaceholder: string): string {
     return this.hasError(field) ? this.errors[field] : defaultPlaceholder;
   }
-
-  /* ORIGINAL onSubmit kept for reference (commented out)
-  onSubmit() {
-    this.submitted = true;
-    this.validateAllFields();
-
-    if (this.isFormValid()) {
-      // Log the submitted data before the form is reset
-      console.log({ ...this.contactdata });
-      this.handleSuccessfulSubmit();
-    } else {
-      this.formSuccess = false;
-      // Log current values to help debugging when the form is invalid
-      console.log({ ...this.contactdata });
-    }
-
-  }
-  */
 
   // New onSubmit that accepts the template-driven form and optionally sends a real HTTP POST
   onSubmit(ngForm: NgForm) {

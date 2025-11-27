@@ -1,32 +1,32 @@
 <!-- Modal overlay (moved from featured-projects) -->
 <div class="modal-overlay" [class.open]="isOpen" (click)="onClose()">
 	<div class="modal-wrapper" (click)="$event.stopPropagation()">
-		<button class="modal-close" (click)="onClose(); $event.stopPropagation()">
-			<img src="/assets/img/icons/featured-projects/modal/close_small.png" alt="Close">
-		</button>
+			<button class="modal-close" (click)="onClose(); $event.stopPropagation()">
+				<img src="assets/img/icons/featured-projects/modal/close_small.png" alt="Close">
+			</button>
 		<div class="modal-content">
 			<div class="modal-left">
 				<h1 class="modal-number">{{ (index + 1) < 10 ? ('0' + (index + 1)) : (index + 1) }}</h1>
 								<h2 class="modal-title">{{ project?.title }}</h2>
 	                    <h3>{{ languageService.translate('projects.modal.whatIs') }}</h3>
 								<p class="modal-project-description">{{ languageService.translate(project?.descriptionKey || '') }}</p>
-				<div class="modal-tech-stack">
-					<div *ngFor="let t of project?.techIcons" class="tech-item">
-						<img [src]="t.src" [alt]="t.label">
-						<p>{{ t.label }}</p>
+					<div class="modal-tech-stack">
+						<div *ngFor="let t of project?.techIcons" class="tech-item">
+							<img [src]="t.src" [alt]="t.label">
+							<p>{{ t.label }}</p>
+						</div>
 					</div>
-				</div>
 
-				<div class="modal-links">
-					<a class="button" [href]="project?.github" target="_blank">
-						<span>{{ languageService.translate('projects.modal.github') }}</span>
-						<img src="/assets/img/icons/featured-projects/modal/arrow_outward-green.png" alt="GitHub Icon">
-					</a>
-					<a class="button" [href]="project?.live" target="_blank">
-						<span>{{ languageService.translate('projects.modal.live') }}</span>
-						<img src="/assets/img/icons/featured-projects/modal/arrow_outward-green.png" alt="External Link Icon">
-					</a>
-				</div>
+					<div class="modal-links">
+						<a class="button" [href]="project?.github" target="_blank">
+							<span>{{ languageService.translate('projects.modal.github') }}</span>
+							<img src="assets/img/icons/featured-projects/modal/arrow_outward-green.png" alt="GitHub Icon">
+						</a>
+						<a class="button" [href]="project?.live" target="_blank">
+							<span>{{ languageService.translate('projects.modal.live') }}</span>
+							<img src="assets/img/icons/featured-projects/modal/arrow_outward-green.png" alt="External Link Icon">
+						</a>
+					</div>
 			</div>
 
 			<div class="modal-right">
@@ -35,8 +35,8 @@
 		</div>
 
 		<button class="modal-next" (click)="onNext(); $event.stopPropagation()">
-	            <p>{{ languageService.translate('projects.modal.nextProject') }}</p>
-	            <img src="/assets/img/icons/featured-projects/modal/arrow_forward.png" alt="">
+				<p>{{ languageService.translate('projects.modal.nextProject') }}</p>
+					    <img src="assets/img/icons/featured-projects/modal/arrow_forward.png" alt="">
 	        </button>
 	</div>
 </div>

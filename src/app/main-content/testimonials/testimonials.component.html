@@ -11,7 +11,7 @@
         <div #viewport class="viewport">
             <div #track class="track">
                 <div class="testimonial-card" *ngFor="let testimonial of carouselItems; let i = index" [class.active]="i === trackIndex" (click)="onCardClick(i)">
-                    <img class="quote" src="/assets/img/icons/testimonials/quotes.png" alt="quote icon" aria-hidden="true">
+                    <img class="quote" src="assets/img/icons/testimonials/quotes.png" alt="quote icon" aria-hidden="true">
                     <p class="testimonial-message">"{{ languageService.translate(testimonial.messageKey) }}"</p>
                     <div class="testimonial-client-info">
                         <div class="client-details">
@@ -28,7 +28,7 @@
         </div>
         <div class="controls">
             <button type="button" class="arrow left" (click)="prev()" aria-label="Previous">
-                <img src="/assets/img/icons/testimonials/arrow_back.png" alt="arrow left testimonials">
+                <img src="assets/img/icons/testimonials/arrow_back.png" alt="arrow left testimonials">
             </button>
 
                 <div class="dots" aria-hidden="true" role="presentation">
@@ -36,7 +36,7 @@
             </div>
             
             <button type="button" class="arrow right" (click)="next()" aria-label="Next">
-                <img src="/assets/img/icons/testimonials/arrow_forward.png" alt="arrow right testimonials">
+                <img src="assets/img/icons/testimonials/arrow_forward.png" alt="arrow right testimonials">
             </button>
         </div>
     </div>

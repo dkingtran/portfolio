@@ -51,7 +51,7 @@
                     <div class="privacy-policy-checkbox-content">
                         <label class="custom-checkbox">
                             <input type="checkbox" name="acceptPrivacy" [(ngModel)]="acceptPrivacy" />
-                            <img alt="Privacy Checkbox" [src]="acceptPrivacy ? '/assets/img/icons/contact/check_box.png' : '/assets/img/icons/contact/check_box_outline_blank.png'">
+                            <img alt="Privacy Checkbox" [src]="acceptPrivacy ? 'assets/img/icons/contact/check_box.png' : 'assets/img/icons/contact/check_box_outline_blank.png'">
                         </label>
                         <span>
                             {{ languageService.translate('contact.privacy.prefix') }} <a href="/privacy-policy">{{ languageService.translate('contact.privacy.link') }}</a> {{ languageService.translate('contact.privacy.suffix') }}

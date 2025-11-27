@@ -15,7 +15,7 @@
                  (mouseenter)="showPreview(project.image, project.background, i)"
                  (mouseleave)="clearPreview()"
                  (click)="openModal(i)">
-                <span>{{ project.title }}<img class="hover-icon" src="/assets/img/icons/featured-projects/base/arrow_outward.png" alt="arrow"></span>
+                <span>{{ project.title }}<img class="hover-icon" src="assets/img/icons/featured-projects/base/arrow_outward.png" alt="arrow"></span>
                 <p>
                     <ng-container *ngFor="let t of project.tech; let i = index">
                         {{ t }}<span *ngIf="i < project.tech.length - 1" class="pipe">|</span>
