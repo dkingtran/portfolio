@@ -165,7 +165,8 @@ $color-green: #3DCFB6;
 }
 
 .contact-form-container input[type="text"],
-.contact-form-container input[type="email"] {
+.contact-form-container input[type="email"],
+.contact-form-container textarea {
     background: transparent;
     border: none;
     color: white;
@@ -175,14 +176,28 @@ $color-green: #3DCFB6;
     font-weight: 400;
     line-height: 1.2;
     transition: color 0.125s ease;
+    font-family: inherit;
 
     @media (max-width: 400px) {
         font-size: 16px;
     }
 }
 
+.contact-form-container textarea {
+    resize: vertical;
+    height: 26px;
+    min-height: 26px;
+    max-height: 280px;
+
+    @media (max-width: 600px) {
+        min-height: 48px !important;
+        height: 48px;
+    }
+}
+
 .input-error input[type=text],
-.input-error input[type=email] {
+.input-error input[type=email],
+.input-error textarea {
     color: #EC7B7BCC;
     @include karla-eighteen;
     font-weight: 400;
@@ -194,7 +209,8 @@ $color-green: #3DCFB6;
     }
 }
 
-.input-error input::placeholder {
+.input-error input::placeholder,
+.input-error textarea::placeholder {
     color: #EC7B7BCC;
     @include karla-eighteen;
     font-weight: 400;

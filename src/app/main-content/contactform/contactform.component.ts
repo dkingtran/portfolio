@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
@@ -31,16 +31,19 @@ export class ContactformComponent {
   errors: { [key: string]: string } = {};
   tempValues: { [key: string]: string } = {};
 
-  mailTest = true;
+  // Set to `false` to actually send the HTTP request to the configured endpoint.
+  // Keep `true` while developing locally without a mail backend.
+  mailTest = false;
 
   post = {
+    // Change this to your deployed PHP endpoint or local test server.
     endPoint: 'https://dennistran.de/sendMail.php',
-    body: (payload: any) => JSON.stringify(payload),
+    // We'll post a JSON body (HttpClient will stringify it for us).
+    body: (payload: any) => payload,
+    // Proper HttpClient options: headers as HttpHeaders and responseType at root.
     options: {
-      headers: {
-        'Content-Type': 'text/plain',
-        responseType: 'text',
-      },
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text' as const,
     },
   };
 
@@ -154,6 +157,7 @@ export class ContactformComponent {
     // or run the local test flow (when mailTest === true)
     if (ngForm.submitted && this.isFormValid() && !this.mailTest) {
       // Attempt to post the payload to the configured endpoint
+      // HttpClient will serialize the object to JSON because of the Content-Type.
       this.http.post(this.post.endPoint, this.post.body(this.contactdata), this.post.options as any)
         .subscribe({
           next: (response) => {

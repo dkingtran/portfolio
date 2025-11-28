@@ -2,7 +2,7 @@
 
 <div class="contactform-container-all">
     <div class="contact-form-content">
-        <div data-aos="fade-down-right" data-aos-duration="1500" data-aos-once="false" class="text-content">
+        <div data-aos="fade-up-right" data-aos-duration="1500" data-aos-once="false" class="text-content">
             <h3>{{ languageService.translate('contact.subtitle') }}</h3>
             <h1>{{ languageService.translate('contact.titleLine1') }} <br>
                 {{ languageService.translate('contact.titleLine2') }}</h1>
@@ -17,7 +17,7 @@
                 </p>
             </div>
         </div>
-        <div data-aos="fade-up-left" data-aos-duration="1500" data-aos-once="false" class="contact-form">
+        <div data-aos="fade-up-right" data-aos-duration="1500" data-aos-once="false" class="contact-form">
             <!-- original: (ngSubmit)="onSubmit()" -->
             <form (ngSubmit)="onSubmit(contactform)" #contactform="ngForm" novalidate autocomplete="off">
                 <div class="contact-form-container">
@@ -42,7 +42,7 @@
                     <div class="message-form" [class.input-error]="hasError('message')">
                         <span class="question-span">{{ languageService.translate('contact.messageQuestion') }}</span>
                         <div>
-                            <input name="message" [(ngModel)]="contactdata.message" #messageCtrl="ngModel" minlength="10" type="text" autocomplete="off" [placeholder]="getPlaceholder('message', languageService.translate('contact.placeholder.message'))" (blur)="onBlur('message')" (focus)="onFocus('message')" />
+                            <textarea name="message" [(ngModel)]="contactdata.message" #messageCtrl="ngModel" minlength="10" autocomplete="off" [placeholder]="getPlaceholder('message', languageService.translate('contact.placeholder.message'))" (blur)="onBlur('message')" (focus)="onFocus('message')" rows="4"></textarea>
                         </div>
                     </div>
                 </div>
@@ -60,12 +60,6 @@
                     <div class="error-message-privacy-policy-container">
                         <span class="error-message-privacy-policy" *ngIf="submitted && !acceptPrivacy"> {{ languageService.translate('contact.privacy.error') }} </span>
                     </div>
-                    <!-- Modal-style success message (centered) -->
-                    <div class="form-success-modal-backdrop" *ngIf="formSuccess">
-                        <div class="form-success-modal" role="status" aria-live="polite">
-                            <p class="form-success-message" [innerHTML]="languageService.translate('contact.success')"></p>
-                        </div>
-                    </div>
                     <div class="send-btn-container">
                         <button type="submit" [disabled]="!contactdata.name || !contactdata.email || !acceptPrivacy">
                             <span class="btn-text" [attr.data-text]="languageService.translate('contact.submit')">{{ languageService.translate('contact.submit') }}</span>
@@ -73,6 +67,12 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <!-- Modal-style success message -->
+        <div class="form-success-modal-backdrop" *ngIf="formSuccess">
+            <div class="form-success-modal" role="status" aria-live="polite">
+                <p class="form-success-message" [innerHTML]="languageService.translate('contact.success')"></p>
+            </div>
         </div>
     </div>
 </div>

@@ -41,3 +41,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/src/app/sendMail.php
+/src/app/sendMail.config.php.example
+/src/app/sendMail.config.php
