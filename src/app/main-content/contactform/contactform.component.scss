@@ -43,8 +43,7 @@ $color-green: #3DCFB6;
 }
 
 .text-content {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     gap: 20px;
     max-width: 640px;
 
@@ -135,7 +134,6 @@ $color-green: #3DCFB6;
 .contact-form-container {
     display: flex;
     padding: 40px 32px;
-    /* single separator: each item draws a bottom border; the very first item will get a top border separately */
     border-bottom: 1px solid rgba($color-green, 0.8);
     align-items: center;
     gap: 16px;
@@ -283,7 +281,6 @@ $color-green: #3DCFB6;
     height: 18px;
     display: block;
 }
-
 
 .custom-checkbox input:checked+img {
     transform: scale(1);
