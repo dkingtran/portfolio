@@ -55,18 +55,19 @@ export class FeaturedProjectsComponent {
     },
     {
       id: 'proj-3',
-      title: 'DA Bubble',
-      tech: ['HTML', 'CSS', 'JavaScript', 'Angular', 'REST-API'],
-      image: '/assets/img/icons/featured-projects/project-images/03_pokedex_img.png',
+      title: 'DABubble',
+      tech: ['HTML', 'CSS', 'Angular', 'TypeScript', 'Firebase'],
+      image: '/assets/img/icons/featured-projects/project-images/original-size/da-bubble.jpg',
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj3.description',
-      github: 'https://github.com/dkingtran/pokedex',
+      github: 'https://github.com/dkingtran/da-bubble',
       live: 'https://da-bubble.dennistran.de',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
         { src: '/assets/img/icons/featured-projects/modal/css.png', label: 'CSS' },
-        { src: '/assets/img/icons/featured-projects/modal/javascript.png', label: 'JavaScript' },
-        { src: '/assets/img/icons/featured-projects/modal/rest-api.png', label: 'REST-API' }
+        { src: '/assets/img/icons/featured-projects/modal/angular.png', label: 'Angular' },
+        { src: '/assets/img/icons/featured-projects/modal/typescript.png', label: 'TypeScript' },
+        { src: '/assets/img/icons/featured-projects/modal/firebase.png', label: 'Firebase' }
       ]
     }
   ];
