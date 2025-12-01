@@ -8,6 +8,7 @@ $color-green: #3DCFB6;
     max-width: 1920px;
     width: 100%;
     padding: 96px;
+    margin: 0 auto;
 
     @media (max-width: 1300px) {
         flex-direction: column;

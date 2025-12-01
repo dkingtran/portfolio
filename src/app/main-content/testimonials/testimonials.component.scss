@@ -9,6 +9,7 @@ $color-green: #3DCFB6;
     max-width: 1920px;
     width: 100%;
     padding: 96px;
+    margin: 0 auto;
     background: linear-gradient(90deg, #1C1C1C 0%, rgba(28, 28, 28, 0) 10%, rgba(28, 28, 28, 0) 90%, #1C1C1C 100%);
 
     @media (max-width: 1300px) {

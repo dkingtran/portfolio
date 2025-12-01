@@ -23,7 +23,15 @@ export class AppComponent implements OnInit {
         if (!prefersReduced) {
           // once: false -> allow animations to replay when element re-enters
           // mirror: true -> animate elements out when scrolling past them
-          AOS.init({ once: false, mirror: true, duration: 600, anchorPlacement: 'top-bottom' });
+          // startEvent: load -> wait for full page load to prevent layout shift
+          AOS.init({
+            once: false,
+            mirror: true,
+            duration: 600,
+            anchorPlacement: 'top-bottom',
+            startEvent: 'load',
+            disableMutationObserver: false,
+          });
         }
       } catch (e) {
         // ignore AOS init errors in dev/SSR environments

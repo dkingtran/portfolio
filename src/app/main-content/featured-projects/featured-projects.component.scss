@@ -10,6 +10,7 @@ $color-green: #3DCFB6;
     width: auto;
     padding: 96px;
     position: relative;
+    margin: 0 auto;
 
     @media (max-width: 1300px) {
         padding: 48px;
@@ -156,6 +157,7 @@ $color-green: #3DCFB6;
     position: relative;
     flex: 0 0 35%;
     padding: 80px;
+    width: 100%;
     pointer-events: none;
     @include flex-center-center;
 

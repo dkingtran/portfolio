@@ -12,6 +12,7 @@
 /* Ensure anchor jumps and browser scrolling account for the fixed header */
 html {
     scroll-padding-top: var(--header-height);
+    overflow-x: hidden;
 }
 
 /* Reduce offset for smaller screens where the header is shorter */
@@ -24,12 +25,11 @@ html {
 $color-green: #3DCFB6;
 
 body {
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     font-family: 'FiraCode', 'Karla', sans-serif;
     background-color: #1c1c1c;
     color: white;
-    max-width: 1920px;
     overflow-x: hidden;
 }
 

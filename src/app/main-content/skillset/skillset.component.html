@@ -2,7 +2,7 @@
 
 <div class="layout">
     <div class="skillset-container">
-        <div data-aos="zoom-in-up" data-aos-duration="2000" data-aos-once="false" class="text-content">
+        <div data-aos="fade-right" data-aos-duration="2000" data-aos-once="false" class="text-content">
             <div>
                 <h3>{{ languageService.translate('skills.subtitle') }}</h3>
             </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div data-aos="zoom-in-up" data-aos-duration="2000" class="icons-container">
+        <div data-aos="fade-left" data-aos-duration="2000" data-aos-once="false" class="icons-container">
             <div *ngFor="let skill of skills; let i = index" class="icon-item">
                 <img [src]="skill.icon" [alt]="skill.text">
                 <span>{{ skill.text }}</span>
