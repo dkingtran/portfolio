@@ -11,6 +11,8 @@ $color-green: #3DCFB6;
     opacity: 0;
     pointer-events: none;
     transition: opacity 200ms ease-in-out;
+    overscroll-behavior: contain;
+    touch-action: none;
 
     &.open {
         opacity: 1;
@@ -33,6 +35,8 @@ $color-green: #3DCFB6;
     @include flex-column;
     border: 0.5px solid $color-green;
     overflow: hidden;
+    touch-action: auto;
+    overscroll-behavior: contain;
 
     @media (max-width: 1300px) {
         width: 60vw;

@@ -135,6 +135,13 @@ export class ContactformComponent {
 
   isValidName(name: string): boolean {
     const trimmedName = name.trim();
+    // Only allow letters (incl. accented chars like é, ü, ñ), hyphens, apostrophes, and spaces
+    // No digits or special characters like @, #, !, etc.
+    const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\-''\s]+$/;
+    if (!nameRegex.test(trimmedName)) {
+      return false;
+    }
+    // Must have at least 2 words (first and last name)
     const words = trimmedName.split(/\s+/).filter(word => word.length > 0);
     return words.length >= 2;
   }
@@ -161,7 +168,6 @@ export class ContactformComponent {
       this.http.post(this.post.endPoint, this.post.body(this.contactdata), this.post.options as any)
         .subscribe({
           next: (response) => {
-            console.log('mail send response', response);
             // show success modal and reset local state
             this.handleSuccessfulSubmit();
             ngForm.resetForm();
