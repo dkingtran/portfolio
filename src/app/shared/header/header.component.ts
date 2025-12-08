@@ -4,6 +4,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-header',
@@ -60,15 +61,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateToFragment(event: Event, fragment: string) {
     event.preventDefault();
     this.router.navigate(['/'], { fragment }).then(() => setTimeout(() => {
-      const el = this.document.getElementById(fragment);
-      if (!el) return;
+      const el = this.document.getElementById(fragment); if (!el) return;
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
       try { (el as HTMLElement).focus({ preventScroll: true }); } catch { }
       const cs = getComputedStyle(this.document.documentElement);
-      const matches = cs.getPropertyValue('--header-height').match(/(\d+)/);
-      const offset = matches ? parseInt(matches[1], 10) : 98;
+      const m = cs.getPropertyValue('--header-height').match(/\d+/);
+      const offset = m ? parseInt(m[0], 10) : 98;
       const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
+      setTimeout(() => { if (typeof AOS !== 'undefined' && AOS.refresh) AOS.refresh(); }, 400);
     }, 20));
   }
 
@@ -82,6 +83,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Refresh AOS after scroll so animations trigger on mobile
+    setTimeout(() => {
+      if (typeof AOS !== 'undefined' && AOS.refresh) {
+        AOS.refresh();
+      }
+    }, 400);
   }
 
   @HostListener('document:click', ['$event'])

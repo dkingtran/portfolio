@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 import { RouterModule, Router } from '@angular/router';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-footer',
@@ -22,5 +23,11 @@ export class FooterComponent {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Refresh AOS after scroll so animations trigger on mobile
+    setTimeout(() => {
+      if (typeof AOS !== 'undefined' && AOS.refresh) {
+        AOS.refresh();
+      }
+    }, 400);
   }
 }

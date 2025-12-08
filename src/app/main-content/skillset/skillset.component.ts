@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../services/language.service';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-skillset',
@@ -29,24 +30,13 @@ export class SkillsetComponent {
   scrollTo(section: string) {
     const el = document.getElementById(section);
     if (!el) return;
-    // ensure focusable for accessibility
-    if (!el.hasAttribute('tabindex')) {
-      el.setAttribute('tabindex', '-1');
-    }
-    try {
-      (el as HTMLElement).focus({ preventScroll: true });
-    } catch (e) {
-      // ignore if browser doesn't support options
-    }
-    // compute header offset from CSS var
-    const cs = getComputedStyle(document.documentElement);
-    const headerVar = cs.getPropertyValue('--header-height') || '';
-    let offset = 98;
-    const matches = headerVar.match(/(\d+)(px)?/);
-    if (matches && matches[1]) {
-      offset = parseInt(matches[1], 10);
-    }
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    try { (el as HTMLElement).focus({ preventScroll: true }); } catch { }
+    const headerVar = getComputedStyle(document.documentElement).getPropertyValue('--header-height') || '';
+    const m = headerVar.match(/(\d+)/);
+    const offset = m ? parseInt(m[1], 10) : 98;
     const top = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
+    setTimeout(() => typeof AOS !== 'undefined' && AOS.refresh && AOS.refresh(), 400);
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { LanguageService } from '../../services/language.service';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-above-the-fold',
@@ -15,5 +16,11 @@ export class AboveTheFoldComponent {
 
   scrollTo(section: string) {
     document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    // Refresh AOS after scroll so animations trigger on mobile
+    setTimeout(() => {
+      if (typeof AOS !== 'undefined' && AOS.refresh) {
+        AOS.refresh();
+      }
+    }, 400);
   }
 }
