@@ -61,7 +61,7 @@ export class FeaturedProjectsComponent {
       background: '/assets/img/icons/featured-projects/base/01_capa_1.png',
       descriptionKey: 'projects.proj3.description',
       github: 'https://github.com/dkingtran/DABubble',
-      live: 'https://da-bubble.dennistran.de',
+      live: 'https://dabubble.dennistran.de',
       techIcons: [
         { src: '/assets/img/icons/featured-projects/modal/html.png', label: 'HTML' },
         { src: '/assets/img/icons/featured-projects/modal/css.png', label: 'CSS' },
