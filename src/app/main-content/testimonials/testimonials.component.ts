@@ -24,22 +24,22 @@ export class TestimonialsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   testimonials: Testimonial[] = [
     {
-      name: 'O. Harper',
+      name: 'A. Reitz',
       positionKey: 'testimonials.t1.position',
       messageKey: 'testimonials.t1.message'
     },
     {
-      name: 'M. Lee',
+      name: 'T. Sabanovic',
       positionKey: 'testimonials.t2.position',
       messageKey: 'testimonials.t2.message'
     },
     {
-      name: 'S. Alvarez',
+      name: 'A. Kissner',
       positionKey: 'testimonials.t3.position',
       messageKey: 'testimonials.t3.message'
     },
     {
-      name: 'E. Brown',
+      name: 'L. Kohl',
       positionKey: 'testimonials.t4.position',
       messageKey: 'testimonials.t4.message'
     }
